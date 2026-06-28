@@ -1,0 +1,20 @@
+---
+import Stat from "../content/Stat.astro";
+import Cluster from "../../primitives/Cluster.astro";
+
+interface Props {
+  items: { value: string; label: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<Cluster as="ul" gap="12" justify="center">
+  {
+    items.map((item) => (
+      <li>
+        <Stat {...item} />
+      </li>
+    ))
+  }
+</Cluster>

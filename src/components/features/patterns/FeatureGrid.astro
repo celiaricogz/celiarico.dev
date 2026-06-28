@@ -1,0 +1,20 @@
+---
+import FeatureCard from "../content/FeatureCard.astro";
+import Grid from "../../primitives/Grid.astro";
+
+interface Props {
+  items: { title: string; description: string; badge?: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<Grid as="ul" columns={3} gap="8">
+  {
+    items.map((item) => (
+      <li>
+        <FeatureCard {...item} />
+      </li>
+    ))
+  }
+</Grid>

@@ -1,0 +1,20 @@
+---
+import QuoteBlock from "../content/QuoteBlock.astro";
+import Stack from "../../primitives/Stack.astro";
+
+interface Props {
+  items: { text: string; attribution?: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<Stack as="ul" gap="12">
+  {
+    items.map((item) => (
+      <li>
+        <QuoteBlock {...item} />
+      </li>
+    ))
+  }
+</Stack>
