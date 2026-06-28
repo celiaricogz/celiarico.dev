@@ -1,0 +1,38 @@
+---
+import Link from "../ui/Link.astro";
+import Container from "../primitives/Container.astro";
+import Stack from "../primitives/Stack.astro";
+import Body from "../typography/Body.astro";
+import Heading from "../typography/Heading.astro";
+import Lead from "../typography/Lead.astro";
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section id={id} aria-labelledby="introduction-heading" class="py-section-lg">
+  <Container>
+    <Stack gap="10">
+      <Stack gap="6">
+        <Heading level={1} id="introduction-heading">
+          Complex systems don't become easier to change with time. They become
+          harder.
+        </Heading>
+        <Lead>
+          The problem is not always the technology. It is the accumulated
+          uncertainty that makes every change riskier, slower and more expensive
+          than it should be.
+        </Lead>
+        <Body>
+          I am Celia Rico, IT Architect specialising in Platform Engineering,
+          DevOps and Cloud. I help technical teams modernise complex systems
+          through structured engineering and architectural clarity.
+        </Body>
+      </Stack>
+      <Link href="#approach-heading" variant="cta">Discover the approach</Link>
+    </Stack>
+  </Container>
+</section>

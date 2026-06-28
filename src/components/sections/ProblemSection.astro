@@ -1,0 +1,49 @@
+---
+import Callout from "../ui/Callout.astro";
+import Container from "../primitives/Container.astro";
+import Stack from "../primitives/Stack.astro";
+import Body from "../typography/Body.astro";
+import Heading from "../typography/Heading.astro";
+import Lead from "../typography/Lead.astro";
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const symptoms = [
+  "Deployments require careful coordination to avoid unexpected failures.",
+  "Few people in the organisation fully understand how critical components interact.",
+  "Delivery is slow despite experienced teams working at full capacity.",
+  "Changing one part of the system produces unexpected effects elsewhere.",
+  "Operational complexity increases with every attempt to reduce it.",
+];
+---
+
+<section id={id} aria-labelledby="problem-heading" class="py-section-md">
+  <Container>
+    <Stack gap="10">
+      <Stack gap="6">
+        <Heading level={2} id="problem-heading">
+          The problem is rarely the technology
+        </Heading>
+        <Lead>
+          Most engineering teams working with legacy systems share a common
+          experience. The system works, but changing it safely has become
+          increasingly difficult.
+        </Lead>
+        <Body>
+          Complexity rarely arrives all at once. It accumulates gradually
+          through years of well-intentioned decisions made without full
+          visibility of the system. Architecture evolves without clear
+          direction. Understanding disappears. Every change becomes riskier than
+          the last.
+        </Body>
+      </Stack>
+      <Stack gap="4">
+        {symptoms.map((symptom) => <Callout>{symptom}</Callout>)}
+      </Stack>
+    </Stack>
+  </Container>
+</section>

@@ -1,0 +1,66 @@
+---
+import ExperienceCard from "../features/content/ExperienceCard.astro";
+import StatisticsRow from "../features/patterns/StatisticsRow.astro";
+import Callout from "../ui/Callout.astro";
+import Container from "../primitives/Container.astro";
+import Stack from "../primitives/Stack.astro";
+import Heading from "../typography/Heading.astro";
+import Lead from "../typography/Lead.astro";
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const experiences = [
+  {
+    title: "IT Architecture and Platform Engineering",
+    description:
+      "Designing and evolving distributed systems, cloud platforms and internal developer platforms across different industries. Focus on reducing operational complexity and building systems that teams can actually understand and maintain.",
+    tags: ["Architecture", "Platform Engineering", "Cloud"],
+  },
+  {
+    title: "DevOps and Delivery Automation",
+    description:
+      "Designing deployment pipelines, infrastructure automation and observability systems that make delivery predictable. Reducing the operational risk of change so teams can move with confidence.",
+    tags: ["DevOps", "CI/CD", "Infrastructure"],
+  },
+  {
+    title: "Engineering in High-Stakes Environments",
+    description:
+      "Engineering leadership experience in environments where reliability, coordination under pressure and clear decision-making are essential — including aerospace projects where system failures carry significant consequences.",
+    tags: ["Leadership", "Reliability", "Aerospace"],
+  },
+];
+
+const stats = [
+  { value: "10+", label: "Years of engineering experience" },
+  { value: "5+", label: "Legacy modernisations" },
+  { value: "3", label: "Cloud platforms" },
+];
+---
+
+<section id={id} aria-labelledby="evidence-heading" class="py-section-md">
+  <Container>
+    <Stack gap="12">
+      <Stack gap="6">
+        <Heading level={2} id="evidence-heading">
+          Experience demonstrated through outcomes
+        </Heading>
+        <Lead>
+          Engineering credibility is not claimed. It is demonstrated through the
+          quality of decisions made in real, complex environments over time.
+        </Lead>
+      </Stack>
+      <Stack gap="8">
+        {experiences.map((experience) => <ExperienceCard {...experience} />)}
+      </Stack>
+      <StatisticsRow items={stats} />
+      <Callout variant="accent">
+        Experience matters because it produces better engineering decisions. Not
+        because it increases the number of years on a résumé.
+      </Callout>
+    </Stack>
+  </Container>
+</section>

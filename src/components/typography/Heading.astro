@@ -4,9 +4,10 @@ import type { HeadingVariant, TypographyLevel } from "../../types/tokens";
 interface Props {
   level?: TypographyLevel;
   variant?: HeadingVariant;
+  id?: string;
 }
 
-const { level = 1, variant = "default" } = Astro.props;
+const { level = 1, variant = "default", id } = Astro.props;
 
 const tagMap: Record<TypographyLevel, "h1" | "h2" | "h3" | "h4"> = {
   1: "h1",
@@ -30,6 +31,6 @@ const sizeClasses =
     : defaultClasses[level];
 ---
 
-<Tag class={`font-body ${sizeClasses}`}>
+<Tag id={id} class={`font-body ${sizeClasses}`}>
   <slot />
 </Tag>

@@ -1,0 +1,54 @@
+---
+import Link from "../ui/Link.astro";
+import Container from "../primitives/Container.astro";
+import Stack from "../primitives/Stack.astro";
+import Body from "../typography/Body.astro";
+import Heading from "../typography/Heading.astro";
+import Lead from "../typography/Lead.astro";
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const contactLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/celiarico/",
+    external: true,
+  },
+];
+---
+
+<section id={id} aria-labelledby="next-step-heading" class="py-section-lg">
+  <Container>
+    <Stack gap="10">
+      <Stack gap="6">
+        <Heading level={2} id="next-step-heading">
+          Start the conversation
+        </Heading>
+        <Lead>
+          Every collaboration begins with understanding the situation. The first
+          conversation is simply an opportunity to discuss your engineering
+          challenges and determine whether working together makes sense.
+        </Lead>
+        <Body
+          >There is no commitment and no sales process. Only a conversation.</Body
+        >
+      </Stack>
+      <Stack gap="4">
+        <Link href="mailto:hola@celiarico.dev" variant="cta"
+          >Start the conversation</Link
+        >
+        {
+          contactLinks.map(({ label, href, external }) => (
+            <Link href={href} external={external}>
+              {label}
+            </Link>
+          ))
+        }
+      </Stack>
+    </Stack>
+  </Container>
+</section>

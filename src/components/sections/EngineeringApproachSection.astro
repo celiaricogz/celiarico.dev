@@ -1,0 +1,59 @@
+---
+import ProcessTimeline from "../features/patterns/ProcessTimeline.astro";
+import Container from "../primitives/Container.astro";
+import Stack from "../primitives/Stack.astro";
+import Heading from "../typography/Heading.astro";
+import Lead from "../typography/Lead.astro";
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const steps = [
+  {
+    title: "Understand",
+    description:
+      "Map system boundaries, major components, communication flows, dependencies and operational behaviour. Understanding the current state reduces uncertainty before any change is introduced.",
+  },
+  {
+    title: "Analyse",
+    description:
+      "Study observed behaviour to identify root causes rather than surface symptoms. Engineering decisions should be based on evidence, not assumptions about what the system does.",
+  },
+  {
+    title: "Design",
+    description:
+      "Design solutions that balance simplicity, maintainability and scalability within the actual project constraints. Technology is selected to serve the architecture — not the other way around.",
+  },
+  {
+    title: "Implement",
+    description:
+      "Execute the agreed design incrementally. Each change should improve the system's clarity and reduce its operational risk. New uncertainty should never be introduced as a side effect.",
+  },
+  {
+    title: "Evolve",
+    description:
+      "Engineering does not end at deployment. Systems should remain understandable and maintainable as the organisation grows and requirements change.",
+  },
+];
+---
+
+<section id={id} aria-labelledby="approach-heading" class="py-section-md">
+  <Container>
+    <Stack gap="10">
+      <Stack gap="6">
+        <Heading level={2} id="approach-heading">
+          Understanding before implementation
+        </Heading>
+        <Lead>
+          Successful modernisation does not begin with technology selection or
+          architectural redesign. It begins with understanding the system as it
+          actually exists today.
+        </Lead>
+      </Stack>
+      <ProcessTimeline items={steps} />
+    </Stack>
+  </Container>
+</section>
