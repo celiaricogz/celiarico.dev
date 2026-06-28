@@ -61,6 +61,10 @@ When several implementations satisfy the specification equally well, always choo
 When making implementation decisions, follow this priority.
 
 ```text
+Professional Operating System (POS)
+
+↓
+
 Approved Architecture
 
 ↓
@@ -82,9 +86,45 @@ Code
 
 Never reverse this order.
 
-Code should implement architecture.
+Code implements architecture.
 
-Architecture should never emerge from code.
+Architecture never emerges from code.
+
+---
+
+# POS Context Selection
+
+The implementation of this repository is governed by the Professional Operating System (POS).
+
+The POS is the architectural source of truth.
+
+This repository contains only the implementation.
+
+Before implementing any task, the Development Agent must first identify the relevant architectural context.
+
+The agent must begin every implementation by consulting:
+
+```text
+POS/pbs/website/000-index.md
+```
+
+Using the index, the agent must identify the minimum set of documents required for the requested task.
+
+The entire POS should **not** be read by default.
+
+Only the documents relevant to the current implementation should be loaded.
+
+Before writing any code, the agent must explicitly state:
+
+- which POS documents were selected
+- why they are relevant
+- which architectural constraints they introduce
+
+Only after this analysis has been completed may implementation begin.
+
+If the required POS context is unavailable, incomplete or inconsistent, implementation must stop until clarification is provided.
+
+Architectural assumptions should never replace documented decisions.
 
 ---
 
@@ -92,14 +132,16 @@ Architecture should never emerge from code.
 
 Before implementing any feature:
 
+- inspect the repository
 - inspect the existing architecture
-- understand the responsibility of the target layer
+- identify the relevant POS documentation
+- understand the responsibility of the target architectural layer
 - verify whether an existing solution already exists
-- explain your implementation plan
+- explain the implementation plan
 
 Do not immediately begin coding.
 
-Implementation should always begin with reasoning.
+Implementation always begins with understanding.
 
 ---
 
@@ -156,9 +198,9 @@ Every component should:
 - expose a minimal API
 - minimise configuration
 
-Avoid generic components designed to solve hypothetical future problems.
+Prefer composition over abstraction.
 
-Prefer explicit composition.
+Avoid generic components created for hypothetical future requirements.
 
 ---
 
@@ -187,7 +229,7 @@ Motion should never exist for decoration.
 
 Components consume the Motion System.
 
-They do not create independent animation behaviour.
+They never invent independent animation behaviour.
 
 ---
 
@@ -203,7 +245,7 @@ Every implementation should:
 - avoid interaction-only communication
 - remain usable without animation
 
-Accessibility is never considered optional.
+Accessibility is never optional.
 
 ---
 
@@ -215,8 +257,8 @@ Prefer:
 
 - static rendering
 - minimal JavaScript
-- small bundles
 - progressive enhancement
+- small bundles
 
 Avoid client-side code unless it provides measurable value.
 
@@ -226,7 +268,7 @@ Avoid client-side code unless it provides measurable value.
 
 When implementation decisions are required:
 
-- explain the available options
+- explain available options
 - describe trade-offs
 - recommend one solution
 - wait for approval before changing architecture
@@ -246,12 +288,12 @@ Write code that is:
 
 Avoid:
 
-- clever abstractions
-- unnecessary indirection
+- unnecessary abstraction
+- clever implementations
 - premature optimisation
 - configuration without purpose
 
-Readable code is preferred over shorter code.
+Readable code is preferred over compact code.
 
 ---
 
@@ -266,19 +308,17 @@ Refactoring is encouraged when it:
 
 Refactoring should preserve behaviour.
 
-Never change architecture during refactoring.
+It must never modify architectural intent.
 
 ---
 
 # Communication
 
-When responding:
-
-Separate clearly between:
+Separate responses into:
 
 ## Facts
 
-Objective statements supported by implementation.
+Objective implementation details.
 
 ## Analysis
 
@@ -286,19 +326,24 @@ Engineering reasoning.
 
 ## Recommendation
 
-Preferred implementation.
+Preferred implementation approach.
 
-Do not present opinions as facts.
+Clearly distinguish facts from opinions.
 
 ---
 
 # If You Detect Problems
 
-If documentation appears inconsistent:
+If implementation reveals:
+
+- inconsistent documentation
+- missing architectural decisions
+- conflicting specifications
+- unclear responsibilities
 
 Stop implementation.
 
-Explain the inconsistency.
+Explain the issue.
 
 Propose possible solutions.
 
@@ -317,6 +362,14 @@ Understand
 
 ↓
 
+Select POS Context
+
+↓
+
+Analyse
+
+↓
+
 Plan
 
 ↓
@@ -332,7 +385,7 @@ Review
 Validate
 ```
 
-Skipping planning is considered an implementation error.
+Skipping understanding or context selection is considered an implementation error.
 
 ---
 
@@ -341,6 +394,7 @@ Skipping planning is considered an implementation error.
 A successful implementation:
 
 - follows the documented architecture
+- respects the POS
 - introduces no unnecessary complexity
 - preserves consistency
 - remains maintainable
@@ -350,14 +404,15 @@ A successful implementation:
 
 # Guiding Principles
 
-Keep the following principles in mind throughout every task.
+Keep these principles in mind throughout every task.
 
 - Architecture before implementation.
+- Understanding before coding.
+- POS before repository.
 - Content before interface.
 - Simplicity before flexibility.
 - Composition before duplication.
 - Explicitness before cleverness.
 - Consistency before convenience.
-- Understanding before coding.
 
-The best implementation is the one that feels inevitable once the problem is understood.
+The best implementation is the one that feels inevitable once the problem is fully understood.
