@@ -1,0 +1,11 @@
+---
+interface Props {
+  as?: "p" | "div";
+}
+
+const { as: Tag = "p" } = Astro.props;
+---
+
+<Tag class="font-body text-body leading-relaxed">
+  <slot />
+</Tag>

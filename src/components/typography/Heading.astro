@@ -1,0 +1,35 @@
+---
+import type { HeadingVariant, TypographyLevel } from "../../types/tokens";
+
+interface Props {
+  level?: TypographyLevel;
+  variant?: HeadingVariant;
+}
+
+const { level = 1, variant = "default" } = Astro.props;
+
+const tagMap: Record<TypographyLevel, "h1" | "h2" | "h3" | "h4"> = {
+  1: "h1",
+  2: "h2",
+  3: "h3",
+  4: "h4",
+};
+
+const Tag = tagMap[level];
+
+const defaultClasses: Record<TypographyLevel, string> = {
+  1: "text-h1 leading-tight tracking-tight",
+  2: "text-h2 leading-snug tracking-snug",
+  3: "text-h3 leading-snug tracking-snug",
+  4: "text-h4 leading-normal tracking-normal",
+};
+
+const sizeClasses =
+  variant === "display"
+    ? "text-display leading-tight tracking-tight"
+    : defaultClasses[level];
+---
+
+<Tag class={`font-body ${sizeClasses}`}>
+  <slot />
+</Tag>

@@ -1,0 +1,11 @@
+---
+interface Props {
+  as?: "figcaption" | "small" | "p";
+}
+
+const { as: Tag = "p" } = Astro.props;
+---
+
+<Tag class="font-body text-caption leading-normal">
+  <slot />
+</Tag>

@@ -1,0 +1,23 @@
+---
+import type { CodeVariant } from "../../types/tokens";
+
+interface Props {
+  variant?: CodeVariant;
+}
+
+const { variant = "inline" } = Astro.props;
+---
+
+{
+  variant === "block" ? (
+    <pre class="text-code font-mono leading-relaxed">
+      <code>
+        <slot />
+      </code>
+    </pre>
+  ) : (
+    <code class="text-code font-mono leading-normal">
+      <slot />
+    </code>
+  )
+}
