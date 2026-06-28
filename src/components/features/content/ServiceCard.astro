@@ -1,0 +1,26 @@
+---
+import Body from "../../../typography/Body.astro";
+import Heading from "../../../typography/Heading.astro";
+import Box from "../../../primitives/Box.astro";
+import Stack from "../../../primitives/Stack.astro";
+import Card from "../../../ui/Card.astro";
+import Link from "../../../ui/Link.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  cta?: { label: string; href: string };
+}
+
+const { title, description, cta } = Astro.props;
+---
+
+<Card variant="outlined" as="article">
+  <Box padding="6">
+    <Stack gap="4">
+      <Heading level={3}>{title}</Heading>
+      <Body>{description}</Body>
+      {cta && <Link href={cta.href}>{cta.label}</Link>}
+    </Stack>
+  </Box>
+</Card>

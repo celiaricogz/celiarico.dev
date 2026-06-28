@@ -1,0 +1,19 @@
+---
+import Body from "../../../typography/Body.astro";
+import Lead from "../../../typography/Lead.astro";
+import Stack from "../../../primitives/Stack.astro";
+
+interface Props {
+  statement: string;
+  elaboration?: string;
+}
+
+const { statement, elaboration } = Astro.props;
+---
+
+<article>
+  <Stack gap="2">
+    <Lead>{statement}</Lead>
+    {elaboration && <Body>{elaboration}</Body>}
+  </Stack>
+</article>

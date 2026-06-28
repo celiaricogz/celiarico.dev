@@ -1,0 +1,23 @@
+---
+import Caption from "../../../typography/Caption.astro";
+import Quote from "../../../typography/Quote.astro";
+import Stack from "../../../primitives/Stack.astro";
+
+interface Props {
+  text: string;
+  attribution?: string;
+}
+
+const { text, attribution } = Astro.props;
+---
+
+<Stack as="figure" gap="4">
+  <Quote>{text}</Quote>
+  {
+    attribution && (
+      <Caption as="figcaption">
+        <cite>{attribution}</cite>
+      </Caption>
+    )
+  }
+</Stack>

@@ -1,167 +1,60 @@
-# ARCHITECTURE.md
+# Architecture
 
-# Project Architecture
+This document provides a high-level overview of the implementation architecture of `celiarico.dev`.
 
-This document provides a high-level overview of the architecture implemented by `celiarico.dev`.
+It complements `AGENTS.md`.
 
-It is intended for developers and AI development agents contributing to the project.
+`AGENTS.md` defines how AI agents collaborate.
 
-For implementation rules, see `AGENTS.md`.
+This document explains how the project is organised.
 
----
-
-# Philosophy
-
-The project follows an engineering-first approach.
-
-The website is designed as a communication system rather than a collection of independent pages.
-
-The architecture prioritises:
-
-1. Simplicity
-2. Maintainability
-3. Scalability
-4. Accessibility
-5. Performance
-
-Every implementation decision should preserve these priorities.
+The architectural source of truth remains the Professional Operating System (POS).
 
 ---
 
-# Architectural Layers
+# Architecture Philosophy
 
-The project follows a strict layered architecture.
+The repository implements a layered architecture.
+
+Each layer owns a single responsibility.
+
+Layers compose lower layers.
+
+Layers never depend on higher layers.
+
+Architecture is intentionally explicit.
+
+Complexity is reduced through composition rather than configuration.
+
+---
+
+# Source of Truth
+
+Implementation decisions follow this order.
 
 ```text
-Design Tokens
-        ↓
-Primitives
-        ↓
-UI Components
-        ↓
-Feature Components
-        ├── Content Blocks
-        └── Communication Patterns
-        ↓
-Sections
-        ↓
-Pages
+Professional Operating System (POS)
+
+↓
+
+Architecture
+
+↓
+
+Design System
+
+↓
+
+Implementation Specifications
+
+↓
+
+Code
 ```
 
-Dependencies must always point downwards.
+Code never defines architecture.
 
-Higher layers compose lower layers.
-
-Lower layers must never depend on higher ones.
-
----
-
-# Layer Responsibilities
-
-## Design Tokens
-
-Define the visual language.
-
-Examples:
-
-- colours
-- spacing
-- typography
-- shadows
-- radii
-- motion values
-
-Tokens contain no behaviour.
-
----
-
-## Primitives
-
-Provide the smallest reusable layout elements.
-
-Examples:
-
-- Container
-- Stack
-- Grid
-- Flow
-- Cluster
-- Box
-
-Primitives establish structure only.
-
----
-
-## UI Components
-
-Implement reusable interface elements.
-
-Examples:
-
-- Button
-- Link
-- Input
-- Divider
-- Badge
-
-UI Components remain context-independent.
-
----
-
-## Feature Components
-
-Represent reusable communication units.
-
-Feature Components are divided into:
-
-### Content Blocks
-
-Communicate one complete idea.
-
-Examples:
-
-- Service Card
-- Principle Card
-- Experience Card
-- Quote
-- Statistic
-
----
-
-### Communication Patterns
-
-Communicate relationships between multiple ideas.
-
-Examples:
-
-- Process Timeline
-- Architecture Diagram
-- Comparison Matrix
-- Decision Flow
-
-Communication Patterns are composed from reusable Content Blocks.
-
----
-
-## Sections
-
-Sections organise communication into complete narrative units.
-
-Every Section answers one visitor question while naturally leading to the next.
-
----
-
-## Pages
-
-Pages compose Sections into complete user experiences.
-
-Pages own:
-
-- routing
-- metadata
-- composition
-
-Nothing else.
+It implements it.
 
 ---
 
@@ -170,81 +63,341 @@ Nothing else.
 ```text
 src/
 
-assets/
+design/
+    fonts/
+    tokens/
+
+types/
 
 components/
+
     primitives/
+
+    typography/
+
     ui/
-    content/
-    patterns/
-    sections/
 
-content/
+    features/
 
-design/
-    tokens/
-    motion/
+        content/
+
+        patterns/
 
 layouts/
-
-lib/
 
 pages/
 
 styles/
-
-types/
 ```
 
-The repository structure mirrors the architectural layers.
+The repository mirrors the architectural layers.
+
+Directories represent responsibilities rather than implementation convenience.
 
 ---
 
-# Design System
+# Layer Responsibilities
 
-The Design System defines:
+## Design
+
+Location:
+
+```text
+src/design/
+```
+
+Contains the Design System implementation.
+
+Includes:
+
+- fonts
+- design tokens
+
+No component logic exists here.
+
+Everything in this layer is reusable throughout the project.
+
+---
+
+## Types
+
+Location:
+
+```text
+src/types/
+```
+
+Contains shared TypeScript types.
+
+Typical responsibilities:
+
+- token-derived types
+- reusable interfaces
+- shared utility types
+
+No implementation logic.
+
+---
+
+## Layout Primitives
+
+Location:
+
+```text
+src/components/primitives/
+```
+
+Provide structural composition.
+
+Examples:
+
+- Container
+- Stack
+- Cluster
+- Grid
+- Flow
+- Box
+
+Responsibilities:
 
 - layout
-- typography
+- spacing
+- semantic wrappers
+
+Primitives never communicate content.
+
+---
+
+## Typography Components
+
+Location:
+
+```text
+src/components/typography/
+```
+
+Implement semantic typography.
+
+Examples:
+
+- Heading
+- Lead
+- Body
+- Caption
+- Quote
+- Code
+
+Responsibilities:
+
+- semantic HTML
+- reading hierarchy
+- typography scale
+
+Typography never owns layout.
+
+---
+
+## UI Components
+
+Location:
+
+```text
+src/components/ui/
+```
+
+Reusable interface elements.
+
+Examples:
+
+- Button
+- Link
+- Card
+- Badge
+- Callout
+- Divider
+
+Responsibilities:
+
 - interaction
-- content blocks
-- communication patterns
-- sections
+- reusable interface behaviour
+- surface treatment
 
-Implementation must always follow the Design System.
-
-Components never redefine it.
+UI Components never communicate business concepts.
 
 ---
 
-# Motion
+## Feature Components
 
-Motion is part of the shared language of the interface.
+Location:
 
-Animations communicate:
+```text
+src/components/features/
+```
 
-- continuity
+Feature Components communicate complete ideas.
+
+They compose lower architectural layers.
+
+They are divided into two sublayers.
+
+### Content Blocks
+
+Location:
+
+```text
+src/components/features/content/
+```
+
+Communicate one complete idea.
+
+Examples:
+
+- FeatureCard
+- ServiceCard
+- ExperienceCard
+- PrincipleCard
+- Stat
+- QuoteBlock
+
+Content Blocks never communicate relationships between ideas.
+
+---
+
+### Communication Patterns
+
+Location:
+
+```text
+src/components/features/patterns/
+```
+
+Compose multiple Content Blocks.
+
+Responsibilities:
+
+- grouping
+- comparison
 - progression
-- feedback
+- ordering
 
-They never exist purely for decoration.
+Examples:
+
+- FeatureGrid
+- ServiceComparison
+- StatisticsRow
+- PrincipleList
+- TestimonialGroup
+
+Patterns never introduce new UI behaviour.
 
 ---
 
-# Accessibility
+## Layouts
 
-Accessibility is considered a design requirement.
+Location:
 
-Every reusable component should:
+```text
+src/layouts/
+```
 
-- use semantic HTML
-- support keyboard navigation
-- preserve logical reading order
-- remain understandable without animation
+Compose global page structure.
 
-Accessibility belongs to the system.
+Responsibilities:
 
-Not individual pages.
+- document shell
+- metadata
+- global imports
+- shared page framing
+
+Layouts never contain reusable content.
+
+---
+
+## Pages
+
+Location:
+
+```text
+src/pages/
+```
+
+Compose Sections into complete pages.
+
+Responsibilities:
+
+- routing
+- page composition
+- metadata
+
+Pages should remain intentionally thin.
+
+---
+
+# Dependency Rules
+
+Dependencies always point downward.
+
+```text
+Design Tokens
+        ↓
+Layout Primitives
+        ↓
+Typography Components
+        ↓
+UI Components
+        ↓
+Content Blocks
+        ↓
+Communication Patterns
+        ↓
+Layouts
+        ↓
+Pages
+```
+
+Never introduce upward dependencies.
+
+Never introduce circular dependencies.
+
+---
+
+# Design Token Consumption
+
+Every visual decision originates from the Design Token layer.
+
+Components consume tokens using two mechanisms.
+
+## Tier 1
+
+Tailwind utility classes.
+
+Preferred whenever possible.
+
+Examples:
+
+- colours
+- spacing
+- typography
+- motion
+- radius
+- elevation
+
+---
+
+## Tier 2
+
+CSS custom properties.
+
+Used only when Tailwind utilities cannot express the required value.
+
+Examples:
+
+- reading measure
+- container widths
+
+Tier 2 exists as an exception.
+
+Not as an alternative styling system.
 
 ---
 
@@ -252,71 +405,128 @@ Not individual pages.
 
 Every component should:
 
-- have one responsibility
+- own one responsibility
+- expose a minimal API
+- be composable
 - remain reusable
-- minimise configuration
-- favour composition
-- expose explicit APIs
+- avoid unnecessary configuration
 
-Complexity should emerge through composition.
+Components should solve today's problem.
 
-Never through increasingly generic components.
+Not hypothetical future problems.
 
 ---
 
-# Implementation Workflow
+# Accessibility
 
-Development progresses from the lowest architectural layer to the highest.
+Accessibility is part of every architectural layer.
 
-```text
-Design Tokens
+Responsibilities accumulate.
 
-↓
+Examples:
 
 Primitives
 
-↓
+- landmarks
+- structure
 
-UI Components
+Typography
 
-↓
+- semantic headings
+- readable hierarchy
+
+UI
+
+- keyboard interaction
+- focus management
 
 Content Blocks
 
+- self-contained meaning
+
+Patterns
+
+- logical grouping
+
+Accessibility is implemented where the responsibility naturally belongs.
+
+---
+
+# Performance
+
+Performance is a design requirement.
+
+Prefer:
+
+- static rendering
+- server-first rendering
+- minimal JavaScript
+- progressive enhancement
+- small bundles
+
+Avoid client-side rendering unless necessary.
+
+---
+
+# Repository Conventions
+
+The project intentionally avoids:
+
+- barrel exports
+- generic helper components
+- utility wrappers without responsibility
+- premature abstractions
+
+Directories should remain easy to navigate.
+
+Architecture should remain obvious.
+
+---
+
+# Development Workflow
+
+Every implementation follows the same sequence.
+
+```text
+Understand
+
 ↓
 
-Communication Patterns
+Plan
 
 ↓
 
-Sections
+Implement
 
 ↓
 
-Pages
+Review
+
+↓
+
+Validate
 ```
 
-No implementation should skip architectural layers.
+Validation always includes:
+
+- lint
+- format
+- build
+
+No implementation is considered complete without all three passing.
 
 ---
 
-# AI-Assisted Development
+# Guiding Principles
 
-The project is designed for AI-assisted implementation.
+Keep these principles in mind throughout the project.
 
-Development agents should:
+- Architecture before implementation.
+- Composition before configuration.
+- Simplicity before flexibility.
+- Explicitness before cleverness.
+- Design Tokens before hardcoded values.
+- Accessibility by default.
+- Performance by design.
 
-- understand the architecture before writing code
-- preserve existing decisions
-- avoid unnecessary abstraction
-- propose improvements without changing architecture autonomously
-
-Implementation guidance is defined in `AGENTS.md`.
-
----
-
-# Guiding Principle
-
-Architecture exists to make implementation predictable.
-
-Every new component, page or feature should naturally fit into the existing system rather than expanding it.
+The best architecture is the one that makes the correct implementation the easiest one to write.

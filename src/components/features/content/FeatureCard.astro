@@ -1,0 +1,29 @@
+---
+import Body from "../../../typography/Body.astro";
+import Heading from "../../../typography/Heading.astro";
+import Badge from "../../../ui/Badge.astro";
+import Cluster from "../../../primitives/Cluster.astro";
+import Stack from "../../../primitives/Stack.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  badge?: string;
+}
+
+const { title, description, badge } = Astro.props;
+---
+
+<article>
+  <Stack gap="3">
+    {
+      badge && (
+        <Cluster gap="2">
+          <Badge variant="subtle">{badge}</Badge>
+        </Cluster>
+      )
+    }
+    <Heading level={3}>{title}</Heading>
+    <Body>{description}</Body>
+  </Stack>
+</article>
