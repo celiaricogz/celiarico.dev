@@ -1,0 +1,30 @@
+---
+interface Props {
+  href: string;
+  variant?: "default" | "cta";
+  external?: boolean;
+}
+
+const { href, variant = "default", external = false } = Astro.props;
+
+const base =
+  "transition-colors duration-fast ease-out motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring";
+
+const variants: Record<"default" | "cta", string> = {
+  default:
+    "text-foreground underline underline-offset-2 rounded-sm hover:text-accent",
+  cta: "inline-flex items-center justify-center px-5 py-3 text-body font-body leading-normal rounded-md bg-accent text-accent-foreground hover:bg-accent-hover active:opacity-90",
+};
+
+const classes = `${base} ${variants[variant]}`;
+---
+
+<a
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  class={classes}
+>
+  <slot />
+  {external && <span class="sr-only">(opens in new tab)</span>}
+</a>
