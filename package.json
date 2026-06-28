@@ -1,5 +1,5 @@
 {
-  "name": "ecliptic-event",
+  "name": "celiarico.dev",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -9,9 +9,38 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky",
+    "start": "astro dev",
+    "lint": "eslint \"src/**/*.{astro,js,ts}\"",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "dependencies": {
-    "astro": "^7.0.3"
+    "@tailwindcss/vite": "^4.3.1",
+    "astro": "^7.0.3",
+    "tailwindcss": "^4.3.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.62.0",
+    "eslint": "^9",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "globals": "^17.7.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
+    "prettier": "^3.9.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "typescript-eslint": "^8.62.0"
+  },
+  "lint-staged": {
+    "*.{astro,js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,json,md,mjs}": [
+      "prettier --write"
+    ]
   }
 }
