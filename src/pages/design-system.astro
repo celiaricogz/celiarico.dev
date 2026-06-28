@@ -1,0 +1,587 @@
+---
+import "../styles/global.css";
+
+import Box from "../components/primitives/Box.astro";
+import Cluster from "../components/primitives/Cluster.astro";
+import Container from "../components/primitives/Container.astro";
+import Flow from "../components/primitives/Flow.astro";
+import Grid from "../components/primitives/Grid.astro";
+import Stack from "../components/primitives/Stack.astro";
+
+import Body from "../components/typography/Body.astro";
+import Caption from "../components/typography/Caption.astro";
+import Code from "../components/typography/Code.astro";
+import Heading from "../components/typography/Heading.astro";
+import Lead from "../components/typography/Lead.astro";
+import Quote from "../components/typography/Quote.astro";
+
+import Badge from "../components/ui/Badge.astro";
+import Button from "../components/ui/Button.astro";
+import Callout from "../components/ui/Callout.astro";
+import Card from "../components/ui/Card.astro";
+import Divider from "../components/ui/Divider.astro";
+import Link from "../components/ui/Link.astro";
+
+import ExperienceCard from "../components/features/content/ExperienceCard.astro";
+import FeatureCard from "../components/features/content/FeatureCard.astro";
+import PrincipleCard from "../components/features/content/PrincipleCard.astro";
+import QuoteBlock from "../components/features/content/QuoteBlock.astro";
+import ServiceCard from "../components/features/content/ServiceCard.astro";
+import Stat from "../components/features/content/Stat.astro";
+
+import FeatureGrid from "../components/features/patterns/FeatureGrid.astro";
+import PrincipleGrid from "../components/features/patterns/PrincipleGrid.astro";
+import ServiceGrid from "../components/features/patterns/ServiceGrid.astro";
+import StatisticsRow from "../components/features/patterns/StatisticsRow.astro";
+import TestimonialGroup from "../components/features/patterns/TestimonialGroup.astro";
+
+const featureGridItems = [
+  {
+    title: "Component Architecture",
+    description:
+      "A layered system where each component owns exactly one responsibility and depends only on lower layers.",
+    badge: "Foundation",
+  },
+  {
+    title: "Design Tokens",
+    description:
+      "Every visual decision represented as a token. Components consume tokens and never redefine them.",
+    badge: "Tokens",
+  },
+  {
+    title: "Motion System",
+    description:
+      "Movement that communicates progression and continuity. Never decoration.",
+    badge: "Motion",
+  },
+];
+
+const serviceGridItems = [
+  {
+    title: "Engineering Partnership",
+    description:
+      "Long-term collaboration on complex frontend architecture and delivery.",
+    cta: { label: "Learn more", href: "#" },
+  },
+  {
+    title: "Architecture Review",
+    description:
+      "An independent assessment of your current frontend architecture with concrete, actionable recommendations.",
+    cta: { label: "Learn more", href: "#" },
+  },
+];
+
+const principleGridItems = [
+  {
+    statement: "Architecture before implementation.",
+    elaboration:
+      "Understanding the problem fully before writing a single line of code.",
+  },
+  {
+    statement: "Simplicity before flexibility.",
+    elaboration:
+      "The simplest solution that satisfies the constraint is always preferred.",
+  },
+  {
+    statement: "Composition over abstraction.",
+    elaboration:
+      "Small building blocks that compose naturally produce better outcomes than premature generalisation.",
+  },
+  {
+    statement: "Content before interface.",
+    elaboration:
+      "Visitors should notice the ideas, not the components that communicate them.",
+  },
+];
+
+const statisticsItems = [
+  { value: "8", label: "Design token categories" },
+  { value: "6", label: "Layout primitives" },
+  { value: "7", label: "Typography components" },
+];
+
+const testimonialItems = [
+  {
+    text: "Good design is almost invisible. Visitors should remember the ideas that were communicated, not the interface that communicated them.",
+    attribution: "Design System — 000 Overview",
+  },
+  {
+    text: "Architecture defines responsibilities. Components implement them. Every component should feel like the inevitable implementation of a single, clearly defined responsibility.",
+    attribution: "Component Architecture — 002",
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Design System — celiarico.dev</title>
+  </head>
+  <body>
+    <main>
+      <Container>
+        <Box paddingY="16">
+          <Stack gap="20">
+            <Stack gap="4">
+              <Heading level={1}>Design System Showcase</Heading>
+              <Lead>
+                A visual validation of all implemented design system layers.
+                This page exists to confirm the system composes correctly before
+                production sections are built. It is not part of navigation or
+                production structure.
+              </Lead>
+            </Stack>
+
+            <Divider decorative={true} />
+
+            <section aria-label="Layout Primitives">
+              <Stack gap="12">
+                <Heading level={2}>Layout Primitives</Heading>
+
+                <Stack gap="4">
+                  <Heading level={3}>Stack</Heading>
+                  <Card variant="flat">
+                    <Box padding="6">
+                      <Stack gap="6">
+                        <Body>
+                          First item. Stack arranges children vertically with
+                          consistent gap.
+                        </Body>
+                        <Body>
+                          Second item. Spacing is applied uniformly between all
+                          children.
+                        </Body>
+                        <Body>Third item. No manual margin required.</Body>
+                      </Stack>
+                    </Box>
+                  </Card>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Cluster</Heading>
+                  <Cluster gap="2">
+                    <Badge>Component Architecture</Badge>
+                    <Badge>Design Tokens</Badge>
+                    <Badge>Motion System</Badge>
+                    <Badge>Typography</Badge>
+                  </Cluster>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Grid</Heading>
+                  <Grid columns={3} gap="6">
+                    <Card variant="outlined">
+                      <Box padding="6">
+                        <Body>Column one</Body>
+                      </Box>
+                    </Card>
+                    <Card variant="outlined">
+                      <Box padding="6">
+                        <Body>Column two</Body>
+                      </Box>
+                    </Card>
+                    <Card variant="outlined">
+                      <Box padding="6">
+                        <Body>Column three</Body>
+                      </Box>
+                    </Card>
+                  </Grid>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Flow</Heading>
+                  <Flow>
+                    <Body>
+                      Flow maintains consistent vertical rhythm between text
+                      elements, optimised for long-form reading.
+                    </Body>
+                    <Body>
+                      Each paragraph breathes naturally within the reading flow,
+                      maintaining the established rhythm without requiring
+                      manual spacing.
+                    </Body>
+                  </Flow>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Box</Heading>
+                  <Card variant="outlined">
+                    <Box padding="8">
+                      <Body>
+                        Box applies padding tokens to its children. The card
+                        boundary makes the padding visible here.
+                      </Body>
+                    </Box>
+                  </Card>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Container</Heading>
+                  <Caption>
+                    Container wraps this entire page. It constrains content to
+                    the readable width defined by the layout token layer.
+                  </Caption>
+                </Stack>
+              </Stack>
+            </section>
+
+            <Divider decorative={true} />
+
+            <section aria-label="Typography">
+              <Stack gap="12">
+                <Heading level={2}>Typography</Heading>
+
+                <Stack gap="4">
+                  <Heading level={3}>Heading</Heading>
+                  <Stack gap="4">
+                    <Heading level={1} variant="display">
+                      Display — The craft of engineering
+                    </Heading>
+                    <Heading level={1}>
+                      Heading 1 — The craft of engineering
+                    </Heading>
+                    <Heading level={2}>
+                      Heading 2 — Component architecture
+                    </Heading>
+                    <Heading level={3}>Heading 3 — Design token layer</Heading>
+                    <Heading level={4}>Heading 4 — Spacing scale</Heading>
+                  </Stack>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Lead</Heading>
+                  <Lead>
+                    Lead introduces a section or page. It provides additional
+                    context before detailed content begins, establishing the
+                    reading direction for what follows.
+                  </Lead>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Body</Heading>
+                  <Body>
+                    Body is the default reading style. Most content uses this
+                    typography. Readability takes precedence over density. Lines
+                    should breathe without feeling sparse.
+                  </Body>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Caption</Heading>
+                  <Caption>
+                    Caption supports surrounding content — image descriptions,
+                    metadata, supplementary information. Always clearly
+                    secondary.
+                  </Caption>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Quote</Heading>
+                  <Quote>
+                    Good design is almost invisible. Visitors should remember
+                    the ideas that were communicated, not the interface that
+                    communicated them.
+                  </Quote>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Code</Heading>
+                  <Stack gap="4">
+                    <Body>
+                      Inline variant: <Code>variant="inline"</Code> renders within
+                      body text.
+                    </Body>
+                    <Code variant="block">const system = "composable";</Code>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </section>
+
+            <Divider decorative={true} />
+
+            <section aria-label="UI Components">
+              <Stack gap="12">
+                <Heading level={2}>UI Components</Heading>
+
+                <Stack gap="4">
+                  <Heading level={3}>Button</Heading>
+                  <Cluster gap="6">
+                    <Stack gap="2">
+                      <Button variant="primary">Primary</Button>
+                      <Caption>primary</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Button variant="secondary">Secondary</Button>
+                      <Caption>secondary</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Button variant="primary" disabled>Disabled</Button>
+                      <Caption>disabled</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Button variant="primary" loading>Loading</Button>
+                      <Caption>loading</Caption>
+                    </Stack>
+                  </Cluster>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Link</Heading>
+                  <Cluster gap="8">
+                    <Stack gap="2">
+                      <Link href="#">Default link</Link>
+                      <Caption>default</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Link href="#" variant="cta">Call to action</Link>
+                      <Caption>cta</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Link href="https://example.com" external
+                        >External link</Link
+                      >
+                      <Caption>external</Caption>
+                    </Stack>
+                  </Cluster>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Badge</Heading>
+                  <Cluster gap="4">
+                    <Stack gap="2">
+                      <Badge variant="default">Default</Badge>
+                      <Caption>default</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Badge variant="accent">Accent</Badge>
+                      <Caption>accent</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Badge variant="subtle">Subtle</Badge>
+                      <Caption>subtle</Caption>
+                    </Stack>
+                  </Cluster>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Card</Heading>
+                  <Grid columns={2} gap="6">
+                    <Stack gap="2">
+                      <Card variant="flat">
+                        <Box padding="6">
+                          <Body>Flat card with subtle background fill.</Body>
+                        </Box>
+                      </Card>
+                      <Caption>flat</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Card variant="outlined">
+                        <Box padding="6">
+                          <Body>
+                            Outlined card with transparent background and
+                            visible border.
+                          </Body>
+                        </Box>
+                      </Card>
+                      <Caption>outlined</Caption>
+                    </Stack>
+                  </Grid>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Callout</Heading>
+                  <Stack gap="6">
+                    <Stack gap="2">
+                      <Callout variant="default">
+                        <Body>
+                          Default callout. Highlights information requiring
+                          temporary emphasis.
+                        </Body>
+                      </Callout>
+                      <Caption>default</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Callout variant="accent">
+                        <Body>
+                          Accent callout. Used when the callout carries stronger
+                          communicative intent.
+                        </Body>
+                      </Callout>
+                      <Caption>accent</Caption>
+                    </Stack>
+                  </Stack>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Divider</Heading>
+                  <Stack gap="6">
+                    <Stack gap="2">
+                      <Divider decorative={true} />
+                      <Caption>default</Caption>
+                    </Stack>
+                    <Stack gap="2">
+                      <Divider variant="subtle" decorative={true} />
+                      <Caption>subtle</Caption>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </section>
+
+            <Divider decorative={true} />
+
+            <section aria-label="Content Blocks">
+              <Stack gap="12">
+                <Heading level={2}>Content Blocks</Heading>
+
+                <Stack gap="4">
+                  <Heading level={3}>FeatureCard</Heading>
+                  <Grid columns={2} gap="6">
+                    <FeatureCard
+                      title="Component Architecture"
+                      description="A layered system where each component owns exactly one responsibility and depends only on lower layers."
+                    />
+                    <FeatureCard
+                      title="Design Tokens"
+                      description="Every visual decision represented as a token. Components consume tokens and never redefine them."
+                      badge="Foundation"
+                    />
+                  </Grid>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>ServiceCard</Heading>
+                  <Grid columns={2} gap="6">
+                    <ServiceCard
+                      title="Architecture Review"
+                      description="An independent assessment of your current frontend architecture with concrete, actionable recommendations."
+                    />
+                    <ServiceCard
+                      title="Engineering Partnership"
+                      description="Long-term collaboration on complex frontend architecture and delivery."
+                      cta={{ label: "Learn more", href: "#" }}
+                    />
+                  </Grid>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>ExperienceCard</Heading>
+                  <Grid columns={2} gap="6">
+                    <ExperienceCard
+                      title="Frontend Platform"
+                      description="Led the architecture and delivery of a component system used across multiple product teams."
+                    />
+                    <ExperienceCard
+                      title="Design System"
+                      description="Defined and implemented a design token layer and component hierarchy adopted across three product surfaces."
+                      tags={["Astro", "TypeScript", "Design Systems"]}
+                    />
+                  </Grid>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>PrincipleCard</Heading>
+                  <Grid columns={2} gap="6">
+                    <PrincipleCard
+                      statement="Architecture before implementation."
+                    />
+                    <PrincipleCard
+                      statement="Simplicity before flexibility."
+                      elaboration="The simplest solution that satisfies the constraint is always preferred."
+                    />
+                  </Grid>
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>Stat</Heading>
+                  <Stat value="8" label="Design token categories" />
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>QuoteBlock</Heading>
+                  <Stack gap="8">
+                    <QuoteBlock text="Good design is almost invisible." />
+                    <QuoteBlock
+                      text="Architecture defines responsibilities. Components implement them."
+                      attribution="Component Architecture — 002"
+                    />
+                  </Stack>
+                </Stack>
+              </Stack>
+            </section>
+
+            <Divider decorative={true} />
+
+            <section aria-label="Communication Patterns">
+              <Stack gap="12">
+                <Heading level={2}>Communication Patterns</Heading>
+
+                <Stack gap="4">
+                  <Heading level={3}>FeatureGrid</Heading>
+                  <FeatureGrid items={featureGridItems} />
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>ServiceGrid</Heading>
+                  <ServiceGrid items={serviceGridItems} />
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>PrincipleGrid</Heading>
+                  <PrincipleGrid items={principleGridItems} />
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>StatisticsRow</Heading>
+                  <StatisticsRow items={statisticsItems} />
+                </Stack>
+
+                <Stack gap="4">
+                  <Heading level={3}>TestimonialGroup</Heading>
+                  <TestimonialGroup items={testimonialItems} />
+                </Stack>
+              </Stack>
+            </section>
+
+            <Divider decorative={true} />
+
+            <section aria-label="Composition Preview">
+              <Stack gap="12">
+                <Stack gap="4">
+                  <Heading level={2}>Composition Preview</Heading>
+                  <Lead>
+                    This section validates that the complete design system
+                    composes naturally. No new components, tokens, or design
+                    decisions are introduced here.
+                  </Lead>
+                </Stack>
+
+                <Stack gap="16">
+                  <Stack gap="6">
+                    <Heading level={3}>Engineering Approach</Heading>
+                    <Lead>
+                      Celia builds systems that outlive their initial
+                      requirements — through principled architecture, considered
+                      composition, and careful attention to maintainability.
+                    </Lead>
+                    <FeatureGrid items={featureGridItems} />
+                  </Stack>
+
+                  <StatisticsRow items={statisticsItems} />
+
+                  <Cluster gap="4">
+                    <Button variant="primary">Start a conversation</Button>
+                    <Button variant="secondary">Read the notes</Button>
+                  </Cluster>
+                </Stack>
+              </Stack>
+            </section>
+          </Stack>
+        </Box>
+      </Container>
+    </main>
+  </body>
+</html>

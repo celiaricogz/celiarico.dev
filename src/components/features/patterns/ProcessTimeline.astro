@@ -1,0 +1,20 @@
+---
+import ProcessStep from "../content/ProcessStep.astro";
+import Stack from "../../primitives/Stack.astro";
+
+interface Props {
+  items: { title: string; description: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<Stack as="ol" gap="10">
+  {
+    items.map((item) => (
+      <li>
+        <ProcessStep {...item} />
+      </li>
+    ))
+  }
+</Stack>
