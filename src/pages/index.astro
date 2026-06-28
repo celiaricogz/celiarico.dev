@@ -1,17 +1,21 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CollaborationSection from "../components/sections/CollaborationSection.astro";
+import EngineeringApproachSection from "../components/sections/EngineeringApproachSection.astro";
+import EvidenceSection from "../components/sections/EvidenceSection.astro";
+import IntroductionSection from "../components/sections/IntroductionSection.astro";
+import NextStepSection from "../components/sections/NextStepSection.astro";
+import ProblemSection from "../components/sections/ProblemSection.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<BaseLayout
+  title="Celia Rico — IT Architect"
+  description="IT Architect specialising in Platform Engineering, DevOps and Cloud. Helping technical teams modernise complex systems through structured engineering and architectural clarity."
+>
+  <IntroductionSection id="introduction" />
+  <ProblemSection id="problem" />
+  <EngineeringApproachSection id="approach" />
+  <EvidenceSection id="evidence" />
+  <CollaborationSection id="collaboration" />
+  <NextStepSection id="next-step" />
+</BaseLayout>

@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "IT Architect specialising in Platform Engineering, DevOps and Cloud. Helping technical teams modernise complex systems through structured engineering and architectural clarity.",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const websiteSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Celia Rico",
+  url: Astro.site,
+});
+
+const personSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Celia Rico",
+  jobTitle: "IT Architect",
+  url: Astro.site,
+  email: "hola@celiarico.dev",
+  sameAs: ["https://www.linkedin.com/in/celiarico/"],
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <script type="application/ld+json" set:html={websiteSchema} />
+    <script type="application/ld+json" set:html={personSchema} />
+  </head>
+  <body class="bg-background text-foreground">
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
