@@ -1,0 +1,13 @@
+@theme {
+  /* Breakpoints — rem units preserve user font-size preferences */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+
+  /* Container widths — consumed via var() by the Container primitive */
+  --container-prose: 40rem;
+  --container-narrow: 48rem;
+  --container-default: 64rem;
+  --container-wide: 80rem;
+}

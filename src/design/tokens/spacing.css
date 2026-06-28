@@ -1,0 +1,10 @@
+@theme {
+  /* Section spacing — fluid scaling via clamp()
+   * Transitions linearly from mobile minimum (375px) to desktop maximum (1280px).
+   * Consumed as spacing utilities: py-section-xl, mt-section-md, etc.
+   */
+  --spacing-section-sm: clamp(2.5rem, 1.46rem + 4.42vw, 5rem);
+  --spacing-section-md: clamp(3.5rem, 1.84rem + 7.07vw, 7.5rem);
+  --spacing-section-lg: clamp(4.5rem, 2.22rem + 9.72vw, 10rem);
+  --spacing-section-xl: clamp(6rem, 2.69rem + 14.14vw, 14rem);
+}
