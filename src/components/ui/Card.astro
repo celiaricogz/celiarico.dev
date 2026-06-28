@@ -1,0 +1,21 @@
+---
+interface Props {
+  variant?: "flat" | "outlined";
+  as?: string;
+}
+
+const { variant = "flat", as: Tag = "div" } = Astro.props;
+
+const base = "rounded-lg border";
+
+const variants: Record<"flat" | "outlined", string> = {
+  flat: "bg-background-subtle border-border",
+  outlined: "bg-transparent border-border",
+};
+
+const classes = `${base} ${variants[variant]}`;
+---
+
+<Tag class={classes}>
+  <slot />
+</Tag>

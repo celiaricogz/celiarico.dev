@@ -1,0 +1,17 @@
+---
+interface Props {
+  variant?: "default" | "subtle";
+  decorative?: boolean;
+}
+
+const { variant = "default", decorative = false } = Astro.props;
+
+const variants: Record<"default" | "subtle", string> = {
+  default: "border-border",
+  subtle: "border-border-subtle",
+};
+
+const classes = `border-0 border-t ${variants[variant]}`;
+---
+
+<hr class={classes} aria-hidden={decorative ? "true" : undefined} />

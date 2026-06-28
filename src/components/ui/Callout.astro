@@ -1,0 +1,21 @@
+---
+interface Props {
+  variant?: "default" | "accent";
+  as?: "aside" | "div";
+}
+
+const { variant = "default", as: Tag = "aside" } = Astro.props;
+
+const base = "border-l-2 pl-5 py-4";
+
+const variants: Record<"default" | "accent", string> = {
+  default: "bg-background-subtle border-border",
+  accent: "bg-background-muted border-accent",
+};
+
+const classes = `${base} ${variants[variant]}`;
+---
+
+<Tag class={classes}>
+  <slot />
+</Tag>

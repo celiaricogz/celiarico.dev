@@ -1,0 +1,23 @@
+---
+interface Props {
+  variant?: "default" | "accent" | "subtle";
+  as?: "span" | "div";
+}
+
+const { variant = "default", as: Tag = "span" } = Astro.props;
+
+const base =
+  "inline-flex items-center px-2 py-0.5 text-caption font-body leading-normal tracking-wide rounded-full";
+
+const variants: Record<"default" | "accent" | "subtle", string> = {
+  default: "bg-background-subtle border border-border text-foreground-subtle",
+  accent: "bg-accent text-accent-foreground",
+  subtle: "bg-background-muted text-foreground-muted",
+};
+
+const classes = `${base} ${variants[variant]}`;
+---
+
+<Tag class={classes}>
+  <slot />
+</Tag>
