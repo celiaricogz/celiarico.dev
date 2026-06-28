@@ -1,0 +1,17 @@
+---
+import type { ContainerSize } from "../../types/tokens";
+
+interface Props {
+  as?: string;
+  size?: ContainerSize;
+}
+
+const { as: Tag = "div", size = "default" } = Astro.props;
+---
+
+<Tag
+  class="mx-auto w-full px-4 md:px-6 lg:px-8"
+  style={`max-width: var(--container-${size})`}
+>
+  <slot />
+</Tag>
