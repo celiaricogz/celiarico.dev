@@ -9,7 +9,7 @@
   --duration-deliberate: 600ms;
 
   /* Easing — calm curves, no bounce */
-  --ease-in-out: initial;
+  --ease-*: initial;
 
   --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
