@@ -1,10 +1,5 @@
 ---
-import PrincipleGrid from "../features/patterns/PrincipleGrid.astro";
-import ServiceGrid from "../features/patterns/ServiceGrid.astro";
-import Container from "../primitives/Container.astro";
-import Stack from "../primitives/Stack.astro";
-import Heading from "../typography/Heading.astro";
-import Lead from "../typography/Lead.astro";
+import SectionLabel from "../ui/SectionLabel.astro";
 
 interface Props {
   id?: string;
@@ -12,67 +7,329 @@ interface Props {
 
 const { id } = Astro.props;
 
-const services = [
+const items = [
   {
-    title: "Legacy Modernisation",
-    description:
-      "Helping organisations evolve complex systems safely, reducing operational risk and recovering architectural clarity without disrupting ongoing delivery.",
+    number: "01",
+    textEn:
+      "No two systems start from the same place. The engagement begins from where yours is.",
+    textEs:
+      "No hay dos sistemas que partan del mismo lugar. El proyecto empieza donde está el tuyo.",
+    delay: 60,
   },
   {
-    title: "DevOps and Platform Engineering",
-    description:
-      "Improving delivery processes through infrastructure automation, deployment pipeline design and developer platform evolution.",
+    number: "02",
+    textEn:
+      "Before any recommendation, there is investigation. The starting point is the existing architecture, the knowledge already inside the team, the pace at which change is safe. These cannot be assumed in advance. They are found.",
+    textEs:
+      "Antes de cualquier recomendación, hay investigación. El punto de partida es la arquitectura existente, el conocimiento que ya tiene el equipo, el ritmo al que es seguro cambiar. Esto no se puede asumir de antemano. Se descubre.",
+    delay: 120,
   },
   {
-    title: "Architecture and Technical Guidance",
-    description:
-      "Supporting engineering teams and technical leadership during complex architectural decisions, technology transitions and system redesign.",
-  },
-  {
-    title: "Long-Term Technical Collaboration",
-    description:
-      "Ongoing engineering support through predefined availability, providing architectural continuity and technical guidance as the organisation evolves.",
-  },
-];
-
-const principles = [
-  {
-    statement: "Understanding before implementation",
-    elaboration: "No system should be changed before it is understood.",
-  },
-  {
-    statement: "Architecture before technology",
-    elaboration:
-      "Technology is selected to serve the architecture, not to define it.",
-  },
-  {
-    statement: "Simplicity before complexity",
-    elaboration:
-      "The right solution is the simplest one that actually solves the problem.",
-  },
-  {
-    statement: "Sustainable evolution over quick fixes",
-    elaboration:
-      "Every change should leave the system easier to understand and evolve than before.",
+    number: "03",
+    textEn:
+      "What adapts to that context is what should adapt — the scope, the pace, the form the engagement takes. The engineering judgement applied to it does not.",
+    textEs:
+      "Lo que se adapta a ese contexto es lo que debe adaptarse: el alcance, el ritmo, la forma que toma el proyecto. El criterio de ingeniería que se aplica, no.",
+    delay: 180,
   },
 ];
 ---
 
-<section id={id} aria-labelledby="collaboration-heading" class="py-section-md">
-  <Container>
-    <Stack gap="12">
-      <Stack gap="6">
-        <Heading level={2} id="collaboration-heading">
-          How we can work together
-        </Heading>
-        <Lead>
-          Every engagement begins by understanding the organisation's specific
-          situation. The collaboration adapts to the project — not the other way
-          around.
-        </Lead>
-      </Stack>
-      <ServiceGrid items={services} />
-      <PrincipleGrid items={principles} />
-    </Stack>
-  </Container>
+<section id={id} aria-labelledby="collab-heading" class="collab-section">
+  <div class="collab-section__inner">
+    <SectionLabel label="04 — Collaboration" counter="04 / 05" />
+
+    <h2
+      data-reveal
+      data-d="60"
+      id="collab-heading"
+      class="collab-section__headline"
+    >
+      <span lang="en"
+        >Every engagement begins with the system you already have.</span
+      >
+      <span lang="es">Todo proyecto empieza con el sistema que ya tienes.</span>
+    </h2>
+
+    <div class="collab-section__split">
+      <div class="collab-section__items">
+        {
+          items.map((item) => (
+            <div data-reveal data-d={item.delay} class="collab-item">
+              <span class="collab-item__number">{item.number}</span>
+              <p class="collab-item__text">
+                <span lang="en">{item.textEn}</span>
+                <span lang="es">{item.textEs}</span>
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Adapts / constant diagram -->
+      <div
+        data-reveal
+        data-d="140"
+        class="collab-diagram"
+        role="img"
+        data-label-en="Diagram: scope, pace and form of engagement vary per client, but the engineering judgement applied to them stays constant"
+        data-label-es="Diagrama: el alcance, el ritmo y la forma del proyecto varían según el cliente, pero el criterio de ingeniería aplicado se mantiene constante"
+      >
+        <span class="collab-diagram__label">
+          <span lang="en">What adapts, what doesn't</span>
+          <span lang="es">Qué se adapta, qué no</span>
+        </span>
+
+        <div class="collab-diagram__inputs">
+          <div class="collab-diagram__input">
+            <span class="collab-diagram__input-tag">
+              <span lang="en">Varies</span><span lang="es">Varía</span>
+            </span>
+            <span class="collab-diagram__input-value">
+              <span lang="en">Scope</span><span lang="es">Alcance</span>
+            </span>
+          </div>
+          <div class="collab-diagram__input">
+            <span class="collab-diagram__input-tag">
+              <span lang="en">Varies</span><span lang="es">Varía</span>
+            </span>
+            <span class="collab-diagram__input-value">
+              <span lang="en">Pace</span><span lang="es">Ritmo</span>
+            </span>
+          </div>
+          <div class="collab-diagram__input">
+            <span class="collab-diagram__input-tag">
+              <span lang="en">Varies</span><span lang="es">Varía</span>
+            </span>
+            <span class="collab-diagram__input-value">
+              <span lang="en">Form of engagement</span>
+              <span lang="es">Forma del proyecto</span>
+            </span>
+          </div>
+        </div>
+
+        <div aria-hidden="true" class="collab-diagram__paths">
+          <svg
+            viewBox="0 0 300 60"
+            preserveAspectRatio="none"
+            class="collab-diagram__paths-svg"
+          >
+            <path
+              d="M 50 0 C 50 30, 150 20, 150 55"
+              fill="none"
+              stroke="var(--line2)"
+              stroke-width="1.5"></path>
+            <path
+              d="M 150 0 L 150 55"
+              fill="none"
+              stroke="var(--line2)"
+              stroke-width="1.5"></path>
+            <path
+              d="M 250 0 C 250 30, 150 20, 150 55"
+              fill="none"
+              stroke="var(--line2)"
+              stroke-width="1.5"></path>
+          </svg>
+        </div>
+
+        <div class="collab-diagram__output">
+          <span class="collab-diagram__output-tag">
+            <span lang="en">Stays constant, every time</span>
+            <span lang="es">Se mantiene constante, siempre</span>
+          </span>
+          <span class="collab-diagram__output-value">
+            <span lang="en">Engineering judgement</span>
+            <span lang="es">Criterio de ingeniería</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <p data-reveal data-d="80" class="collab-section__closing">
+      <span lang="en"
+        >The measure of a successful engagement is not the delivery date. The
+        best outcome is a team that understands the system, owns what was built,
+        and can make the next change themselves.</span
+      >
+      <span lang="es"
+        >La medida de un proyecto exitoso no es la fecha de entrega. El mejor
+        resultado es un equipo que entiende el sistema, es dueño de lo que se
+        construyó, y puede hacer el próximo cambio por sí mismo.</span
+      >
+    </p>
+  </div>
 </section>
+
+<style>
+  .collab-section {
+    position: relative;
+    z-index: 1;
+    padding: clamp(6rem, 12vh, 9.375rem) clamp(1.25rem, 4vw, 3.5rem);
+    background: var(--bg2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .collab-section__inner {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .collab-section__headline {
+    margin: 0 0 56px;
+    max-width: 700px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4.2vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  .collab-section__split {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  @media (max-width: 980px) {
+    .collab-section__split {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .collab-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .collab-item:last-child {
+    border-bottom: none;
+  }
+
+  .collab-item__number {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .collab-item__text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Diagram */
+  .collab-diagram {
+    padding: 26px;
+    border-radius: 18px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+  }
+
+  .collab-diagram__label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .collab-diagram__inputs {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .collab-diagram__input {
+    padding: 12px 8px;
+    border-radius: 11px;
+    background: var(--bg3);
+    border: 1px dashed var(--line2);
+    text-align: center;
+  }
+
+  .collab-diagram__input-tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 6px;
+  }
+
+  .collab-diagram__input-value {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+
+  .collab-diagram__paths {
+    position: relative;
+    height: 44px;
+    margin: 2px 6px 0;
+  }
+
+  .collab-diagram__paths-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .collab-diagram__output {
+    padding: 20px 22px;
+    border-radius: 14px;
+    background: linear-gradient(160deg, var(--accent), var(--accent-2));
+    text-align: center;
+  }
+
+  .collab-diagram__output-tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+    margin-bottom: 8px;
+  }
+
+  .collab-diagram__output-value {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.3;
+    color: #fff;
+    letter-spacing: -0.015em;
+  }
+
+  /* Closing */
+  .collab-section__closing {
+    margin: 56px 0 0;
+    font-family: var(--font-body);
+    font-size: clamp(1.1875rem, 2.1vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    padding-top: 28px;
+    border-top: 2px solid var(--ink);
+  }
+</style>

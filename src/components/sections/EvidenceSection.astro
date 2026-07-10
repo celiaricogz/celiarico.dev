@@ -1,11 +1,5 @@
 ---
-import ExperienceCard from "../features/content/ExperienceCard.astro";
-import StatisticsRow from "../features/patterns/StatisticsRow.astro";
-import Callout from "../ui/Callout.astro";
-import Container from "../primitives/Container.astro";
-import Stack from "../primitives/Stack.astro";
-import Heading from "../typography/Heading.astro";
-import Lead from "../typography/Lead.astro";
+import SectionLabel from "../ui/SectionLabel.astro";
 
 interface Props {
   id?: string;
@@ -13,54 +7,436 @@ interface Props {
 
 const { id } = Astro.props;
 
-const experiences = [
+const cases = [
   {
-    title: "IT Architecture and Platform Engineering",
-    description:
-      "Designing and evolving distributed systems, cloud platforms and internal developer platforms across different industries. Focus on reducing operational complexity and building systems that teams can actually understand and maintain.",
-    tags: ["Architecture", "Platform Engineering", "Cloud"],
+    tagEn: "Platform Engineering",
+    tagEs: "Ingeniería de plataforma",
+    titleEn: "A deployment platform analysed, redesigned, and delivered.",
+    titleEs: "Una plataforma de despliegue analizada, rediseñada y entregada.",
+    bodyEn:
+      "The client presented a problem — a WebLogic platform that needed to be modernised without disrupting existing deployments. The technical solution was proposed after analysing the complete deployment system. A Shared Jenkins Library centralised the deployment logic. Compatibility layers preserved what the client needed unchanged. The platform was delivered on schedule.",
+    bodyEs:
+      "El cliente planteó un problema: una plataforma WebLogic que necesitaba modernizarse sin interrumpir los despliegues existentes. La solución técnica se propuso tras analizar el sistema de despliegue completo. Una Shared Jenkins Library centralizó la lógica de despliegue. Capas de compatibilidad preservaron lo que el cliente necesitaba mantener sin cambios. La plataforma se entregó según lo previsto.",
+    delay: 60,
   },
   {
-    title: "DevOps and Delivery Automation",
-    description:
-      "Designing deployment pipelines, infrastructure automation and observability systems that make delivery predictable. Reducing the operational risk of change so teams can move with confidence.",
-    tags: ["DevOps", "CI/CD", "Infrastructure"],
-  },
-  {
-    title: "Engineering in High-Stakes Environments",
-    description:
-      "Engineering leadership experience in environments where reliability, coordination under pressure and clear decision-making are essential — including aerospace projects where system failures carry significant consequences.",
-    tags: ["Leadership", "Reliability", "Aerospace"],
+    tagEn: "Enterprise Architecture",
+    tagEs: "Arquitectura empresarial",
+    titleEn: "Architecture reviews across multiple engineering teams.",
+    titleEs: "Revisiones de arquitectura en múltiples equipos de ingeniería.",
+    bodyEn:
+      "Reviewing solution architectures, evaluating technology migrations, and maintaining shared engineering infrastructure — for multiple development teams simultaneously. Recommendations follow analysis. When an evaluation concludes a migration is not advisable, that conclusion is documented with the evidence that supports it.",
+    bodyEs:
+      "Revisando arquitecturas de solución, evaluando migraciones tecnológicas y manteniendo infraestructura de ingeniería compartida, para varios equipos de desarrollo a la vez. Las recomendaciones vienen después del análisis. Cuando una evaluación concluye que una migración no es aconsejable, esa conclusión se documenta con la evidencia que la respalda.",
+    delay: 120,
   },
 ];
 
-const stats = [
-  { value: "10+", label: "Years of engineering experience" },
-  { value: "5+", label: "Legacy modernisations" },
-  { value: "3", label: "Cloud platforms" },
+const observations = [
+  {
+    years: "4",
+    textEn:
+      "Across four years supporting multiple concurrent engineering teams — different projects, different stacks, different operational environments — incidents reported as application defects regularly traced back to platform configuration, infrastructure, or failures between systems. Each required building a model of the whole before it was possible to locate the part that had failed.",
+    textEs:
+      "A lo largo de cuatro años dando soporte a varios equipos de ingeniería en paralelo (proyectos distintos, stacks distintos, entornos operativos distintos), incidentes reportados como defectos de aplicación se remontaban con frecuencia a la configuración de la plataforma, a la infraestructura, o a fallos entre sistemas. Cada caso exigía construir un modelo del conjunto antes de poder localizar la parte que había fallado.",
+    delay: 80,
+  },
+  {
+    years: "3",
+    textEn:
+      "Earlier still — a student team of fewer than twenty engineers, an eleven-month window, their first operational rocket. Full software lifecycle responsibility: architecture through integration through operational launch, coordinated across avionics, electronics, structures, propulsion and operations. Limited testing opportunities. Real consequences for every decision.",
+    textEs:
+      "Antes aún: un equipo estudiantil de menos de veinte ingenieros, una ventana de once meses, su primer cohete operativo. Responsabilidad completa del ciclo de vida del software: desde la arquitectura hasta la integración y el lanzamiento operativo, coordinado entre aviónica, electrónica, estructuras, propulsión y operaciones. Oportunidades de prueba limitadas. Consecuencias reales en cada decisión.",
+    delay: 140,
+  },
 ];
 ---
 
-<section id={id} aria-labelledby="evidence-heading" class="py-section-md">
-  <Container>
-    <Stack gap="12">
-      <Stack gap="6">
-        <Heading level={2} id="evidence-heading">
-          Experience demonstrated through outcomes
-        </Heading>
-        <Lead>
-          Engineering credibility is not claimed. It is demonstrated through the
-          quality of decisions made in real, complex environments over time.
-        </Lead>
-      </Stack>
-      <Stack gap="8">
-        {experiences.map((experience) => <ExperienceCard {...experience} />)}
-      </Stack>
-      <StatisticsRow items={stats} />
-      <Callout variant="accent">
-        Experience matters because it produces better engineering decisions. Not
-        because it increases the number of years on a résumé.
-      </Callout>
-    </Stack>
-  </Container>
+<section id={id} aria-labelledby="evidence-heading" class="evidence-section">
+  <div class="evidence-section__inner">
+    <SectionLabel label="03 — Evidence" counter="03 / 05" />
+
+    <h2
+      data-reveal
+      data-d="60"
+      id="evidence-heading"
+      class="evidence-section__headline"
+    >
+      <span lang="en"
+        >The approach has already been applied. In systems that were already in
+        production.</span
+      >
+      <span lang="es"
+        >El enfoque ya se ha aplicado. En sistemas que ya estaban en producción.</span
+      >
+    </h2>
+
+    <p data-reveal data-d="120" class="evidence-section__lead">
+      <span lang="en"
+        >The environments have included enterprise software undergoing active
+        migration, a platform team supporting multiple defence simulation
+        projects simultaneously, a large healthcare organisation's shared
+        engineering infrastructure, and a student rocketry team with an
+        eleven-month deadline and real launch constraints.</span
+      >
+      <span lang="es"
+        >Los entornos han incluido software empresarial en migración activa, un
+        equipo de plataforma dando soporte a varios proyectos de simulación de
+        defensa a la vez, la infraestructura de ingeniería compartida de una
+        gran organización sanitaria, y un equipo estudiantil de cohetería con un
+        plazo de once meses y restricciones reales de lanzamiento.</span
+      >
+    </p>
+
+    <!-- Case study grid -->
+    <div class="evidence-section__cases">
+      {
+        cases.map((c) => (
+          <div data-reveal data-d={c.delay} class="evidence-case">
+            <span class="evidence-case__tag">
+              <span lang="en">{c.tagEn}</span>
+              <span lang="es">{c.tagEs}</span>
+            </span>
+            <h3 class="evidence-case__title">
+              <span lang="en">{c.titleEn}</span>
+              <span lang="es">{c.titleEs}</span>
+            </h3>
+            <p class="evidence-case__body">
+              <span lang="en">{c.bodyEn}</span>
+              <span lang="es">{c.bodyEs}</span>
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Pattern separator -->
+    <div data-reveal class="evidence-section__separator">
+      <span aria-hidden="true" class="evidence-section__separator-line"></span>
+      <span class="evidence-section__separator-text">
+        <span lang="en">+6 years of field experience</span>
+        <span lang="es">+6 años de experiencia en campo</span>
+      </span>
+      <span aria-hidden="true" class="evidence-section__separator-line"></span>
+    </div>
+
+    <!-- Observations -->
+    <div class="evidence-section__observations">
+      {
+        observations.map((o) => (
+          <div data-reveal data-d={o.delay} class="evidence-observation">
+            <div class="evidence-observation__value-row">
+              <span class="evidence-observation__value">{o.years}</span>
+              <span class="evidence-observation__unit">
+                <span lang="en">years</span>
+                <span lang="es">años</span>
+              </span>
+            </div>
+            <p class="evidence-observation__text">
+              <span lang="en">{o.textEn}</span>
+              <span lang="es">{o.textEs}</span>
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Confirmation -->
+    <p data-reveal data-d="80" class="evidence-section__confirmation">
+      <span lang="en"
+        >The domain, the scale, the constraints — these have differed.
+        <span class="evidence-section__confirmation-accent"
+          >The approach has not.</span
+        ></span
+      >
+      <span lang="es"
+        >El dominio, la escala, las restricciones: eso ha cambiado.
+        <span class="evidence-section__confirmation-accent"
+          >El enfoque, no.</span
+        ></span
+      >
+    </p>
+
+    <!-- Learning / practice -->
+    <div data-reveal data-d="80" class="evidence-section__notes">
+      <div class="evidence-section__note">
+        <span
+          class="evidence-section__note-label evidence-section__note-label--accent"
+        >
+          <span lang="en">Continuous learning</span>
+          <span lang="es">Aprendizaje continuo</span>
+        </span>
+        <p class="evidence-section__note-text">
+          <span lang="en"
+            >The technology landscape does not remain stable. Studying
+            unfamiliar technologies, building Proofs of Concept before
+            recommending them, and treating adaptation as a professional
+            responsibility — not a reaction to deadlines — is part of how the
+            work is done.</span
+          >
+          <span lang="es"
+            >El panorama tecnológico no permanece estable. Estudiar tecnologías
+            desconocidas, construir pruebas de concepto antes de recomendarlas,
+            y tratar la adaptación como una responsabilidad profesional (no como
+            una reacción a los plazos) forma parte de cómo se hace el trabajo.</span
+          >
+        </p>
+      </div>
+      <div aria-hidden="true" class="evidence-section__note-divider"></div>
+      <div class="evidence-section__note">
+        <span class="evidence-section__note-label">
+          <span lang="en">In practice</span>
+          <span lang="es">En la práctica</span>
+        </span>
+        <p class="evidence-section__note-text">
+          <span lang="en"
+            >Experience shapes the quality of decisions made in unfamiliar
+            systems. What that looks like in practice — that depends on what the
+            system actually needs.</span
+          >
+          <span lang="es"
+            >La experiencia moldea la calidad de las decisiones tomadas en
+            sistemas desconocidos. Cómo se ve eso en la práctica depende de lo
+            que el sistema realmente necesita.</span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
+
+<style>
+  .evidence-section {
+    position: relative;
+    z-index: 1;
+    padding: clamp(6rem, 12vh, 9.375rem) clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  .evidence-section__inner {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .evidence-section__headline {
+    margin: 0 0 12px;
+    max-width: 700px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(1.375rem, 2.8vw, 2rem);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  .evidence-section__lead {
+    margin: 0 0 56px;
+    max-width: 720px;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink2);
+  }
+
+  /* Case study grid */
+  .evidence-section__cases {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 720px) {
+    .evidence-section__cases {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .evidence-case {
+    padding: 30px 28px;
+    border-radius: 18px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+  }
+
+  .evidence-case__tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 6px 11px;
+    border-radius: 7px;
+    background: var(--accent-soft);
+  }
+
+  .evidence-case__title {
+    margin: 16px 0 12px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(1.1875rem, 2vw, 1.4375rem);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  .evidence-case__body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink2);
+  }
+
+  /* Separator */
+  .evidence-section__separator {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .evidence-section__separator-line {
+    flex: 1;
+    height: 2px;
+    background: var(--ink);
+  }
+
+  .evidence-section__separator-text {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  /* Observations */
+  .evidence-section__observations {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 720px) {
+    .evidence-section__observations {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .evidence-observation {
+    padding: 30px;
+    border-radius: 18px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .evidence-observation__value-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .evidence-observation__value {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+  }
+
+  .evidence-observation__unit {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .evidence-observation__text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink2);
+  }
+
+  /* Confirmation */
+  .evidence-section__confirmation {
+    margin: 40px 0 0;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: clamp(1.0625rem, 1.9vw, 1.3125rem);
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .evidence-section__confirmation-accent {
+    color: var(--accent);
+  }
+
+  /* Learning / practice */
+  .evidence-section__notes {
+    margin-top: 48px;
+    padding: 30px 32px;
+    border-radius: 18px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+  }
+
+  .evidence-section__note {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 640px) {
+    .evidence-section__note {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+
+  .evidence-section__note-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 7px;
+    background: var(--bg2);
+    height: fit-content;
+  }
+
+  .evidence-section__note-label--accent {
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .evidence-section__note-text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink2);
+  }
+
+  .evidence-section__note-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 22px 0;
+  }
+</style>

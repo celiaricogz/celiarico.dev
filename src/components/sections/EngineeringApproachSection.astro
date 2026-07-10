@@ -1,9 +1,6 @@
 ---
 import ProcessTimeline from "../features/patterns/ProcessTimeline.astro";
-import Container from "../primitives/Container.astro";
-import Stack from "../primitives/Stack.astro";
-import Heading from "../typography/Heading.astro";
-import Lead from "../typography/Lead.astro";
+import SectionLabel from "../ui/SectionLabel.astro";
 
 interface Props {
   id?: string;
@@ -13,47 +10,168 @@ const { id } = Astro.props;
 
 const steps = [
   {
-    title: "Understand",
-    description:
-      "Map system boundaries, major components, communication flows, dependencies and operational behaviour. Understanding the current state reduces uncertainty before any change is introduced.",
+    stepNumber: "01",
+    tagEn: "UNDERSTAND",
+    tagEs: "ENTENDER",
+    titleEn: "Build an accurate model of how the system actually works.",
+    titleEs:
+      "Construir un modelo preciso de cómo funciona realmente el sistema.",
+    bodyEn:
+      "Not how it was designed to work — how it behaves in production, under real conditions. The objective is a coherent mental model: the major components, how information moves between them, what each part actually does. Until that model exists, no decision is grounded.",
+    bodyEs:
+      "No cómo fue diseñado para funcionar, sino cómo se comporta en producción, en condiciones reales. El objetivo es un modelo mental coherente: los componentes principales, cómo se mueve la información entre ellos, qué hace realmente cada parte. Hasta que ese modelo existe, ninguna decisión tiene fundamento.",
   },
   {
-    title: "Analyse",
-    description:
-      "Study observed behaviour to identify root causes rather than surface symptoms. Engineering decisions should be based on evidence, not assumptions about what the system does.",
+    stepNumber: "02",
+    tagEn: "ANALYSE",
+    tagEs: "ANALIZAR",
+    titleEn: "Find the root cause, not the symptom.",
+    titleEs: "Encontrar la causa raíz, no el síntoma.",
+    bodyEn:
+      "Observable problems point to something deeper. The analysis follows the evidence — behaviour in production, metrics, logs, operational history — until the actual cause becomes clear. Recommendations are postponed until the uncertainty is resolved.",
+    bodyEs:
+      "Los problemas observables apuntan a algo más profundo. El análisis sigue la evidencia (comportamiento en producción, métricas, registros, historial operativo) hasta que la causa real queda clara. Las recomendaciones se posponen hasta resolver la incertidumbre.",
   },
   {
-    title: "Design",
-    description:
-      "Design solutions that balance simplicity, maintainability and scalability within the actual project constraints. Technology is selected to serve the architecture — not the other way around.",
+    stepNumber: "03",
+    tagEn: "DESIGN",
+    tagEs: "DISEÑAR",
+    titleEn: "Shape the solution around the actual constraints.",
+    titleEs: "Dar forma a la solución en torno a las restricciones reales.",
+    bodyEn:
+      "Business priorities, team capacity, technical debt tolerance, time horizon — these define the solution space before any technology is considered. Architecture is determined first. Technology is selected to serve it, not the other way around.",
+    bodyEs:
+      "Las prioridades del negocio, la capacidad del equipo, la tolerancia a la deuda técnica, el horizonte temporal: esto define el espacio de la solución antes de considerar cualquier tecnología. La arquitectura se determina primero. La tecnología se elige para servirla, no al revés.",
   },
   {
-    title: "Implement",
-    description:
-      "Execute the agreed design incrementally. Each change should improve the system's clarity and reduce its operational risk. New uncertainty should never be introduced as a side effect.",
+    stepNumber: "04",
+    tagEn: "IMPLEMENT",
+    tagEs: "IMPLEMENTAR",
+    titleEn: "Change incrementally. Validate as you go.",
+    titleEs: "Cambiar de forma incremental. Validar sobre la marcha.",
+    bodyEn:
+      "Each modification is a deliberate step, not a bet. Complexity is never increased as a side effect of reducing it elsewhere. The system improves through a series of decisions that each make the next decision easier to make with confidence.",
+    bodyEs:
+      "Cada modificación es un paso deliberado, no una apuesta. La complejidad nunca aumenta como efecto secundario de reducirla en otro lugar. El sistema mejora mediante una serie de decisiones que hacen que cada siguiente decisión sea más fácil de tomar con confianza.",
   },
   {
-    title: "Evolve",
-    description:
-      "Engineering does not end at deployment. Systems should remain understandable and maintainable as the organisation grows and requirements change.",
+    stepNumber: "05",
+    tagEn: "EVOLVE",
+    tagEs: "EVOLUCIONAR",
+    titleEn: "Leave the system easier to evolve than you found it.",
+    titleEs: "Dejar el sistema más fácil de evolucionar de lo que se encontró.",
+    bodyEn:
+      "Deployment is not completion. The measure of a successful engagement is whether the team understands the system better than before — and whether the next change is easier to make. That is the standard, not the delivery date.",
+    bodyEs:
+      "El despliegue no es el final. La medida de un proyecto exitoso es si el equipo entiende mejor el sistema que antes, y si el próximo cambio es más fácil de hacer. Ese es el estándar, no la fecha de entrega.",
   },
 ];
 ---
 
-<section id={id} aria-labelledby="approach-heading" class="py-section-md">
-  <Container>
-    <Stack gap="10">
-      <Stack gap="6">
-        <Heading level={2} id="approach-heading">
-          Understanding before implementation
-        </Heading>
-        <Lead>
-          Successful modernisation does not begin with technology selection or
-          architectural redesign. It begins with understanding the system as it
-          actually exists today.
-        </Lead>
-      </Stack>
-      <ProcessTimeline items={steps} />
-    </Stack>
-  </Container>
+<section id={id} aria-labelledby="approach-heading" class="approach-section">
+  <div class="approach-section__inner">
+    <SectionLabel label="02 — The Approach" counter="02 / 05" />
+
+    <h2
+      data-reveal
+      data-d="60"
+      id="approach-heading"
+      class="approach-section__headline"
+    >
+      <span lang="en"
+        >A deliberate path from uncertainty to a system you trust.</span
+      >
+      <span lang="es"
+        >Un camino deliberado de la incertidumbre a un sistema en el que
+        confías.</span
+      >
+    </h2>
+
+    <p data-reveal data-d="120" class="approach-section__lead">
+      <span lang="en"
+        >Engineering is the process of reducing uncertainty until the right
+        action becomes obvious. The questions asked, the evidence gathered, the
+        decisions postponed — all follow from that principle.</span
+      >
+      <span lang="es"
+        >La ingeniería es el proceso de reducir la incertidumbre hasta que la
+        acción correcta se vuelve obvia. Las preguntas que se hacen, la
+        evidencia que se reúne, las decisiones que se posponen: todo se deriva
+        de ese principio.</span
+      >
+    </p>
+
+    <ProcessTimeline items={steps} />
+
+    <div data-reveal data-d="80" class="approach-section__commitment">
+      <p class="approach-section__commitment-text">
+        <span lang="en"
+          >Technology is chosen after the architecture — never before. The
+          objective is not selecting tools. The objective is helping the system
+          become easier to understand, easier to evolve and easier to operate
+          than it was before.</span
+        >
+        <span lang="es"
+          >La tecnología se elige después de la arquitectura, nunca antes. El
+          objetivo no es seleccionar herramientas. El objetivo es ayudar a que
+          el sistema sea más fácil de entender, de evolucionar y de operar de lo
+          que era antes.</span
+        >
+      </p>
+    </div>
+  </div>
 </section>
+
+<style>
+  .approach-section {
+    position: relative;
+    z-index: 1;
+    padding: clamp(6rem, 12vh, 9.375rem) clamp(1.25rem, 4vw, 3.5rem);
+    background: var(--bg2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .approach-section__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .approach-section__headline {
+    margin: 0 0 22px;
+    max-width: 760px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4.2vw, 3.125rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  .approach-section__lead {
+    margin: 0 0 68px;
+    max-width: 600px;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink2);
+  }
+
+  .approach-section__commitment {
+    margin-top: 56px;
+    padding: 30px 32px;
+    border-radius: 18px;
+    background: linear-gradient(160deg, var(--accent), var(--accent-2));
+  }
+
+  .approach-section__commitment-text {
+    margin: 0;
+    max-width: 760px;
+    font-family: var(--font-body);
+    font-size: clamp(1.0625rem, 1.8vw, 1.3125rem);
+    line-height: 1.55;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+</style>

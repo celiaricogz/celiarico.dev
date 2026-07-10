@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+  a { color: var(--accent, #38536f); }
+  a:hover { color: var(--accent-2, #2b4156); }
+  *:focus-visible { outline: 2px solid var(--accent, #38536f); outline-offset: 3px; border-radius: 2px; }
+  ::selection { background: var(--accent-soft, rgba(56,83,111,0.18)); }
+  @keyframes cr-breathe { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+  @keyframes cr-scrollcue { 0% { transform: translateY(-100%); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(120%); opacity: 0; } }
+  @keyframes cr-spin { to { transform: rotate(360deg); } }
+  @media (max-width: 1240px) { [data-rail] { display: none !important; } }
+  @media (max-width: 980px) {
+    [data-hero-grid] { grid-template-columns: 1fr !important; }
+    [data-split] { grid-template-columns: 1fr !important; }
+    [data-cascade] { display: none !important; }
+    [data-labelrow] { grid-template-columns: 1fr !important; gap: 12px !important; }
+  }
+  @media (max-width: 640px) {
+    [data-hero-panel] { max-width: 100% !important; }
+    [data-stat-row] { grid-template-columns: repeat(2,1fr) !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="position: relative; width: 100%; overflow: hidden; background: var(--bg,#f4f2ee); color: var(--ink,#14151a); transition: background .4s ease, color .4s ease;">
+
+  <template id="__bundler_thumbnail" data-bg-color="#14151a">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#14151a"></rect>
+      <rect x="420" y="260" width="360" height="280" rx="18" fill="none" stroke="#7fa8d9" stroke-width="10"></rect>
+      <circle cx="600" cy="400" r="60" fill="#7fa8d9" opacity="0.6"></circle>
+    </svg>
+  </template>
+
+  <a href="#main" style="position: absolute; left: 12px; top: -60px; z-index: 200; padding: 10px 16px; background: var(--ink,#14151a); color: var(--bg,#fff); border-radius: 8px; font: 600 13px/1 'Hanken Grotesk', sans-serif; text-decoration: none; transition: top .2s;" style-focus="top: 12px;">{{ L.skip }}</a>
+
+  <!-- story rail -->
+  <nav data-rail="" aria-label="{{ L.nav.sectionsAria }}" style="position: fixed; left: 28px; top: 50%; transform: translateY(-50%); z-index: 50;">
+    <div style="position: relative; padding: 6px 0;">
+      <div style="position: absolute; left: 4px; top: 12px; bottom: 12px; width: 1.5px; background: var(--line2,rgba(20,21,26,0.16));"></div>
+      <div data-rail-fill="" style="position: absolute; left: 4px; top: 12px; width: 1.5px; height: 0%; background: var(--accent,#38536f); transition: height .2s linear;"></div>
+      <button data-rail-dot="" data-target="hero" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 13px; padding: 10px 0;" aria-label="{{ L.rail.goHero }}"><span data-dot="" style="width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--line2,rgba(20,21,26,0.28)); background: var(--bg,#f4f2ee); transition: all .35s;"></span><span data-dot-label="" style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); opacity: 0; transform: translateX(-4px); transition: all .3s; white-space: nowrap;">{{ L.rail.start }}</span></button>
+      <button data-rail-dot="" data-target="problem" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 13px; padding: 10px 0;" aria-label="{{ L.rail.goProblem }}"><span data-dot="" style="width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--line2,rgba(20,21,26,0.28)); background: var(--bg,#f4f2ee); transition: all .35s;"></span><span data-dot-label="" style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); opacity: 0; transform: translateX(-4px); transition: all .3s; white-space: nowrap;">{{ L.rail.recognition }}</span></button>
+      <button data-rail-dot="" data-target="approach" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 13px; padding: 10px 0;" aria-label="{{ L.rail.goApproach }}"><span data-dot="" style="width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--line2,rgba(20,21,26,0.28)); background: var(--bg,#f4f2ee); transition: all .35s;"></span><span data-dot-label="" style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); opacity: 0; transform: translateX(-4px); transition: all .3s; white-space: nowrap;">{{ L.rail.approach }}</span></button>
+      <button data-rail-dot="" data-target="evidence" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 13px; padding: 10px 0;" aria-label="{{ L.rail.goEvidence }}"><span data-dot="" style="width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--line2,rgba(20,21,26,0.28)); background: var(--bg,#f4f2ee); transition: all .35s;"></span><span data-dot-label="" style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); opacity: 0; transform: translateX(-4px); transition: all .3s; white-space: nowrap;">{{ L.rail.evidence }}</span></button>
+      <button data-rail-dot="" data-target="collaboration" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 13px; padding: 10px 0;" aria-label="{{ L.rail.goCollaboration }}"><span data-dot="" style="width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--line2,rgba(20,21,26,0.28)); background: var(--bg,#f4f2ee); transition: all .35s;"></span><span data-dot-label="" style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); opacity: 0; transform: translateX(-4px); transition: all .3s; white-space: nowrap;">{{ L.rail.collaboration }}</span></button>
+      <button data-rail-dot="" data-target="next" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 13px; padding: 10px 0;" aria-label="{{ L.rail.goNext }}"><span data-dot="" style="width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--line2,rgba(20,21,26,0.28)); background: var(--bg,#f4f2ee); transition: all .35s;"></span><span data-dot-label="" style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); opacity: 0; transform: translateX(-4px); transition: all .3s; white-space: nowrap;">{{ L.rail.next }}</span></button>
+    </div>
+  </nav>
+
+  <!-- header -->
+  <header data-topbar="" style="position: fixed; top: 0; left: 0; right: 0; z-index: 55; display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 4vw, 56px); background: var(--bg-translucent,rgba(244,242,238,0.001)); backdrop-filter: blur(0px); border-bottom: 1px solid transparent; transition: background .4s, backdrop-filter .4s, border-color .4s;">
+    <button data-target="hero" data-nav="" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 11px;">
+      <span aria-hidden="true" style="width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(150deg, var(--accent,#38536f), var(--accent-2,#2b4156)); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);"><span style="width: 11px; height: 11px; border: 2px solid rgba(255,255,255,0.92); border-radius: 3px;"></span></span>
+      <span style="display: flex; flex-direction: column; line-height: 1.05;"><span style="font: 700 15px/1 'Hanken Grotesk', sans-serif; letter-spacing: -.01em; color: var(--ink,#14151a);">Celia Rico</span><span style="font: 500 9px/1 'IBM Plex Mono', monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); margin-top: 4px;">{{ L.logoRole }}</span></span>
+    </button>
+    <nav aria-label="{{ L.nav.primaryAria }}" style="display: flex; align-items: center; gap: clamp(10px, 2vw, 22px);">
+      <button data-target="approach" data-nav="" data-navlink="" style="all: unset; cursor: pointer; font: 500 13.5px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.62)); transition: color .25s;" style-hover="color: var(--ink,#14151a);">{{ L.nav.approach }}</button>
+      <button data-target="evidence" data-nav="" data-navlink="" style="all: unset; cursor: pointer; font: 500 13.5px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.62)); transition: color .25s;" style-hover="color: var(--ink,#14151a);">{{ L.nav.evidence }}</button>
+
+      <span aria-hidden="true" style="width: 1px; height: 18px; background: var(--line,rgba(20,21,26,0.14));"></span>
+
+      <!-- language switch -->
+      <div role="group" aria-label="{{ L.langAria }}" style="display: flex; align-items: center; gap: 2px; padding: 3px; border-radius: 100px; background: var(--bg3,rgba(20,21,26,0.04)); border: 1px solid var(--line,rgba(20,21,26,0.1));">
+        <button onclick="{{ setLangEn }}" aria-pressed="{{ isEnglish }}" style="{{ enBtnStyle }}">EN</button>
+        <button onclick="{{ setLangEs }}" aria-pressed="{{ isSpanish }}" style="{{ esBtnStyle }}">ES</button>
+      </div>
+
+      <button role="switch" aria-checked="{{ isDark }}" aria-label="{{ L.themeToggleAria }}" onclick="{{ toggleTheme }}" style="all: unset; cursor: pointer; display: inline-flex; align-items: center; width: 44px; height: 25px; border-radius: 100px; background: var(--line2,rgba(20,21,26,0.2)); border: 1px solid var(--line,rgba(20,21,26,0.14)); padding: 2px; transition: background .3s;">
+        <span style="position: relative; width: 19px; height: 19px; border-radius: 50%; background: var(--bg2,#fff); box-shadow: 0 2px 6px rgba(0,0,0,0.25); transform: {{ knobTransform }}; transition: transform .3s cubic-bezier(.16,.7,.3,1);">
+          <svg viewBox="0 0 16 16" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: {{ sunOpacity }}; transition: opacity .3s;" aria-hidden="true">
+            <circle cx="8" cy="8" r="3.2" fill="var(--ink2,rgba(20,21,26,0.6))"></circle>
+            <line x1="8" y1="0.8" x2="8" y2="2.4" stroke="var(--ink2,rgba(20,21,26,0.6))" stroke-width="1.3" stroke-linecap="round"></line>
+            <line x1="8" y1="13.6" x2="8" y2="15.2" stroke="var(--ink2,rgba(20,21,26,0.6))" stroke-width="1.3" stroke-linecap="round"></line>
+            <line x1="0.8" y1="8" x2="2.4" y2="8" stroke="var(--ink2,rgba(20,21,26,0.6))" stroke-width="1.3" stroke-linecap="round"></line>
+            <line x1="13.6" y1="8" x2="15.2" y2="8" stroke="var(--ink2,rgba(20,21,26,0.6))" stroke-width="1.3" stroke-linecap="round"></line>
+            <line x1="2.9" y1="2.9" x2="4" y2="4" stroke="var(--ink2,rgba(20,21,26,0.6))" stroke-width="1.3" stroke-linecap="round"></line>
+            <line x1="12" y1="12" x2="13.1" y2="13.1" stroke="var(--ink2,rgba(20,21,26,0.6))" stroke-width="1.3" stroke-linecap="round"></line>
+            <line x1="2.9" y1="13.1" x2="4" y2="12" stroke="var(--ink2,rgba(20,21,26,0.6))" stroke-width="1.3" stroke-linecap="round"></line>
+            <line x1="12" y1="4" x2="13.1" y2="2.9" stroke="var(--ink2,rgba(20,21,26,0.6))" stroke-width="1.3" stroke-linecap="round"></line>
+          </svg>
+          <svg viewBox="0 0 16 16" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: {{ moonOpacity }}; transition: opacity .3s;" aria-hidden="true">
+            <circle cx="8" cy="8" r="5.4" fill="var(--ink2,rgba(20,21,26,0.6))"></circle>
+            <circle cx="10.6" cy="5.6" r="4.6" fill="var(--bg2,#fff)"></circle>
+          </svg>
+        </span>
+      </button>
+      <a href="#next" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 17px; border-radius: 10px; background: var(--ink,#14151a); color: var(--bg,#f4f2ee); text-decoration: none; font: 600 13.5px/1 'Hanken Grotesk', sans-serif; transition: transform .25s, box-shadow .25s;" style-hover="transform: translateY(-1px);"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--ok,#5b9b78); box-shadow: 0 0 8px var(--ok,#5b9b78);"></span>{{ L.nav.cta }}</a>
+    </nav>
+  </header>
+
+  <main id="main">
+  <!-- ============ HERO ============ -->
+  <section id="hero" data-screen-label="Hero" style="position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; padding: 120px clamp(20px, 4vw, 56px) 64px;">
+    <div data-hero-grid="" style="position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: clamp(32px, 5vw, 72px);">
+
+      <!-- left copy -->
+      <div>
+        <div data-reveal="" style="opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: inline-flex; align-items: center; gap: 10px; margin-bottom: 26px;">
+          <span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent,#38536f);"></span>
+          <span style="font: 500 11.5px/1 'IBM Plex Mono', monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2,rgba(20,21,26,0.6));">{{ L.hero.eyebrow }}</span>
+        </div>
+        <h1 data-reveal="" data-d="80" style="opacity: 0; transform: translateY(26px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 0; font-weight: 700; font-size: clamp(40px, 5.6vw, 74px); line-height: 1.03; letter-spacing: -0.04em; color: var(--ink,#14151a);">{{ L.hero.headline1 }}<br><span style="color: var(--accent,#38536f);">{{ L.hero.headline2 }}</span></h1>
+        <p data-reveal="" data-d="180" style="opacity: 0; transform: translateY(22px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 28px 0 0; max-width: 460px; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; color: var(--ink2,rgba(20,21,26,0.64));">{{ L.hero.body }}</p>
+        <div data-reveal="" data-d="280" style="opacity: 0; transform: translateY(18px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 36px;">
+          <a href="#next" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 12px; background: linear-gradient(180deg, var(--accent,#38536f), var(--accent-2,#2b4156)); color: #fff; text-decoration: none; font: 600 15px/1 'Hanken Grotesk', sans-serif; box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 14px 30px -12px var(--accent-glow,rgba(56,83,111,0.6)); transition: transform .3s cubic-bezier(.16,.7,.3,1), box-shadow .3s;" style-hover="transform: translateY(-2px);">{{ L.hero.ctaPrimary }}<span aria-hidden="true">→</span></a>
+          <a href="#approach" style="display: inline-flex; align-items: center; gap: 8px; font: 600 15px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.72)); text-decoration: none; transition: color .3s;" style-hover="color: var(--accent,#38536f);">{{ L.hero.ctaSecondary }}<span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+
+      <!-- right: interface panel -->
+      <div data-hero-panel="" style="position: relative; display: flex; justify-content: center;">
+        <!-- floating annotation chips -->
+        <div data-reveal="" data-d="360" style="opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s ease; position: absolute; top: -7%; left: -6%; z-index: 3; display: flex; align-items: center; gap: 8px; padding: 9px 13px; border-radius: 11px; background: var(--bg2,#fff); border: 1px solid var(--line,rgba(20,21,26,0.1)); box-shadow: 0 14px 30px -16px rgba(0,0,0,0.28);">
+          <span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 6px; background: var(--accent-soft,rgba(56,83,111,0.12)); display: flex; align-items: center; justify-content: center; color: var(--accent,#38536f); font: 700 11px/1 'IBM Plex Mono', monospace;">43</span>
+          <span style="display: flex; flex-direction: column; line-height: 1.2;"><span style="font: 600 11.5px/1.1 'Hanken Grotesk', sans-serif; color: var(--ink,#14151a);">{{ L.hero.chip1Title }}</span><span style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: var(--ink3,rgba(20,21,26,0.45)); margin-top: 3px;">{{ L.hero.chip1Sub }}</span></span>
+        </div>
+        <div data-reveal="" data-d="420" style="opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s ease; position: absolute; bottom: 4%; right: -6%; z-index: 3; display: flex; align-items: center; gap: 9px; padding: 10px 14px; border-radius: 11px; background: var(--chip-bg,#14151a); box-shadow: 0 14px 30px -16px rgba(0,0,0,0.4); transition: background .4s ease;">
+          <span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: var(--chip-dot,#d6a86a); flex-shrink: 0;"></span>
+          <span style="display: flex; flex-direction: column; line-height: 1.2;"><span style="font: 600 11.5px/1.1 'Hanken Grotesk', sans-serif; color: var(--chip-fg,#fff);">{{ L.hero.chip2Title }}</span><span style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: var(--chip-sub,rgba(255,255,255,0.55)); margin-top: 3px;">{{ L.hero.chip2Sub }}</span></span>
+        </div>
+
+        <!-- main panel -->
+        <div style="position: relative; z-index: 2; width: 100%; max-width: 460px; border-radius: 18px; background: var(--bg2,#fff); border: 1px solid var(--line,rgba(20,21,26,0.1)); box-shadow: 0 40px 80px -40px rgba(20,21,26,0.35); overflow: hidden;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-bottom: 1px solid var(--line,rgba(20,21,26,0.08));">
+            <div style="display: flex; flex-direction: column; line-height: 1.15;"><span style="font: 600 13px/1 'Hanken Grotesk', sans-serif; color: var(--ink,#14151a);">{{ L.hero.panelTitle }}</span><span style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: var(--ink3,rgba(20,21,26,0.45)); margin-top: 3px;">{{ L.hero.panelSubtitle }}</span></div>
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 100px; background: rgba(91,155,120,0.14); border: 1px solid rgba(91,155,120,0.28);"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--ok,#5b9b78); animation: cr-breathe 2.6s ease-in-out infinite;"></span><span style="font: 600 10px/1 'IBM Plex Mono', monospace; letter-spacing: .05em; color: var(--ok,#3f7d5d);">{{ L.hero.active }}</span></span>
+          </div>
+          <div style="padding: 18px;">
+            <div data-stat-row="" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px;">
+              <div style="padding: 12px 10px; border-radius: 11px; background: var(--bg3,rgba(20,21,26,0.03)); border: 1px solid var(--line,rgba(20,21,26,0.07));"><div style="font: 700 22px/1 'Hanken Grotesk', sans-serif; color: var(--ink,#14151a); letter-spacing: -.02em;">43</div><div style="font: 500 9px/1 'IBM Plex Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); margin-top: 6px;">{{ L.hero.componentsLabel }}</div></div>
+              <div style="padding: 12px 10px; border-radius: 11px; background: var(--bg3,rgba(20,21,26,0.03)); border: 1px solid var(--line,rgba(20,21,26,0.07));"><div style="font: 700 22px/1 'Hanken Grotesk', sans-serif; color: var(--ink,#14151a); letter-spacing: -.02em;">3</div><div style="font: 500 9px/1 'IBM Plex Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); margin-top: 6px;">{{ L.hero.layersLabel }}</div></div>
+              <div style="padding: 12px 10px; border-radius: 11px; background: linear-gradient(160deg, var(--accent,#38536f), var(--accent-2,#2b4156));"><div style="font: 700 22px/1 'Hanken Grotesk', sans-serif; color: #fff; letter-spacing: -.02em;">{{ L.hero.boundariesValue }}</div><div style="font: 500 9px/1 'IBM Plex Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-top: 6px;">{{ L.hero.boundariesLabel }}</div></div>
+            </div>
+
+            <div style="margin-top: 14px; padding: 14px 15px; border-radius: 12px; background: var(--bg3,rgba(20,21,26,0.03)); border: 1px solid var(--line,rgba(20,21,26,0.07));">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;"><span style="font: 600 11px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.7));">{{ L.hero.workflowLabel }}</span><span style="font: 500 9.5px/1 'IBM Plex Mono', monospace; color: var(--ink3,rgba(20,21,26,0.4));">#073</span></div>
+              <div style="display: flex; align-items: center; gap: 7px;">
+                <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 8px; background: rgba(91,155,120,0.14); font: 600 10px/1 'IBM Plex Mono', monospace; color: var(--ok,#3f7d5d);"><span aria-hidden="true" style="width: 5px;height:5px;border-radius:50%;background:var(--ok,#5b9b78);"></span>{{ L.hero.stepExplore }}</span>
+                <span aria-hidden="true" style="flex: 1; height: 2px; background: rgba(91,155,120,0.4); border-radius: 2px;"></span>
+                <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 8px; background: var(--accent-soft,rgba(56,83,111,0.14)); font: 600 10px/1 'IBM Plex Mono', monospace; color: var(--accent,#38536f);"><span aria-hidden="true" style="width: 8px; height: 8px; border: 2px solid var(--accent,#38536f); border-top-color: transparent; border-radius: 50%; animation: cr-spin .9s linear infinite;"></span>{{ L.hero.stepMap }}</span>
+                <span aria-hidden="true" style="flex: 1; height: 2px; background: var(--line2,rgba(20,21,26,0.14)); border-radius: 2px;"></span>
+                <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 8px; background: var(--bg3,rgba(20,21,26,0.05)); font: 600 10px/1 'IBM Plex Mono', monospace; color: var(--ink3,rgba(20,21,26,0.42));">{{ L.hero.stepModel }}</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 11px;">
+              <div style="display: flex; align-items: center; gap: 10px;"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: var(--ok,#5b9b78); flex-shrink: 0;"></span><span style="flex: 1; font: 500 12px/1.3 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.72));">{{ L.hero.log1 }} <b style="font-weight:600;color:var(--ink,#14151a);">api-gateway</b></span><span style="font: 500 10px/1 'IBM Plex Mono', monospace; color: var(--ink3,rgba(20,21,26,0.4));">2m</span></div>
+              <div style="display: flex; align-items: center; gap: 10px;"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent,#38536f); flex-shrink: 0;"></span><span style="flex: 1; font: 500 12px/1.3 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.72));">{{ L.hero.log2 }} <b style="font-weight:600;color:var(--ink,#14151a);">auth module</b></span><span style="font: 500 10px/1 'IBM Plex Mono', monospace; color: var(--ink3,rgba(20,21,26,0.4));">14m</span></div>
+            </div>
+          </div>
+
+          <div style="padding: 14px 18px; border-top: 1px solid var(--line,rgba(20,21,26,0.08)); display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <span style="font: 500 9.5px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.4));">{{ L.hero.inPractice }}</span>
+            <span style="font: 600 12px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.6));">AWS</span>
+            <span aria-hidden="true" style="width: 3px; height: 3px; border-radius: 50%; background: var(--line2,rgba(20,21,26,0.25));"></span>
+            <span style="font: 600 12px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.6));">Terraform</span>
+            <span aria-hidden="true" style="width: 3px; height: 3px; border-radius: 50%; background: var(--line2,rgba(20,21,26,0.25));"></span>
+            <span style="font: 600 12px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.6));">Kubernetes</span>
+            <span aria-hidden="true" style="width: 3px; height: 3px; border-radius: 50%; background: var(--line2,rgba(20,21,26,0.25));"></span>
+            <span style="font: 600 12px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.6));">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div aria-hidden="true" style="position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 9px; pointer-events: none; z-index: 3;">
+      <span style="font: 500 9px/1 'IBM Plex Mono', monospace; letter-spacing: .2em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.32));">{{ L.hero.scroll }}</span>
+      <div style="position: relative; width: 1.5px; height: 40px; background: var(--line2,rgba(20,21,26,0.16)); overflow: hidden;"><div style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; background: var(--accent,#38536f); animation: cr-scrollcue 2.4s ease-in-out infinite;"></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 01 PROBLEM ============ -->
+  <section id="problem" data-screen-label="01 Problem" style="position: relative; z-index: 1; padding: clamp(96px, 12vh, 150px) clamp(20px, 4vw, 56px);">
+    <div style="max-width: 1160px; margin: 0 auto;">
+      <div data-reveal="" style="opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: flex; align-items: center; gap: 13px; margin-bottom: 26px;">
+        <span style="font: 600 11.5px/1 'IBM Plex Mono', monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--accent,#38536f);">{{ L.problem.label }}</span>
+        <span aria-hidden="true" style="flex: 1; height: 1px; background: var(--line,rgba(20,21,26,0.12));"></span>
+        <span style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; color: var(--ink3,rgba(20,21,26,0.4));">01 / 05</span>
+      </div>
+      <h2 data-reveal="" data-d="60" style="opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 0; max-width: 820px; font-weight: 700; font-size: clamp(28px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.03em; color: var(--ink,#14151a);">{{ L.problem.headline1 }} <span style="color: var(--ink3,rgba(20,21,26,0.42));">{{ L.problem.headline2 }}</span></h2>
+      <p data-reveal="" data-d="120" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 22px 0 60px; max-width: 600px; font-size: 17px; line-height: 1.6; color: var(--ink2,rgba(20,21,26,0.6));">{{ L.problem.lead }}</p>
+
+      <div data-split="" style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start;">
+        <!-- problem spec list -->
+        <div style="border-top: 1px solid var(--line,rgba(20,21,26,0.12));">
+          <div data-reveal="" data-d="60" style="opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line,rgba(20,21,26,0.1));"><span style="font: 600 12px/1 'IBM Plex Mono', monospace; color: var(--accent,#38536f); padding-top: 2px;">01</span><p style="margin: 0; font-size: 18px; line-height: 1.45; color: var(--ink,#14151a); font-weight: 500;">{{ L.problem.item1 }}</p></div>
+          <div data-reveal="" data-d="120" style="opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line,rgba(20,21,26,0.1));"><span style="font: 600 12px/1 'IBM Plex Mono', monospace; color: var(--accent,#38536f); padding-top: 2px;">02</span><p style="margin: 0; font-size: 18px; line-height: 1.45; color: var(--ink,#14151a); font-weight: 500;">{{ L.problem.item2 }}</p></div>
+          <div data-reveal="" data-d="180" style="opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line,rgba(20,21,26,0.1));"><span style="font: 600 12px/1 'IBM Plex Mono', monospace; color: var(--accent,#38536f); padding-top: 2px;">03</span><p style="margin: 0; font-size: 18px; line-height: 1.45; color: var(--ink,#14151a); font-weight: 500;">{{ L.problem.item3 }}</p></div>
+          <div data-reveal="" data-d="240" style="opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line,rgba(20,21,26,0.1));"><span style="font: 600 12px/1 'IBM Plex Mono', monospace; color: var(--accent,#38536f); padding-top: 2px;">04</span><p style="margin: 0; font-size: 18px; line-height: 1.45; color: var(--ink,#14151a); font-weight: 500;">{{ L.problem.item4 }}</p></div>
+        </div>
+
+        <!-- widening gap diagram -->
+        <div data-cascade="" data-reveal="" data-d="160" style="opacity: 0; transform: translateY(16px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); padding: 26px; border-radius: 16px; background: var(--bg2,#fff); border: 1px solid var(--line,rgba(20,21,26,0.1));" role="img" aria-label="{{ L.problem.chartAria }}">
+          <span style="font: 500 9.5px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.42));">{{ L.problem.chartTitle }}</span>
+          <svg viewBox="0 0 320 172" style="width: 100%; height: auto; margin-top: 14px; overflow: visible;" aria-hidden="true">
+            <line x1="10" y1="150" x2="265" y2="150" stroke="var(--line,rgba(20,21,26,0.14))" stroke-width="1"></line>
+            <polygon points="10,150 95,115 180,72 265,22 265,108 180,118 95,128 10,148" fill="var(--accent-soft,rgba(56,83,111,0.1))"></polygon>
+            <polyline points="10,148 95,128 180,118 265,108" fill="none" stroke="var(--ink3,rgba(20,21,26,0.4))" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 6"></polyline>
+            <polyline points="10,150 95,115 180,72 265,22" fill="none" stroke="var(--accent,#38536f)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            <circle cx="265" cy="22" r="4" fill="var(--accent,#38536f)"></circle>
+            <circle cx="265" cy="108" r="4" fill="var(--ink3,rgba(20,21,26,0.4))"></circle>
+            <line x1="284" y1="22" x2="284" y2="108" stroke="var(--ink3,rgba(20,21,26,0.4))" stroke-width="1"></line>
+            <line x1="280" y1="22" x2="288" y2="22" stroke="var(--ink3,rgba(20,21,26,0.4))" stroke-width="1"></line>
+            <line x1="280" y1="108" x2="288" y2="108" stroke="var(--ink3,rgba(20,21,26,0.4))" stroke-width="1"></line>
+            <text x="294" y="69" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600" fill="var(--ink,#14151a)">{{ L.problem.gapWord }}</text>
+            <text x="10" y="163" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink3,rgba(20,21,26,0.4))">t0</text>
+            <text x="88" y="163" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink3,rgba(20,21,26,0.4))">t1</text>
+            <text x="173" y="163" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink3,rgba(20,21,26,0.4))">t2</text>
+            <text x="255" y="163" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink3,rgba(20,21,26,0.4))">t3</text>
+          </svg>
+          <div style="margin-top: 12px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <span style="display: flex; align-items: center; gap: 6px; font: 500 11px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.6));"><span aria-hidden="true" style="width: 14px; height: 3px; border-radius: 2px; background: var(--accent,#38536f);"></span>{{ L.problem.legendComplexity }}</span>
+            <span style="display: flex; align-items: center; gap: 6px; font: 500 11px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.6));"><span aria-hidden="true" style="width: 14px; height: 3px; border-radius: 2px; background: var(--ink3,rgba(20,21,26,0.4));"></span>{{ L.problem.legendUnderstanding }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 64px; display: flex; flex-direction: column; gap: 0;">
+        <div data-reveal="" data-labelrow="" data-d="80" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 30px 0; border-top: 1px solid var(--line,rgba(20,21,26,0.12));">
+          <div><span style="font: 600 10.5px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent,#38536f); display: inline-block; padding: 6px 11px; border-radius: 7px; background: var(--accent-soft,rgba(56,83,111,0.1));">{{ L.problem.whyHappensLabel }}</span></div>
+          <p style="margin: 0; max-width: 640px; font-size: 17px; line-height: 1.7; color: var(--ink2,rgba(20,21,26,0.68));">{{ L.problem.whyHappensText }}</p>
+        </div>
+        <div data-reveal="" data-labelrow="" data-d="140" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 30px 0; border-top: 1px solid var(--line,rgba(20,21,26,0.12));">
+          <div><span style="font: 600 10.5px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent,#38536f); display: inline-block; padding: 6px 11px; border-radius: 7px; background: var(--accent-soft,rgba(56,83,111,0.1));">{{ L.problem.whyCompoundsLabel }}</span></div>
+          <p style="margin: 0; max-width: 640px; font-size: 17px; line-height: 1.7; color: var(--ink2,rgba(20,21,26,0.68));">{{ L.problem.whyCompoundsText }}</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 60px;">
+        <span data-reveal="" style="opacity: 0; transition: opacity .8s ease; display: block; font: 600 11px/1 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); margin-bottom: 22px;">{{ L.problem.showsUpLabel }}</span>
+        <div style="position: relative; padding-left: 26px;">
+          <div aria-hidden="true" style="position: absolute; left: 3px; top: 8px; bottom: 8px; width: 1.5px; background: linear-gradient(180deg, var(--accent,#38536f), var(--ink3,rgba(20,21,26,0.14)));"></div>
+          <div data-reveal="" data-d="0" style="opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease; position: relative; padding-bottom: 22px;"><span aria-hidden="true" style="position: absolute; left: -26px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent,#38536f);"></span><p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink2,rgba(20,21,26,0.68));">{{ L.problem.consequence1 }}</p></div>
+          <div data-reveal="" data-d="60" style="opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease; position: relative; padding-bottom: 22px;"><span aria-hidden="true" style="position: absolute; left: -26px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent,#38536f);"></span><p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink2,rgba(20,21,26,0.68));">{{ L.problem.consequence2 }}</p></div>
+          <div data-reveal="" data-d="120" style="opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease; position: relative; padding-bottom: 22px;"><span aria-hidden="true" style="position: absolute; left: -26px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent,#38536f);"></span><p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink2,rgba(20,21,26,0.68));">{{ L.problem.consequence3 }}</p></div>
+          <div data-reveal="" data-d="180" style="opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease; position: relative; padding-bottom: 22px;"><span aria-hidden="true" style="position: absolute; left: -26px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent,#38536f);"></span><p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink2,rgba(20,21,26,0.68));">{{ L.problem.consequence4 }}</p></div>
+          <div data-reveal="" data-d="240" style="opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease; position: relative;"><span aria-hidden="true" style="position: absolute; left: -26px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent,#38536f);"></span><p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink2,rgba(20,21,26,0.68));">{{ L.problem.consequence5 }}</p></div>
+        </div>
+      </div>
+
+      <p data-reveal="" data-d="80" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 56px 0 0; font-size: clamp(19px, 2.1vw, 24px); line-height: 1.5; color: var(--ink,#14151a); font-weight: 500; letter-spacing: -0.01em; padding: 28px 0 0; border-top: 2px solid var(--ink,#14151a);">{{ L.problem.closing }}</p>
+    </div>
+  </section>
+
+  <!-- ============ 02 APPROACH ============ -->
+  <section id="approach" data-screen-label="02 Approach" style="position: relative; z-index: 1; padding: clamp(96px, 12vh, 150px) clamp(20px, 4vw, 56px); background: var(--bg2,#fff); border-top: 1px solid var(--line,rgba(20,21,26,0.1)); border-bottom: 1px solid var(--line,rgba(20,21,26,0.1));">
+    <div style="max-width: 1080px; margin: 0 auto;">
+      <div data-reveal="" style="opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: flex; align-items: center; gap: 13px; margin-bottom: 26px;">
+        <span style="font: 600 11.5px/1 'IBM Plex Mono', monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--accent,#38536f);">{{ L.approach.label }}</span>
+        <span aria-hidden="true" style="flex: 1; height: 1px; background: var(--line,rgba(20,21,26,0.12));"></span>
+        <span style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; color: var(--ink3,rgba(20,21,26,0.4));">02 / 05</span>
+      </div>
+      <h2 data-reveal="" data-d="60" style="opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 0 0 22px; max-width: 760px; font-weight: 700; font-size: clamp(28px, 4.2vw, 50px); line-height: 1.08; letter-spacing: -0.03em; color: var(--ink,#14151a);">{{ L.approach.headline }}</h2>
+      <p data-reveal="" data-d="120" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 0 0 68px; max-width: 600px; font-size: 17px; line-height: 1.6; color: var(--ink2,rgba(20,21,26,0.6));">{{ L.approach.lead }}</p>
+
+      <div data-timeline="" style="position: relative;">
+        <div aria-hidden="true" style="position: absolute; left: 23px; top: 24px; bottom: 24px; width: 2px; background: var(--line2,rgba(20,21,26,0.14));"></div>
+        <div aria-hidden="true" data-timeline-fill="" style="position: absolute; left: 23px; top: 24px; width: 2px; height: 0px; background: linear-gradient(180deg, var(--accent,#38536f), var(--accent-2,#2b4156));"></div>
+
+        <div data-stage="" data-reveal="" style="opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 26px; padding-bottom: 40px;">
+          <div style="display: flex; justify-content: center;"><span data-stage-dot="" aria-hidden="true" style="position: relative; z-index: 2; margin-top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg2,#fff); border: 2px solid var(--line2,rgba(20,21,26,0.2)); transition: all .5s;"></span></div>
+          <div><span style="font: 600 11px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; color: var(--accent,#38536f); padding: 5px 9px; border-radius: 6px; background: var(--accent-soft,rgba(56,83,111,0.1));">{{ L.approach.step1Tag }}</span><h3 style="margin: 14px 0 8px; font-weight: 700; font-size: clamp(20px, 2.3vw, 26px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink,#14151a);">{{ L.approach.step1Title }}</h3><p style="margin: 0; max-width: 580px; font-size: 16px; line-height: 1.6; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.approach.step1Body }}</p></div>
+        </div>
+
+        <div data-stage="" data-reveal="" data-d="40" style="opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 26px; padding-bottom: 40px;">
+          <div style="display: flex; justify-content: center;"><span data-stage-dot="" aria-hidden="true" style="position: relative; z-index: 2; margin-top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg2,#fff); border: 2px solid var(--line2,rgba(20,21,26,0.2)); transition: all .5s;"></span></div>
+          <div><span style="font: 600 11px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; color: var(--accent,#38536f); padding: 5px 9px; border-radius: 6px; background: var(--accent-soft,rgba(56,83,111,0.1));">{{ L.approach.step2Tag }}</span><h3 style="margin: 14px 0 8px; font-weight: 700; font-size: clamp(20px, 2.3vw, 26px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink,#14151a);">{{ L.approach.step2Title }}</h3><p style="margin: 0; max-width: 580px; font-size: 16px; line-height: 1.6; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.approach.step2Body }}</p></div>
+        </div>
+
+        <div data-stage="" data-reveal="" data-d="40" style="opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 26px; padding-bottom: 40px;">
+          <div style="display: flex; justify-content: center;"><span data-stage-dot="" aria-hidden="true" style="position: relative; z-index: 2; margin-top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg2,#fff); border: 2px solid var(--line2,rgba(20,21,26,0.2)); transition: all .5s;"></span></div>
+          <div><span style="font: 600 11px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; color: var(--accent,#38536f); padding: 5px 9px; border-radius: 6px; background: var(--accent-soft,rgba(56,83,111,0.1));">{{ L.approach.step3Tag }}</span><h3 style="margin: 14px 0 8px; font-weight: 700; font-size: clamp(20px, 2.3vw, 26px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink,#14151a);">{{ L.approach.step3Title }}</h3><p style="margin: 0; max-width: 580px; font-size: 16px; line-height: 1.6; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.approach.step3Body }}</p></div>
+        </div>
+
+        <div data-stage="" data-reveal="" data-d="40" style="opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 26px; padding-bottom: 40px;">
+          <div style="display: flex; justify-content: center;"><span data-stage-dot="" aria-hidden="true" style="position: relative; z-index: 2; margin-top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg2,#fff); border: 2px solid var(--line2,rgba(20,21,26,0.2)); transition: all .5s;"></span></div>
+          <div><span style="font: 600 11px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; color: var(--accent,#38536f); padding: 5px 9px; border-radius: 6px; background: var(--accent-soft,rgba(56,83,111,0.1));">{{ L.approach.step4Tag }}</span><h3 style="margin: 14px 0 8px; font-weight: 700; font-size: clamp(20px, 2.3vw, 26px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink,#14151a);">{{ L.approach.step4Title }}</h3><p style="margin: 0; max-width: 580px; font-size: 16px; line-height: 1.6; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.approach.step4Body }}</p></div>
+        </div>
+
+        <div data-stage="" data-reveal="" data-d="40" style="opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 26px;">
+          <div style="display: flex; justify-content: center;"><span data-stage-dot="" aria-hidden="true" style="position: relative; z-index: 2; margin-top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg2,#fff); border: 2px solid var(--line2,rgba(20,21,26,0.2)); transition: all .5s;"></span></div>
+          <div><span style="font: 600 11px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; color: var(--accent,#38536f); padding: 5px 9px; border-radius: 6px; background: var(--accent-soft,rgba(56,83,111,0.1));">{{ L.approach.step5Tag }}</span><h3 style="margin: 14px 0 8px; font-weight: 700; font-size: clamp(20px, 2.3vw, 26px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink,#14151a);">{{ L.approach.step5Title }}</h3><p style="margin: 0; max-width: 580px; font-size: 16px; line-height: 1.6; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.approach.step5Body }}</p></div>
+        </div>
+      </div>
+
+      <div data-reveal="" data-d="80" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin-top: 56px; padding: 30px 32px; border-radius: 18px; background: linear-gradient(160deg, var(--accent,#38536f), var(--accent-2,#2b4156));">
+        <p style="margin: 0; font-size: clamp(17px, 1.8vw, 21px); line-height: 1.55; color: #fff; font-weight: 500; letter-spacing: -0.01em; max-width: 760px;">{{ L.approach.commitment }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 EVIDENCE ============ -->
+  <section id="evidence" data-screen-label="03 Evidence" style="position: relative; z-index: 1; padding: clamp(96px, 12vh, 150px) clamp(20px, 4vw, 56px);">
+    <div style="max-width: 1160px; margin: 0 auto;">
+      <div data-reveal="" style="opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: flex; align-items: center; gap: 13px; margin-bottom: 26px;">
+        <span style="font: 600 11.5px/1 'IBM Plex Mono', monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--accent,#38536f);">{{ L.evidence.label }}</span>
+        <span aria-hidden="true" style="flex: 1; height: 1px; background: var(--line,rgba(20,21,26,0.12));"></span>
+        <span style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; color: var(--ink3,rgba(20,21,26,0.4));">03 / 05</span>
+      </div>
+      <p data-reveal="" data-d="60" style="opacity: 0; transform: translateY(22px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 0 0 12px; max-width: 700px; font-weight: 700; font-size: clamp(22px, 2.8vw, 32px); line-height: 1.3; letter-spacing: -0.015em; color: var(--ink,#14151a);">{{ L.evidence.headline }}</p>
+      <p data-reveal="" data-d="120" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 0 0 56px; max-width: 720px; font-size: 17px; line-height: 1.65; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.evidence.lead }}</p>
+
+      <!-- case study grid -->
+      <div data-split="" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 8px;">
+        <div data-reveal="" data-d="60" style="opacity: 0; transform: translateY(22px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); position: relative; padding: 30px 28px; border-radius: 18px; background: var(--bg2,#fff); border: 1px solid var(--line,rgba(20,21,26,0.1)); overflow: hidden;">
+          
+          <span style="position: relative; font: 600 10.5px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent,#38536f); display: inline-block; padding: 6px 11px; border-radius: 7px; background: var(--accent-soft,rgba(56,83,111,0.1));">{{ L.evidence.case1Tag }}</span>
+          <h3 style="position: relative; margin: 16px 0 12px; font-weight: 700; font-size: clamp(19px, 2vw, 23px); line-height: 1.3; letter-spacing: -0.015em; color: var(--ink,#14151a);">{{ L.evidence.case1Title }}</h3>
+          <p style="position: relative; margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.evidence.case1Body }}</p>
+        </div>
+        <div data-reveal="" data-d="120" style="opacity: 0; transform: translateY(22px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); position: relative; padding: 30px 28px; border-radius: 18px; background: var(--bg2,#fff); border: 1px solid var(--line,rgba(20,21,26,0.1)); overflow: hidden;">
+          
+          <span style="position: relative; font: 600 10.5px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent,#38536f); display: inline-block; padding: 6px 11px; border-radius: 7px; background: var(--accent-soft,rgba(56,83,111,0.1));">{{ L.evidence.case2Tag }}</span>
+          <h3 style="position: relative; margin: 16px 0 12px; font-weight: 700; font-size: clamp(19px, 2vw, 23px); line-height: 1.3; letter-spacing: -0.015em; color: var(--ink,#14151a);">{{ L.evidence.case2Title }}</h3>
+          <p style="position: relative; margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.evidence.case2Body }}</p>
+        </div>
+      </div>
+
+      <!-- pattern observations -->
+      <div data-reveal="" style="opacity: 0; transition: opacity .8s ease; margin-top: 40px; display: flex; align-items: center; gap: 18px;">
+        <span aria-hidden="true" style="flex: 1; height: 2px; background: var(--ink,#14151a);"></span>
+        <span style="flex-shrink: 0; font: 600 12px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--ink,#14151a); white-space: nowrap;">{{ L.evidence.separator }}</span>
+        <span aria-hidden="true" style="flex: 1; height: 2px; background: var(--ink,#14151a);"></span>
+      </div>
+      <div style="margin-top: 32px;">
+        <div data-split="" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div data-reveal="" data-d="80" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); padding: 30px; border-radius: 18px; background: var(--bg2,#fff); border: 1px solid var(--line,rgba(20,21,26,0.1)); display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; align-items: baseline; gap: 6px;">
+              <span style="font: 700 52px/1 'Hanken Grotesk', sans-serif; letter-spacing: -0.04em; color: var(--accent,#38536f);">4</span>
+              <span style="font: 600 12px/1.2 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.42));">{{ L.evidence.yearsWord }}</span>
+            </div>
+            <p style="margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.evidence.obs1Text }}</p>
+          </div>
+          <div data-reveal="" data-d="140" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); padding: 30px; border-radius: 18px; background: var(--bg2,#fff); border: 1px solid var(--line,rgba(20,21,26,0.1)); display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; align-items: baseline; gap: 6px;">
+              <span style="font: 700 52px/1 'Hanken Grotesk', sans-serif; letter-spacing: -0.04em; color: var(--accent,#38536f);">3</span>
+              <span style="font: 600 12px/1.2 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.42));">{{ L.evidence.yearsWord }}</span>
+            </div>
+            <p style="margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.evidence.obs2Text }}</p>
+          </div>
+        </div>
+      </div>
+
+      <p data-reveal="" data-d="80" style="opacity: 0; transform: translateY(18px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 40px 0 0; text-align: center; font-size: clamp(17px, 1.9vw, 21px); line-height: 1.5; color: var(--ink,#14151a); font-weight: 500;">{{ L.evidence.confirmation1 }} <span style="color: var(--accent,#38536f);">{{ L.evidence.confirmation2 }}</span></p>
+
+      <div data-reveal="" data-d="80" style="opacity: 0; transform: translateY(18px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin-top: 48px; padding: 30px 32px; border-radius: 18px; background: var(--bg3,rgba(20,21,26,0.03)); border: 1px solid var(--line,rgba(20,21,26,0.1));">
+        <div data-labelrow="" style="display: grid; grid-template-columns: 160px 1fr; gap: 24px;">
+          <span style="font: 600 10.5px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent,#38536f); display: inline-block; padding: 6px 11px; border-radius: 7px; background: var(--accent-soft,rgba(56,83,111,0.12)); height: fit-content;">{{ L.evidence.learningLabel }}</span>
+          <p style="margin: 0; font-size: 16px; line-height: 1.7; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.evidence.learningText }}</p>
+        </div>
+        <div aria-hidden="true" style="height: 1px; background: var(--line,rgba(20,21,26,0.12)); margin: 22px 0;"></div>
+        <div data-labelrow="" style="display: grid; grid-template-columns: 160px 1fr; gap: 24px;">
+          <span style="font: 600 10.5px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.45)); display: inline-block; padding: 6px 11px; border-radius: 7px; background: var(--bg2,rgba(255,255,255,0.6)); height: fit-content;">{{ L.evidence.practiceLabel }}</span>
+          <p style="margin: 0; font-size: 16px; line-height: 1.7; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.evidence.practiceText }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 COLLABORATION ============ -->
+  <section id="collaboration" data-screen-label="04 Collaboration" style="position: relative; z-index: 1; padding: clamp(96px, 12vh, 150px) clamp(20px, 4vw, 56px); background: var(--bg2,#fff); border-top: 1px solid var(--line,rgba(20,21,26,0.1)); border-bottom: 1px solid var(--line,rgba(20,21,26,0.1));">
+    <div style="max-width: 1160px; margin: 0 auto;">
+      <div data-reveal="" style="opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,.7,.3,1), transform .8s cubic-bezier(.16,.7,.3,1); display: flex; align-items: center; gap: 13px; margin-bottom: 26px;">
+        <span style="font: 600 11.5px/1 'IBM Plex Mono', monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--accent,#38536f);">{{ L.collaboration.label }}</span>
+        <span aria-hidden="true" style="flex: 1; height: 1px; background: var(--line,rgba(20,21,26,0.12));"></span>
+        <span style="font: 500 10px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; color: var(--ink3,rgba(20,21,26,0.4));">04 / 05</span>
+      </div>
+      <h2 data-reveal="" data-d="60" style="opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 0 0 56px; max-width: 700px; font-weight: 700; font-size: clamp(28px, 4.2vw, 48px); line-height: 1.1; letter-spacing: -0.03em; color: var(--ink,#14151a);">{{ L.collaboration.headline }}</h2>
+
+      <div data-split="" style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: start;">
+        <div>
+          <div data-reveal="" data-d="60" style="opacity: 0; transform: translateY(18px); transition: opacity .85s cubic-bezier(.16,.7,.3,1), transform .85s cubic-bezier(.16,.7,.3,1); display: grid; grid-template-columns: 32px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line,rgba(20,21,26,0.1));"><span style="font: 600 12px/1 'IBM Plex Mono', monospace; color: var(--accent,#38536f);">01</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--ink,#14151a);">{{ L.collaboration.item1 }}</p></div>
+          <div data-reveal="" data-d="120" style="opacity: 0; transform: translateY(18px); transition: opacity .85s cubic-bezier(.16,.7,.3,1), transform .85s cubic-bezier(.16,.7,.3,1); display: grid; grid-template-columns: 32px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line,rgba(20,21,26,0.1));"><span style="font: 600 12px/1 'IBM Plex Mono', monospace; color: var(--accent,#38536f);">02</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--ink,#14151a);">{{ L.collaboration.item2 }}</p></div>
+          <div data-reveal="" data-d="180" style="opacity: 0; transform: translateY(18px); transition: opacity .85s cubic-bezier(.16,.7,.3,1), transform .85s cubic-bezier(.16,.7,.3,1); display: grid; grid-template-columns: 32px 1fr; gap: 16px; padding: 20px 0;"><span style="font: 600 12px/1 'IBM Plex Mono', monospace; color: var(--accent,#38536f);">03</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--ink,#14151a);">{{ L.collaboration.item3 }}</p></div>
+        </div>
+
+        <!-- adapts / constant diagram -->
+        <div data-reveal="" data-d="140" style="opacity: 0; transform: translateY(18px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); padding: 26px; border-radius: 18px; background: var(--bg2,#fff); border: 1px solid var(--line,rgba(20,21,26,0.1));" role="img" aria-label="{{ L.collaboration.diagramAria }}">
+          <span style="font: 500 9.5px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.42));">{{ L.collaboration.diagramLabel }}</span>
+
+          <!-- variable inputs -->
+          <div style="margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+            <div style="padding: 12px 8px; border-radius: 11px; background: var(--bg3,rgba(20,21,26,0.03)); border: 1px dashed var(--line2,rgba(20,21,26,0.28)); text-align: center;">
+              <span style="display: block; font: 600 9px/1 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.42)); margin-bottom: 6px;">{{ L.collaboration.varies }}</span>
+              <span style="display: block; font: 600 13px/1.25 'Hanken Grotesk', sans-serif; color: var(--ink,#14151a);">{{ L.collaboration.scope }}</span>
+            </div>
+            <div style="padding: 12px 8px; border-radius: 11px; background: var(--bg3,rgba(20,21,26,0.03)); border: 1px dashed var(--line2,rgba(20,21,26,0.28)); text-align: center;">
+              <span style="display: block; font: 600 9px/1 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.42)); margin-bottom: 6px;">{{ L.collaboration.varies }}</span>
+              <span style="display: block; font: 600 13px/1.25 'Hanken Grotesk', sans-serif; color: var(--ink,#14151a);">{{ L.collaboration.pace }}</span>
+            </div>
+            <div style="padding: 12px 8px; border-radius: 11px; background: var(--bg3,rgba(20,21,26,0.03)); border: 1px dashed var(--line2,rgba(20,21,26,0.28)); text-align: center;">
+              <span style="display: block; font: 600 9px/1 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.42)); margin-bottom: 6px;">{{ L.collaboration.varies }}</span>
+              <span style="display: block; font: 600 13px/1.25 'Hanken Grotesk', sans-serif; color: var(--ink,#14151a);">{{ L.collaboration.form }}</span>
+            </div>
+          </div>
+
+          <!-- convergence -->
+          <div aria-hidden="true" style="position: relative; height: 44px; margin: 2px 6px 0;">
+            <svg viewBox="0 0 300 60" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible;">
+              <path d="M 50 0 C 50 30, 150 20, 150 55" fill="none" stroke="var(--line2,rgba(20,21,26,0.28))" stroke-width="1.5"></path>
+              <path d="M 150 0 L 150 55" fill="none" stroke="var(--line2,rgba(20,21,26,0.28))" stroke-width="1.5"></path>
+              <path d="M 250 0 C 250 30, 150 20, 150 55" fill="none" stroke="var(--line2,rgba(20,21,26,0.28))" stroke-width="1.5"></path>
+            </svg>
+          </div>
+
+          <!-- constant output -->
+          <div style="padding: 20px 22px; border-radius: 14px; background: linear-gradient(160deg, var(--accent,#38536f), var(--accent-2,#2b4156)); text-align: center;">
+            <span style="display: block; font: 600 9.5px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,0.72); margin-bottom: 8px;">{{ L.collaboration.constantLabel }}</span>
+            <span style="display: block; font-weight: 700; font-size: 19px; line-height: 1.3; color: #fff; letter-spacing: -0.015em;">{{ L.collaboration.constantValue }}</span>
+          </div>
+        </div>
+      </div>
+
+      <p data-reveal="" data-d="80" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 56px 0 0; font-size: clamp(19px, 2.1vw, 24px); line-height: 1.5; color: var(--ink,#14151a); font-weight: 500; letter-spacing: -0.01em; padding-top: 28px; border-top: 2px solid var(--ink,#14151a);">{{ L.collaboration.closing }}</p>
+    </div>
+  </section>
+
+  <!-- ============ 05 NEXT STEP ============ -->
+  <section id="next" data-screen-label="05 Next Step" style="position: relative; z-index: 1; padding: clamp(100px, 14vh, 180px) clamp(20px, 4vw, 56px);">
+    <div style="max-width: 780px; margin: 0 auto; text-align: center;">
+      <span data-reveal="" style="opacity: 0; transition: opacity .8s ease; display: inline-block; font: 600 11.5px/1 'IBM Plex Mono', monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--accent,#38536f); margin-bottom: 26px;">{{ L.next.label }}</span>
+      <h2 data-reveal="" data-d="80" style="opacity: 0; transform: translateY(26px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 0; font-weight: 700; font-size: clamp(34px, 5.6vw, 68px); line-height: 1.05; letter-spacing: -0.035em; color: var(--ink,#14151a);">{{ L.next.headline }}</h2>
+      <p data-reveal="" data-d="160" style="opacity: 0; transform: translateY(22px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); margin: 26px auto 0; max-width: 560px; font-size: 17.5px; line-height: 1.65; color: var(--ink2,rgba(20,21,26,0.62));">{{ L.next.body }}</p>
+      <div data-reveal="" data-d="240" style="opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.16,.7,.3,1), transform .9s cubic-bezier(.16,.7,.3,1); display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 42px;">
+        <a href="mailto:hola@celiarico.dev" style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; border-radius: 13px; background: linear-gradient(180deg, var(--accent,#38536f), var(--accent-2,#2b4156)); color: #fff; text-decoration: none; font: 600 16px/1 'Hanken Grotesk', sans-serif; box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 16px 34px -14px var(--accent-glow,rgba(56,83,111,0.6)); transition: transform .3s cubic-bezier(.16,.7,.3,1);" style-hover="transform: translateY(-2px);">{{ L.next.ctaPrimary }}<span aria-hidden="true">→</span></a>
+        <a href="https://www.linkedin.com/in/celiarico" style="font: 600 14px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.62)); text-decoration: none; transition: color .3s;" style-hover="color: var(--accent,#38536f);" target="_blank" rel="noopener">{{ L.next.ctaSecondary }}</a>
+        <a href="mailto:hola@celiarico.dev" style="font: 500 13.5px/1 'IBM Plex Mono', monospace; letter-spacing: .04em; color: var(--ink3,rgba(20,21,26,0.45)); text-decoration: none; transition: color .3s;" style-hover="color: var(--accent,#38536f);">hola@celiarico.dev</a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- footer -->
+  <footer style="position: relative; z-index: 1; border-top: 1px solid var(--line,rgba(20,21,26,0.1)); padding: 32px clamp(20px, 4vw, 56px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; max-width: 1240px; margin: 0 auto;">
+    <button data-target="hero" data-nav="" style="all: unset; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+      <span aria-hidden="true" style="width: 26px; height: 26px; border-radius: 7px; background: linear-gradient(150deg, var(--accent,#38536f), var(--accent-2,#2b4156)); display: flex; align-items: center; justify-content: center;"><span style="width: 9px; height: 9px; border: 2px solid rgba(255,255,255,0.9); border-radius: 3px;"></span></span>
+      <span style="display: flex; flex-direction: column; line-height: 1.1;"><span style="font: 700 14px/1 'Hanken Grotesk', sans-serif; color: var(--ink,#14151a);">Celia Rico</span><span style="font: 500 9px/1 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.4)); margin-top: 5px;">{{ L.logoRole }}</span></span>
+    </button>
+    <span style="font: 500 11px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3,rgba(20,21,26,0.36));">Celia Rico · 2026</span>
+    <button data-target="hero" data-nav="" style="all: unset; cursor: pointer; font: 600 12.5px/1 'Hanken Grotesk', sans-serif; color: var(--ink2,rgba(20,21,26,0.5)); display: inline-flex; align-items: center; gap: 7px; transition: color .3s;" style-hover="color: var(--accent,#38536f);">{{ L.footerBack }}</button>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  rootRef = (el) => { this._root = el; };
+
+  state = { isDark: false, language: 'en' };
+
+  translations = {
+    en: {
+      skip: 'Skip to content',
+      logoRole: 'IT Architect',
+      footerBack: 'Back to top ↑',
+      langAria: 'Language selector',
+      themeToggleAria: 'Toggle dark mode',
+      nav: { primaryAria: 'Primary', sectionsAria: 'Page sections', approach: 'Approach', evidence: 'Evidence', cta: 'Start a conversation' },
+      rail: {
+        start: 'Start', recognition: 'Recognition', approach: 'Approach', evidence: 'Evidence', collaboration: 'Collaboration', next: 'Next step',
+        goHero: 'Go to Hero', goProblem: 'Go to The Problem', goApproach: 'Go to The Approach', goEvidence: 'Go to Evidence', goCollaboration: 'Go to Collaboration', goNext: 'Go to Next Step'
+      },
+      hero: {
+        eyebrow: 'IT Architect · Architecture · Cloud',
+        headline1: 'Every system', headline2: 'can be understood.',
+        body: "The first step is understanding how a system actually works — not how it was designed to work. I'm Celia Rico, an IT Architect. I build accurate mental models of complex systems before proposing what should change.",
+        ctaPrimary: 'Tell me about your system', ctaSecondary: 'See the approach',
+        chip1Title: 'Architecture mapped', chip1Sub: '43 components',
+        chip2Title: 'Root cause found', chip2Sub: 'auth-service coupling',
+        panelTitle: 'Architecture Review', panelSubtitle: 'current state', active: 'ACTIVE',
+        componentsLabel: 'Components', layersLabel: 'Layers', boundariesValue: 'clear', boundariesLabel: 'Boundaries',
+        workflowLabel: 'Analysis workflow', stepExplore: 'explore', stepMap: 'map', stepModel: 'model',
+        log1: 'Traced dependency tree in', log2: 'Identified constraint in',
+        inPractice: 'In practice', scroll: 'Scroll'
+      },
+      problem: {
+        label: '01 — The Problem',
+        headline1: 'Complex systems rarely break all at once.', headline2: 'They stop making sense, gradually.',
+        lead: 'Most teams know something has shifted before they can describe what. Changes feel riskier. Decisions feel less certain. The system still works — but it no longer feels fully understood.',
+        item1: 'Architecture that grew faster than it was ever designed.',
+        item2: 'Deployments that everyone is quietly a little afraid of.',
+        item3: "Critical knowledge that lives in just one person's head.",
+        item4: 'Dependencies no one can explain but everyone is afraid to touch.',
+        chartAria: 'Line chart showing system complexity rising steeply over time while shared understanding rises only slowly, leaving a widening gap between the two',
+        chartTitle: 'The widening gap', gapWord: 'gap',
+        legendComplexity: 'System complexity', legendUnderstanding: 'Shared understanding',
+        whyHappensLabel: 'Why it happens',
+        whyHappensText: 'This is not a sign of bad teams or poor decisions. The pattern is consistent: as systems grow, the shared understanding of how they actually behave does not grow with them. Each decision is made with an incomplete picture of the whole. The system evolves. The understanding of it does not.',
+        whyCompoundsLabel: 'Why it compounds',
+        whyCompoundsText: 'What makes this condition difficult to resolve from within is that it compounds. Each change made under incomplete understanding creates new uncertainty. The next decision becomes harder to assess. Confidence in the outcome decreases. The cost of every change quietly rises — not because the technology is fundamentally broken, but because the gap between how the system is believed to work and how it actually works widens with every change.',
+        showsUpLabel: 'This shows up as',
+        consequence1: 'Delivery cycles slow as change becomes increasingly cautious.',
+        consequence2: 'Operational risk accumulates with every release.',
+        consequence3: 'Architectural decisions become collective negotiations rather than informed choices.',
+        consequence4: 'Institutional knowledge concentrates in two or three individuals.',
+        consequence5: 'Maintaining the existing system costs more than moving it forward.',
+        closing: 'This situation is not inevitable. But it does not resolve through faster delivery, better tooling, or more documentation. It requires a different starting point — understanding how the system actually behaves, before anything else changes.'
+      },
+      approach: {
+        label: '02 — The Approach',
+        headline: 'A deliberate path from uncertainty to a system you trust.',
+        lead: 'Engineering is the process of reducing uncertainty until the right action becomes obvious. The questions asked, the evidence gathered, the decisions postponed — all follow from that principle.',
+        step1Tag: '01 · UNDERSTAND', step1Title: 'Build an accurate model of how the system actually works.',
+        step1Body: 'Not how it was designed to work — how it behaves in production, under real conditions. The objective is a coherent mental model: the major components, how information moves between them, what each part actually does. Until that model exists, no decision is grounded.',
+        step2Tag: '02 · ANALYSE', step2Title: 'Find the root cause, not the symptom.',
+        step2Body: 'Observable problems point to something deeper. The analysis follows the evidence — behaviour in production, metrics, logs, operational history — until the actual cause becomes clear. Recommendations are postponed until the uncertainty is resolved.',
+        step3Tag: '03 · DESIGN', step3Title: 'Shape the solution around the actual constraints.',
+        step3Body: 'Business priorities, team capacity, technical debt tolerance, time horizon — these define the solution space before any technology is considered. Architecture is determined first. Technology is selected to serve it, not the other way around.',
+        step4Tag: '04 · IMPLEMENT', step4Title: 'Change incrementally. Validate as you go.',
+        step4Body: 'Each modification is a deliberate step, not a bet. Complexity is never increased as a side effect of reducing it elsewhere. The system improves through a series of decisions that each make the next decision easier to make with confidence.',
+        step5Tag: '05 · EVOLVE', step5Title: 'Leave the system easier to evolve than you found it.',
+        step5Body: 'Deployment is not completion. The measure of a successful engagement is whether the team understands the system better than before — and whether the next change is easier to make. That is the standard, not the delivery date.',
+        commitment: 'Technology is chosen after the architecture — never before. The objective is not selecting tools. The objective is helping the system become easier to understand, easier to evolve and easier to operate than it was before.'
+      },
+      evidence: {
+        label: '03 — Evidence',
+        headline: 'The approach has already been applied. In systems that were already in production.',
+        lead: "The environments have included enterprise software undergoing active migration, a platform team supporting multiple defence simulation projects simultaneously, a large healthcare organisation's shared engineering infrastructure, and a student rocketry team with an eleven-month deadline and real launch constraints.",
+        case1Tag: 'Platform Engineering', case1Title: 'A deployment platform analysed, redesigned, and delivered.',
+        case1Body: 'The client presented a problem — a WebLogic platform that needed to be modernised without disrupting existing deployments. The technical solution was proposed after analysing the complete deployment system. A Shared Jenkins Library centralised the deployment logic. Compatibility layers preserved what the client needed unchanged. The platform was delivered on schedule.',
+        case2Tag: 'Enterprise Architecture', case2Title: 'Architecture reviews across multiple engineering teams.',
+        case2Body: 'Reviewing solution architectures, evaluating technology migrations, and maintaining shared engineering infrastructure — for multiple development teams simultaneously. Recommendations follow analysis. When an evaluation concludes a migration is not advisable, that conclusion is documented with the evidence that supports it.',
+        separator: '+6 years of field experience', yearsWord: 'years',
+        obs1Text: 'Across four years supporting multiple concurrent engineering teams — different projects, different stacks, different operational environments — incidents reported as application defects regularly traced back to platform configuration, infrastructure, or failures between systems. Each required building a model of the whole before it was possible to locate the part that had failed.',
+        obs2Text: 'Earlier still — a student team of fewer than twenty engineers, an eleven-month window, their first operational rocket. Full software lifecycle responsibility: architecture through integration through operational launch, coordinated across avionics, electronics, structures, propulsion and operations. Limited testing opportunities. Real consequences for every decision.',
+        confirmation1: 'The domain, the scale, the constraints — these have differed.', confirmation2: 'The approach has not.',
+        learningLabel: 'Continuous learning',
+        learningText: 'The technology landscape does not remain stable. Studying unfamiliar technologies, building Proofs of Concept before recommending them, and treating adaptation as a professional responsibility — not a reaction to deadlines — is part of how the work is done.',
+        practiceLabel: 'In practice',
+        practiceText: 'Experience shapes the quality of decisions made in unfamiliar systems. What that looks like in practice — that depends on what the system actually needs.'
+      },
+      collaboration: {
+        label: '04 — Collaboration',
+        headline: 'Every engagement begins with the system you already have.',
+        item1: 'No two systems start from the same place. The engagement begins from where yours is.',
+        item2: 'Before any recommendation, there is investigation. The starting point is the existing architecture, the knowledge already inside the team, the pace at which change is safe. These cannot be assumed in advance. They are found.',
+        item3: 'What adapts to that context is what should adapt — the scope, the pace, the form the engagement takes. The engineering judgement applied to it does not.',
+        diagramAria: 'Diagram: scope, pace and form of engagement vary per client, but the engineering judgement applied to them stays constant',
+        diagramLabel: "What adapts, what doesn't", varies: 'Varies', scope: 'Scope', pace: 'Pace', form: 'Form of engagement',
+        constantLabel: 'Stays constant, every time', constantValue: 'Engineering judgement',
+        closing: 'The measure of a successful engagement is not the delivery date. The best outcome is a team that understands the system, owns what was built, and can make the next change themselves.'
+      },
+      next: {
+        label: '05 — Next Step', headline: 'Start from where you are.',
+        body: "You don't need a defined problem or a proposed solution before reaching out. If something in this page sounded familiar, that's enough to start. No pitch, no obligation — just a conversation about what you're building, what's getting in the way, and whether there's something worth exploring together.",
+        ctaPrimary: 'Start a conversation', ctaSecondary: 'Connect on LinkedIn'
+      }
+    },
+    es: {
+      skip: 'Saltar al contenido',
+      logoRole: 'Arquitecta TI',
+      footerBack: 'Volver arriba ↑',
+      langAria: 'Selector de idioma',
+      themeToggleAria: 'Cambiar modo oscuro/claro',
+      nav: { primaryAria: 'Principal', sectionsAria: 'Secciones de la página', approach: 'Enfoque', evidence: 'Evidencia', cta: 'Iniciar conversación' },
+      rail: {
+        start: 'Inicio', recognition: 'Reconocimiento', approach: 'Enfoque', evidence: 'Evidencia', collaboration: 'Colaboración', next: 'Próximo paso',
+        goHero: 'Ir a Inicio', goProblem: 'Ir a El problema', goApproach: 'Ir a El enfoque', goEvidence: 'Ir a Evidencia', goCollaboration: 'Ir a Colaboración', goNext: 'Ir a Próximo paso'
+      },
+      hero: {
+        eyebrow: 'Arquitecta TI · Arquitectura · Cloud',
+        headline1: 'Todo sistema', headline2: 'puede entenderse.',
+        body: 'El primer paso es entender cómo funciona realmente un sistema, no cómo fue diseñado para funcionar. Soy Celia Rico, arquitecta de TI. Construyo modelos mentales precisos de sistemas complejos antes de proponer qué debe cambiar.',
+        ctaPrimary: 'Cuéntame sobre tu sistema', ctaSecondary: 'Ver el enfoque',
+        chip1Title: 'Arquitectura mapeada', chip1Sub: '43 componentes',
+        chip2Title: 'Causa raíz encontrada', chip2Sub: 'acoplamiento en auth-service',
+        panelTitle: 'Revisión de arquitectura', panelSubtitle: 'estado actual', active: 'ACTIVO',
+        componentsLabel: 'Componentes', layersLabel: 'Capas', boundariesValue: 'claros', boundariesLabel: 'Límites',
+        workflowLabel: 'Flujo de análisis', stepExplore: 'explorar', stepMap: 'mapear', stepModel: 'modelar',
+        log1: 'Árbol de dependencias trazado en', log2: 'Restricción identificada en',
+        inPractice: 'En la práctica', scroll: 'Desplázate'
+      },
+      problem: {
+        label: '01 — El problema',
+        headline1: 'Los sistemas complejos rara vez se rompen de golpe.', headline2: 'Dejan de tener sentido, poco a poco.',
+        lead: 'La mayoría de los equipos perciben que algo ha cambiado antes de poder describir qué. Los cambios se sienten más arriesgados. Las decisiones, menos seguras. El sistema sigue funcionando, pero ya no se entiende del todo.',
+        item1: 'Una arquitectura que creció más rápido de lo que nunca se diseñó.',
+        item2: 'Despliegues de los que todos, en silencio, tienen un poco de miedo.',
+        item3: 'Conocimiento crítico que vive solo en la cabeza de una persona.',
+        item4: 'Dependencias que nadie puede explicar pero que todos temen tocar.',
+        chartAria: 'Gráfico de líneas que muestra la complejidad del sistema aumentando con fuerza mientras la comprensión compartida crece muy despacio, dejando una brecha cada vez mayor entre ambas',
+        chartTitle: 'La brecha que se amplía', gapWord: 'brecha',
+        legendComplexity: 'Complejidad del sistema', legendUnderstanding: 'Comprensión compartida',
+        whyHappensLabel: 'Por qué ocurre',
+        whyHappensText: 'Esto no es señal de malos equipos ni de malas decisiones. El patrón es constante: a medida que los sistemas crecen, la comprensión compartida de cómo se comportan realmente no crece con ellos. Cada decisión se toma con una imagen incompleta del conjunto. El sistema evoluciona. La comprensión de él, no.',
+        whyCompoundsLabel: 'Por qué se agrava',
+        whyCompoundsText: 'Lo que hace difícil resolver esta condición desde dentro es que se agrava. Cada cambio hecho con una comprensión incompleta genera nueva incertidumbre. La siguiente decisión se vuelve más difícil de evaluar. La confianza en el resultado disminuye. El costo de cada cambio aumenta silenciosamente, no porque la tecnología esté fundamentalmente rota, sino porque la brecha entre cómo se cree que funciona el sistema y cómo funciona realmente se amplía con cada cambio.',
+        showsUpLabel: 'Esto se manifiesta como',
+        consequence1: 'Los ciclos de entrega se ralentizan a medida que el cambio se vuelve cada vez más cauteloso.',
+        consequence2: 'El riesgo operativo se acumula con cada versión.',
+        consequence3: 'Las decisiones de arquitectura se convierten en negociaciones colectivas en lugar de elecciones informadas.',
+        consequence4: 'El conocimiento institucional se concentra en dos o tres personas.',
+        consequence5: 'Mantener el sistema existente cuesta más que hacerlo avanzar.',
+        closing: 'Esta situación no es inevitable. Pero no se resuelve entregando más rápido, con mejores herramientas o más documentación. Requiere un punto de partida distinto: entender cómo se comporta realmente el sistema, antes de cambiar cualquier otra cosa.'
+      },
+      approach: {
+        label: '02 — El enfoque',
+        headline: 'Un camino deliberado de la incertidumbre a un sistema en el que confías.',
+        lead: 'La ingeniería es el proceso de reducir la incertidumbre hasta que la acción correcta se vuelve obvia. Las preguntas que se hacen, la evidencia que se reúne, las decisiones que se posponen: todo se deriva de ese principio.',
+        step1Tag: '01 · ENTENDER', step1Title: 'Construir un modelo preciso de cómo funciona realmente el sistema.',
+        step1Body: 'No cómo fue diseñado para funcionar, sino cómo se comporta en producción, en condiciones reales. El objetivo es un modelo mental coherente: los componentes principales, cómo se mueve la información entre ellos, qué hace realmente cada parte. Hasta que ese modelo existe, ninguna decisión tiene fundamento.',
+        step2Tag: '02 · ANALIZAR', step2Title: 'Encontrar la causa raíz, no el síntoma.',
+        step2Body: 'Los problemas observables apuntan a algo más profundo. El análisis sigue la evidencia (comportamiento en producción, métricas, registros, historial operativo) hasta que la causa real queda clara. Las recomendaciones se posponen hasta resolver la incertidumbre.',
+        step3Tag: '03 · DISEÑAR', step3Title: 'Dar forma a la solución en torno a las restricciones reales.',
+        step3Body: 'Las prioridades del negocio, la capacidad del equipo, la tolerancia a la deuda técnica, el horizonte temporal: esto define el espacio de la solución antes de considerar cualquier tecnología. La arquitectura se determina primero. La tecnología se elige para servirla, no al revés.',
+        step4Tag: '04 · IMPLEMENTAR', step4Title: 'Cambiar de forma incremental. Validar sobre la marcha.',
+        step4Body: 'Cada modificación es un paso deliberado, no una apuesta. La complejidad nunca aumenta como efecto secundario de reducirla en otro lugar. El sistema mejora mediante una serie de decisiones que hacen que cada siguiente decisión sea más fácil de tomar con confianza.',
+        step5Tag: '05 · EVOLUCIONAR', step5Title: 'Dejar el sistema más fácil de evolucionar de lo que se encontró.',
+        step5Body: 'El despliegue no es el final. La medida de un proyecto exitoso es si el equipo entiende mejor el sistema que antes, y si el próximo cambio es más fácil de hacer. Ese es el estándar, no la fecha de entrega.',
+        commitment: 'La tecnología se elige después de la arquitectura, nunca antes. El objetivo no es seleccionar herramientas. El objetivo es ayudar a que el sistema sea más fácil de entender, de evolucionar y de operar de lo que era antes.'
+      },
+      evidence: {
+        label: '03 — Evidencia',
+        headline: 'El enfoque ya se ha aplicado. En sistemas que ya estaban en producción.',
+        lead: 'Los entornos han incluido software empresarial en migración activa, un equipo de plataforma dando soporte a varios proyectos de simulación de defensa a la vez, la infraestructura de ingeniería compartida de una gran organización sanitaria, y un equipo estudiantil de cohetería con un plazo de once meses y restricciones reales de lanzamiento.',
+        case1Tag: 'Ingeniería de plataforma', case1Title: 'Una plataforma de despliegue analizada, rediseñada y entregada.',
+        case1Body: 'El cliente planteó un problema: una plataforma WebLogic que necesitaba modernizarse sin interrumpir los despliegues existentes. La solución técnica se propuso tras analizar el sistema de despliegue completo. Una Shared Jenkins Library centralizó la lógica de despliegue. Capas de compatibilidad preservaron lo que el cliente necesitaba mantener sin cambios. La plataforma se entregó según lo previsto.',
+        case2Tag: 'Arquitectura empresarial', case2Title: 'Revisiones de arquitectura en múltiples equipos de ingeniería.',
+        case2Body: 'Revisando arquitecturas de solución, evaluando migraciones tecnológicas y manteniendo infraestructura de ingeniería compartida, para varios equipos de desarrollo a la vez. Las recomendaciones vienen después del análisis. Cuando una evaluación concluye que una migración no es aconsejable, esa conclusión se documenta con la evidencia que la respalda.',
+        separator: '+6 años de experiencia en campo', yearsWord: 'años',
+        obs1Text: 'A lo largo de cuatro años dando soporte a varios equipos de ingeniería en paralelo (proyectos distintos, stacks distintos, entornos operativos distintos), incidentes reportados como defectos de aplicación se remontaban con frecuencia a la configuración de la plataforma, a la infraestructura, o a fallos entre sistemas. Cada caso exigía construir un modelo del conjunto antes de poder localizar la parte que había fallado.',
+        obs2Text: 'Antes aún: un equipo estudiantil de menos de veinte ingenieros, una ventana de once meses, su primer cohete operativo. Responsabilidad completa del ciclo de vida del software: desde la arquitectura hasta la integración y el lanzamiento operativo, coordinado entre aviónica, electrónica, estructuras, propulsión y operaciones. Oportunidades de prueba limitadas. Consecuencias reales en cada decisión.',
+        confirmation1: 'El dominio, la escala, las restricciones: eso ha cambiado.', confirmation2: 'El enfoque, no.',
+        learningLabel: 'Aprendizaje continuo',
+        learningText: 'El panorama tecnológico no permanece estable. Estudiar tecnologías desconocidas, construir pruebas de concepto antes de recomendarlas, y tratar la adaptación como una responsabilidad profesional (no como una reacción a los plazos) forma parte de cómo se hace el trabajo.',
+        practiceLabel: 'En la práctica',
+        practiceText: 'La experiencia moldea la calidad de las decisiones tomadas en sistemas desconocidos. Cómo se ve eso en la práctica depende de lo que el sistema realmente necesita.'
+      },
+      collaboration: {
+        label: '04 — Colaboración',
+        headline: 'Todo proyecto empieza con el sistema que ya tienes.',
+        item1: 'No hay dos sistemas que partan del mismo lugar. El proyecto empieza donde está el tuyo.',
+        item2: 'Antes de cualquier recomendación, hay investigación. El punto de partida es la arquitectura existente, el conocimiento que ya tiene el equipo, el ritmo al que es seguro cambiar. Esto no se puede asumir de antemano. Se descubre.',
+        item3: 'Lo que se adapta a ese contexto es lo que debe adaptarse: el alcance, el ritmo, la forma que toma el proyecto. El criterio de ingeniería que se aplica, no.',
+        diagramAria: 'Diagrama: el alcance, el ritmo y la forma del proyecto varían según el cliente, pero el criterio de ingeniería aplicado se mantiene constante',
+        diagramLabel: 'Qué se adapta, qué no', varies: 'Varía', scope: 'Alcance', pace: 'Ritmo', form: 'Forma del proyecto',
+        constantLabel: 'Se mantiene constante, siempre', constantValue: 'Criterio de ingeniería',
+        closing: 'La medida de un proyecto exitoso no es la fecha de entrega. El mejor resultado es un equipo que entiende el sistema, es dueño de lo que se construyó, y puede hacer el próximo cambio por sí mismo.'
+      },
+      next: {
+        label: '05 — Próximo paso', headline: 'Empieza desde donde estás.',
+        body: 'No necesitas un problema definido ni una solución propuesta antes de escribir. Si algo en esta página te sonó familiar, eso ya es suficiente para empezar. Sin propuesta comercial, sin compromiso: solo una conversación sobre lo que estás construyendo, qué se interpone en el camino, y si hay algo que valga la pena explorar juntos.',
+        ctaPrimary: 'Iniciar una conversación', ctaSecondary: 'Conectar en LinkedIn'
+      }
+    }
+  };
+
+  componentDidMount() {
+    this._loadTheme();
+    this._loadLanguage();
+    this._applyProps();
+    requestAnimationFrame(() => this._init());
+  }
+  componentDidUpdate() { this._applyProps(); }
+
+  _hexToRgb(hex) {
+    let h = (hex || '#38536f').replace('#', '');
+    if (h.length === 3) h = h.split('').map(c => c + c).join('');
+    const n = parseInt(h, 16);
+    return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+  }
+
+  _mix(c1, c2, t) {
+    return {
+      r: Math.round(c1.r + (c2.r - c1.r) * t),
+      g: Math.round(c1.g + (c2.g - c1.g) * t),
+      b: Math.round(c1.b + (c2.b - c1.b) * t),
+    };
+  }
+
+  _rgbToHsl({ r, g, b }) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    if (max === min) { h = 0; s = 0; }
+    else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        default: h = (r - g) / d + 4;
+      }
+      h *= 60;
+    }
+    return { h, s: s * 100, l: l * 100 };
+  }
+
+  _loadTheme() {
+    let saved = null;
+    try { saved = window.localStorage.getItem('cr-theme-v2'); } catch (e) {}
+    const preset = this.props.defaultTheme;
+    if (saved === 'dark' || saved === 'light') {
+      this.state.isDark = saved === 'dark';
+    } else if (preset === 'dark') {
+      this.state.isDark = true;
+    } else if (preset === 'light') {
+      this.state.isDark = false;
+    } else {
+      this.state.isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+  }
+
+  _loadLanguage() {
+    let saved = null;
+    try { saved = window.localStorage.getItem('cr-lang'); } catch (e) {}
+    this.state.language = (saved === 'es' || saved === 'en') ? saved : 'en';
+  }
+
+  toggleTheme = () => {
+    this.setState(s => {
+      const next = !s.isDark;
+      try { window.localStorage.setItem('cr-theme-v2', next ? 'dark' : 'light'); } catch (e) {}
+      return { isDark: next };
+    });
+  };
+
+  setLangEn = () => {
+    try { window.localStorage.setItem('cr-lang', 'en'); } catch (e) {}
+    this.setState({ language: 'en' });
+  };
+
+  setLangEs = () => {
+    try { window.localStorage.setItem('cr-lang', 'es'); } catch (e) {}
+    this.setState({ language: 'es' });
+  };
+
+  _applyProps() {
+    if (!this._root) return;
+    const accentBase = this.props.accentColor || '#38536f';
+    const base = this._hexToRgb(accentBase);
+    const white = { r: 255, g: 255, b: 255 };
+    const black = { r: 0, g: 0, b: 0 };
+    const dark = this._mix(base, black, 0.3);
+    const light = this._mix(base, white, 0.42);
+    const rgb = (c) => `rgb(${c.r},${c.g},${c.b})`;
+    const rgba = (c, a) => `rgba(${c.r},${c.g},${c.b},${a})`;
+
+    const baseHsl = this._rgbToHsl(base);
+    const hsl = (h, s, l) => `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
+    const hsla = (h, s, l, a) => `hsla(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%, ${a})`;
+    const darkAccent = hsl(baseHsl.h, Math.min(baseHsl.s + 18, 78), 66);
+    const darkAccent2 = hsl(baseHsl.h, Math.min(baseHsl.s + 12, 70), 50);
+    const darkAccentSoft = hsla(baseHsl.h, Math.min(baseHsl.s + 18, 78), 66, 0.2);
+    const darkAccentGlow = hsla(baseHsl.h, Math.min(baseHsl.s + 18, 78), 66, 0.35);
+
+    const isDark = this.state.isDark;
+    const s = this._root.style;
+
+    if (isDark) {
+      s.setProperty('--bg', '#20242b');
+      s.setProperty('--bg2', '#2a2e37');
+      s.setProperty('--bg3', 'rgba(255,255,255,0.05)');
+      s.setProperty('--line', 'rgba(255,255,255,0.09)');
+      s.setProperty('--line2', 'rgba(255,255,255,0.18)');
+      s.setProperty('--ink', '#f1f2f5');
+      s.setProperty('--ink2', 'rgba(241,242,245,0.68)');
+      s.setProperty('--ink3', 'rgba(241,242,245,0.46)');
+      s.setProperty('--accent', darkAccent);
+      s.setProperty('--accent-2', darkAccent2);
+      s.setProperty('--accent-soft', darkAccentSoft);
+      s.setProperty('--accent-glow', darkAccentGlow);
+      s.setProperty('--ok', '#7fd6a3');
+      s.setProperty('--chip-bg', rgb(light));
+      s.setProperty('--chip-fg', '#0c0e12');
+      s.setProperty('--chip-sub', 'rgba(12,14,18,0.6)');
+      s.setProperty('--chip-dot', '#f2b26b');
+    } else {
+      s.setProperty('--bg', '#f4f2ee');
+      s.setProperty('--bg2', '#ffffff');
+      s.setProperty('--bg3', 'rgba(20,21,26,0.03)');
+      s.setProperty('--line', 'rgba(20,21,26,0.1)');
+      s.setProperty('--line2', 'rgba(20,21,26,0.18)');
+      s.setProperty('--ink', '#14151a');
+      s.setProperty('--ink2', 'rgba(20,21,26,0.62)');
+      s.setProperty('--ink3', 'rgba(20,21,26,0.42)');
+      s.setProperty('--accent', rgb(base));
+      s.setProperty('--accent-2', rgb(dark));
+      s.setProperty('--accent-soft', rgba(base, 0.1));
+      s.setProperty('--accent-glow', rgba(base, 0.35));
+      s.setProperty('--ok', '#3f7d5d');
+      s.setProperty('--chip-bg', '#14151a');
+      s.setProperty('--chip-fg', '#ffffff');
+      s.setProperty('--chip-sub', 'rgba(255,255,255,0.55)');
+      s.setProperty('--chip-dot', '#d6a86a');
+    }
+  }
+
+  _init() {
+    if (!this._root || this._inited) return;
+    this._inited = true;
+    const root = this._root;
+    const reduce = this.props.reduceMotion === true || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    const reveals = Array.from(root.querySelectorAll('[data-reveal]'));
+    if (reduce) {
+      reveals.forEach(el => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; });
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            const delay = parseInt(el.getAttribute('data-d') || '0', 10);
+            el.style.transitionDelay = delay + 'ms';
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      reveals.forEach(el => io.observe(el));
+      this._fallback = setTimeout(() => reveals.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }), 2800);
+    }
+
+    const ids = ['hero', 'problem', 'approach', 'evidence', 'collaboration', 'next'];
+    const sections = ids.map(id => root.querySelector('#' + id));
+    const dots = Array.from(root.querySelectorAll('[data-rail-dot]'));
+    const railFill = root.querySelector('[data-rail-fill]');
+    const topbar = root.querySelector('[data-topbar]');
+
+    const scrollToId = (id) => {
+      const el = root.querySelector('#' + id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 1, behavior: reduce ? 'auto' : 'smooth' });
+    };
+    root.querySelectorAll('[data-target]').forEach(btn => {
+      btn.addEventListener('click', () => scrollToId(btn.getAttribute('data-target')));
+    });
+
+    const setActive = (idx) => {
+      dots.forEach((dot, i) => {
+        const mark = dot.querySelector('[data-dot]');
+        const on = i === idx;
+        if (mark) {
+          mark.style.background = on ? 'var(--accent)' : 'var(--bg)';
+          mark.style.borderColor = on ? 'var(--accent)' : 'var(--line2)';
+          mark.style.transform = on ? 'scale(1.3)' : 'scale(1)';
+          mark.style.boxShadow = on ? '0 0 0 4px var(--accent-soft)' : 'none';
+        }
+      });
+    };
+    dots.forEach(dot => {
+      const label = dot.querySelector('[data-dot-label]');
+      if (!label) return;
+      dot.addEventListener('mouseenter', () => { label.style.opacity = '1'; label.style.transform = 'translateX(0)'; });
+      dot.addEventListener('mouseleave', () => { label.style.opacity = '0'; label.style.transform = 'translateX(-4px)'; });
+      dot.addEventListener('focus', () => { label.style.opacity = '1'; label.style.transform = 'translateX(0)'; });
+      dot.addEventListener('blur', () => { label.style.opacity = '0'; label.style.transform = 'translateX(-4px)'; });
+    });
+
+    const timeline = root.querySelector('[data-timeline]');
+    const fill = root.querySelector('[data-timeline-fill]');
+    const stageDots = Array.from(root.querySelectorAll('[data-stage-dot]'));
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const vh = window.innerHeight;
+        const y = window.scrollY;
+        const docH = document.documentElement.scrollHeight - vh;
+
+        if (railFill) railFill.style.height = Math.max(0, Math.min(100, (y / docH) * 100)) + '%';
+
+        if (topbar) {
+          if (y > 40) {
+            topbar.style.background = 'color-mix(in srgb, var(--bg) 82%, transparent)';
+            topbar.style.backdropFilter = 'blur(14px)';
+            topbar.style.borderBottomColor = 'var(--line)';
+          } else {
+            topbar.style.background = 'transparent';
+            topbar.style.backdropFilter = 'none';
+            topbar.style.borderBottomColor = 'transparent';
+          }
+        }
+
+        let active = 0;
+        sections.forEach((sec, i) => { if (sec && sec.getBoundingClientRect().top <= vh * 0.42) active = i; });
+        if (active !== this._active) { this._active = active; setActive(active); }
+
+        if (timeline && fill) {
+          const r = timeline.getBoundingClientRect();
+          const start = vh * 0.6;
+          const prog = Math.max(0, Math.min(1, (start - r.top) / r.height));
+          fill.style.height = (prog * r.height) + 'px';
+          stageDots.forEach(dot => {
+            const dr = dot.getBoundingClientRect();
+            const passed = dr.top < start;
+            dot.style.background = passed ? 'var(--accent)' : 'var(--bg2)';
+            dot.style.borderColor = passed ? 'var(--accent)' : 'var(--line2)';
+            dot.style.boxShadow = passed ? '0 0 0 5px var(--accent-soft)' : 'none';
+          });
+        }
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    this._onScroll = onScroll;
+    setActive(0);
+    onScroll();
+  }
+
+  componentWillUnmount() {
+    if (this._onScroll) {
+      window.removeEventListener('scroll', this._onScroll);
+      window.removeEventListener('resize', this._onScroll);
+    }
+    if (this._fallback) clearTimeout(this._fallback);
+  }
+
+  renderVals() {
+    const isSpanish = this.state.language === 'es';
+    const activeBg = 'var(--ink,#14151a)';
+    const activeFg = 'var(--bg,#fff)';
+    const inactiveStyle = 'all: unset; cursor: pointer; padding: 5px 10px; border-radius: 100px; background: transparent; font: 600 11px/1 \'IBM Plex Mono\', monospace; letter-spacing: .04em; color: var(--ink3,rgba(20,21,26,0.5)); transition: all .25s;';
+    const activeStyle = `all: unset; cursor: pointer; padding: 5px 10px; border-radius: 100px; font: 600 11px/1 'IBM Plex Mono', monospace; letter-spacing: .04em; color: ${activeFg}; background: ${activeBg}; transition: all .25s;`;
+
+    return {
+      rootRef: this.rootRef,
+      isDark: this.state.isDark,
+      knobTransform: this.state.isDark ? 'translateX(19px)' : 'translateX(0px)',
+      sunOpacity: this.state.isDark ? 0.25 : 1,
+      moonOpacity: this.state.isDark ? 1 : 0.25,
+      toggleTheme: this.toggleTheme,
+      isSpanish,
+      isEnglish: !isSpanish,
+      setLangEn: this.setLangEn,
+      setLangEs: this.setLangEs,
+      enBtnStyle: isSpanish ? inactiveStyle : activeStyle,
+      esBtnStyle: isSpanish ? activeStyle : inactiveStyle,
+      L: this.translations[this.state.language],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

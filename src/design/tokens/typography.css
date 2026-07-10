@@ -1,20 +1,21 @@
 @theme {
   /* Font families */
   --font-sans: initial;
-  --font-serif: initial;
-  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-body: "Hanken Grotesk", system-ui, sans-serif;
   --font-mono:
-    ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+    "IBM Plex Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
+    monospace;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
 
-  /* Font sizes — 1.25 modular scale */
+  /* Font sizes — fluid scales */
   --text-*: initial;
 
-  --text-display: 3.052rem;
-  --text-h1: 2.441rem;
-  --text-h2: 1.953rem;
-  --text-h3: 1.563rem;
+  --text-display: clamp(2.5rem, 5.6vw, 4.75rem);
+  --text-h1: clamp(2rem, 3.5vw, 2.75rem);
+  --text-h2: clamp(1.75rem, 4.2vw, 3.25rem);
+  --text-h3: clamp(1.3125rem, 2.4vw, 1.6875rem);
   --text-h4: 1.25rem;
-  --text-lead: 1.125rem;
+  --text-lead: 1.0625rem;
   --text-body: 1rem;
   --text-caption: 0.875rem;
   --text-code: 0.875rem;
@@ -22,17 +23,18 @@
   /* Line heights */
   --leading-*: initial;
 
-  --leading-tight: 1.1;
-  --leading-snug: 1.2;
+  --leading-tight: 1.05;
+  --leading-snug: 1.15;
   --leading-normal: 1.35;
-  --leading-relaxed: 1.65;
+  --leading-relaxed: 1.6;
   --leading-loose: 1.75;
 
   /* Letter spacing */
   --tracking-*: initial;
 
-  --tracking-tight: -0.02em;
-  --tracking-snug: -0.01em;
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.035em;
+  --tracking-snug: -0.02em;
   --tracking-normal: 0em;
   --tracking-wide: 0.01em;
 

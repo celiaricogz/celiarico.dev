@@ -1,3 +1,108 @@
 @import "tailwindcss";
 @import "../design/fonts/source-serif.css";
 @import "../design/tokens/index.css";
+@import "./animations.css";
+
+/*
+ * Theme tokens — light is the default palette; [data-theme="dark"] overrides.
+ * Dark accent values are precomputed from the light accent (#38536f) using the
+ * same HSL derivation as the source prototype (hue held, saturation +18/+12,
+ * lightness 66/50) so both palettes stay visually equivalent to the target.
+ */
+:root {
+  --bg: #f4f2ee;
+  --bg2: #ffffff;
+  --bg3: rgba(20, 21, 26, 0.03);
+  --line: rgba(20, 21, 26, 0.1);
+  --line2: rgba(20, 21, 26, 0.18);
+  --ink: #14151a;
+  --ink2: rgba(20, 21, 26, 0.62);
+  --ink3: rgba(20, 21, 26, 0.42);
+  --accent: #38536f;
+  --accent-2: #27394e;
+  --accent-soft: rgba(56, 83, 111, 0.1);
+  --accent-glow: rgba(56, 83, 111, 0.35);
+  --ok: #3f7d5d;
+  --chip-bg: #14151a;
+  --chip-fg: #ffffff;
+  --chip-sub: rgba(255, 255, 255, 0.55);
+  --chip-dot: #d6a86a;
+}
+
+:root[data-theme="dark"] {
+  --bg: #20242b;
+  --bg2: #2a2e37;
+  --bg3: rgba(255, 255, 255, 0.05);
+  --line: rgba(255, 255, 255, 0.09);
+  --line2: rgba(255, 255, 255, 0.18);
+  --ink: #f1f2f5;
+  --ink2: rgba(241, 242, 245, 0.68);
+  --ink3: rgba(241, 242, 245, 0.46);
+  --accent: #7ca7d4;
+  --accent-2: #467eb9;
+  --accent-soft: hsla(211, 51%, 66%, 0.2);
+  --accent-glow: hsla(211, 51%, 66%, 0.35);
+  --ok: #7fd6a3;
+  --chip-bg: #8c9bab;
+  --chip-fg: #0c0e12;
+  --chip-sub: rgba(12, 14, 18, 0.6);
+  --chip-dot: #f2b26b;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  color: var(--accent-2);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+/*
+ * Bilingual content — every translatable string is authored twice, each
+ * wrapped in an element carrying its own `lang` attribute. Visibility follows
+ * the page's current language via `<html lang>`, toggled by theme-lang.ts.
+ * No JS is required for the default (English) render.
+ */
+html:not([lang="es"]) [lang="es"] {
+  display: none;
+}
+
+html[lang="es"] [lang="en"] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

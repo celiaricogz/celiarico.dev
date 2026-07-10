@@ -1,20 +1,50 @@
 ---
 import ProcessStep from "../content/ProcessStep.astro";
-import Stack from "../../primitives/Stack.astro";
+
+interface StepItem {
+  stepNumber: string;
+  tagEn: string;
+  tagEs: string;
+  titleEn: string;
+  titleEs: string;
+  bodyEn: string;
+  bodyEs: string;
+}
 
 interface Props {
-  items: { title: string; description: string }[];
+  items: StepItem[];
 }
 
 const { items } = Astro.props;
 ---
 
-<Stack as="ol" gap="10">
-  {
-    items.map((item) => (
-      <li>
-        <ProcessStep {...item} />
-      </li>
-    ))
+<div data-timeline class="process-timeline">
+  <div class="process-timeline__track" aria-hidden="true"></div>
+  <div data-timeline-fill class="process-timeline__fill" aria-hidden="true">
+  </div>
+  {items.map((item, i) => <ProcessStep {...item} delay={i === 0 ? 0 : 40} />)}
+</div>
+
+<style>
+  .process-timeline {
+    position: relative;
   }
-</Stack>
+
+  .process-timeline__track {
+    position: absolute;
+    left: 23px;
+    top: 24px;
+    bottom: 24px;
+    width: 2px;
+    background: var(--line2);
+  }
+
+  .process-timeline__fill {
+    position: absolute;
+    left: 23px;
+    top: 24px;
+    width: 2px;
+    height: 0;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  }
+</style>

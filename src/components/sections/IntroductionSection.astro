@@ -1,10 +1,5 @@
 ---
-import Link from "../ui/Link.astro";
-import Container from "../primitives/Container.astro";
-import Stack from "../primitives/Stack.astro";
-import Body from "../typography/Body.astro";
-import Heading from "../typography/Heading.astro";
-import Lead from "../typography/Lead.astro";
+import ConsoleCard from "../features/content/ConsoleCard.astro";
 
 interface Props {
   id?: string;
@@ -13,26 +8,254 @@ interface Props {
 const { id } = Astro.props;
 ---
 
-<section id={id} aria-labelledby="introduction-heading" class="py-section-lg">
-  <Container>
-    <Stack gap="10">
-      <Stack gap="6">
-        <Heading level={1} id="introduction-heading">
-          Complex systems don't become easier to change with time. They become
-          harder.
-        </Heading>
-        <Lead>
-          The problem is not always the technology. It is the accumulated
-          uncertainty that makes every change riskier, slower and more expensive
-          than it should be.
-        </Lead>
-        <Body>
-          I am Celia Rico, IT Architect specialising in Platform Engineering,
-          DevOps and Cloud. I help technical teams modernise complex systems
-          through structured engineering and architectural clarity.
-        </Body>
-      </Stack>
-      <Link href="#approach-heading" variant="cta">Discover the approach</Link>
-    </Stack>
-  </Container>
+<section id={id} aria-label="Introduction" class="hero">
+  <div class="hero__inner">
+    <!-- Left: copy -->
+    <div class="hero__copy">
+      <div data-reveal class="hero__eyebrow">
+        <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+        <span class="hero__eyebrow-text" lang="en"
+          >IT Architect · Software Architecture · Cloud</span
+        >
+        <span class="hero__eyebrow-text" lang="es"
+          >Arquitecta IT · Arquitectura de software · Cloud</span
+        >
+      </div>
+
+      <h1 data-reveal data-d="80" class="hero__headline">
+        <span lang="en"
+          >Every system<br /><span class="hero__headline-accent"
+            >can be understood.</span
+          ></span
+        >
+        <span lang="es"
+          >Todo sistema<br /><span class="hero__headline-accent"
+            >puede entenderse.</span
+          ></span
+        >
+      </h1>
+
+      <p data-reveal data-d="180" class="hero__lead">
+        <span lang="en"
+          >The first step is understanding how a system actually works — not how
+          it was designed to work. I'm Celia Rico, an IT Architect. I build
+          accurate mental models of complex systems before proposing what should
+          change.</span
+        >
+        <span lang="es"
+          >El primer paso es entender cómo funciona realmente un sistema, no
+          cómo fue diseñado para funcionar. Soy Celia Rico, arquitecta de TI.
+          Construyo modelos mentales precisos de sistemas complejos antes de
+          proponer qué debe cambiar.</span
+        >
+      </p>
+
+      <div data-reveal data-d="280" class="hero__cta">
+        <a href="#next" class="hero__cta-primary">
+          <span lang="en">Tell me about your system</span>
+          <span lang="es">Cuéntame sobre tu sistema</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <button data-target="approach" class="hero__cta-secondary">
+          <span lang="en">See the approach</span>
+          <span lang="es">Ver el enfoque</span>
+          <span aria-hidden="true">↓</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right: console mockup -->
+    <div class="hero__panel">
+      <ConsoleCard />
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="hero__scrollcue" aria-hidden="true">
+    <span class="hero__scrollcue-label" lang="en">Scroll</span>
+    <span class="hero__scrollcue-label" lang="es">Desplázate</span>
+    <div class="hero__scrollcue-line">
+      <div class="hero__scrollcue-fill"></div>
+    </div>
+  </div>
 </section>
+
+<style>
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px clamp(1.25rem, 4vw, 3.5rem) 64px;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  @media (max-width: 980px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Eyebrow */
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+
+  .hero__eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .hero__eyebrow-text {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink2);
+  }
+
+  /* Headline */
+  .hero__headline {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5.6vw, 4.625rem);
+    line-height: 1.03;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+
+  .hero__headline-accent {
+    color: var(--accent);
+  }
+
+  /* Lead paragraph */
+  .hero__lead {
+    margin: 28px 0 0;
+    max-width: 460px;
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.3vw, 1.1875rem);
+    line-height: 1.6;
+    color: var(--ink2);
+    font-weight: 400;
+  }
+
+  /* CTA row */
+  .hero__cta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+  }
+
+  .hero__cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 26px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.18) inset,
+      0 14px 30px -12px var(--accent-glow);
+    transition:
+      transform 0.3s cubic-bezier(0.16, 0.7, 0.3, 1),
+      box-shadow 0.3s;
+  }
+
+  .hero__cta-primary:hover {
+    transform: translateY(-2px);
+  }
+
+  .hero__cta-secondary {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--ink2);
+    transition: color 0.3s;
+  }
+
+  .hero__cta-secondary:hover {
+    color: var(--accent);
+  }
+
+  /* Right panel */
+  .hero__panel {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Scroll cue */
+  .hero__scrollcue {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .hero__scrollcue-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .hero__scrollcue-line {
+    position: relative;
+    width: 1.5px;
+    height: 40px;
+    background: var(--line2);
+    overflow: hidden;
+  }
+
+  .hero__scrollcue-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: var(--accent);
+    animation: cr-scrollcue 2.4s ease-in-out infinite;
+  }
+</style>

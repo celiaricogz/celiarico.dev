@@ -1,0 +1,373 @@
+---
+
+---
+
+<header data-topbar class="topnav" role="banner">
+  <button data-target="hero" class="topnav__logo" aria-label="Back to top">
+    <span class="topnav__logo-icon" aria-hidden="true">
+      <span class="topnav__logo-icon-inner"></span>
+    </span>
+    <span class="topnav__logo-text">
+      <span class="topnav__name">Celia Rico</span>
+      <span class="topnav__title" lang="en">IT Architect</span>
+      <span class="topnav__title" lang="es">Arquitecta TI</span>
+    </span>
+  </button>
+
+  <nav data-label-en="Primary" data-label-es="Principal">
+    <ul class="topnav__links">
+      <li class="topnav__links-item">
+        <button data-target="approach" data-navlink class="topnav__link">
+          <span lang="en">Approach</span>
+          <span lang="es">Enfoque</span>
+        </button>
+      </li>
+      <li class="topnav__links-item">
+        <button data-target="evidence" data-navlink class="topnav__link">
+          <span lang="en">Evidence</span>
+          <span lang="es">Evidencia</span>
+        </button>
+      </li>
+
+      <li aria-hidden="true" class="topnav__divider topnav__links-item"></li>
+
+      <li>
+        <div
+          role="group"
+          class="lang-switch"
+          data-lang-group
+          data-label-en="Language selector"
+          data-label-es="Selector de idioma"
+        >
+          <button
+            type="button"
+            class="lang-switch__btn"
+            data-lang-btn="en"
+            aria-pressed="true"
+          >
+            EN
+          </button>
+          <button
+            type="button"
+            class="lang-switch__btn"
+            data-lang-btn="es"
+            aria-pressed="false"
+          >
+            ES
+          </button>
+        </div>
+      </li>
+
+      <li>
+        <button
+          type="button"
+          role="switch"
+          aria-checked="false"
+          class="theme-toggle"
+          data-theme-toggle
+          data-label-en="Toggle dark mode"
+          data-label-es="Cambiar modo oscuro/claro"
+        >
+          <span class="theme-toggle__knob">
+            <svg
+              viewBox="0 0 16 16"
+              class="theme-toggle__icon theme-toggle__icon--sun"
+              aria-hidden="true"
+            >
+              <circle cx="8" cy="8" r="3.2"></circle>
+              <line x1="8" y1="0.8" x2="8" y2="2.4"></line>
+              <line x1="8" y1="13.6" x2="8" y2="15.2"></line>
+              <line x1="0.8" y1="8" x2="2.4" y2="8"></line>
+              <line x1="13.6" y1="8" x2="15.2" y2="8"></line>
+              <line x1="2.9" y1="2.9" x2="4" y2="4"></line>
+              <line x1="12" y1="12" x2="13.1" y2="13.1"></line>
+              <line x1="2.9" y1="13.1" x2="4" y2="12"></line>
+              <line x1="12" y1="4" x2="13.1" y2="2.9"></line>
+            </svg>
+            <svg
+              viewBox="0 0 16 16"
+              class="theme-toggle__icon theme-toggle__icon--moon"
+              aria-hidden="true"
+            >
+              <circle cx="8" cy="8" r="5.4"></circle>
+              <circle cx="10.6" cy="5.6" r="4.6" class="theme-toggle__moon-mask"
+              ></circle>
+            </svg>
+          </span>
+        </button>
+      </li>
+
+      <li>
+        <a href="#next" class="topnav__cta">
+          <span class="topnav__cta-dot" aria-hidden="true"></span>
+          <span class="topnav__cta-label" lang="en">Start a conversation</span>
+          <span class="topnav__cta-label" lang="es">Iniciar conversación</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .topnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 55;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(1.25rem, 4vw, 3.5rem);
+    transition:
+      background 0.4s,
+      backdrop-filter 0.4s,
+      border-color 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+
+  .topnav.is-scrolled {
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom-color: var(--line);
+  }
+
+  /* Logo button */
+  .topnav__logo {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  .topnav__logo-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: linear-gradient(150deg, var(--accent), var(--accent-2));
+    box-shadow:
+      0 4px 12px -4px var(--accent-glow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .topnav__logo-icon-inner {
+    width: 11px;
+    height: 11px;
+    border: 2px solid rgba(255, 255, 255, 0.92);
+    border-radius: 4px;
+    display: block;
+  }
+
+  .topnav__logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+
+  .topnav__name {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .topnav__title {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-top: 4px;
+  }
+
+  /* Nav links */
+  .topnav__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2vw, 30px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .topnav__link {
+    all: unset;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink2);
+    transition: color 0.25s;
+  }
+
+  .topnav__link:hover {
+    color: var(--ink);
+  }
+
+  .topnav__divider {
+    width: 1px;
+    height: 18px;
+    background: var(--line);
+  }
+
+  /* Language switch */
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    border-radius: 100px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+  }
+
+  .lang-switch__btn {
+    all: unset;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: var(--ink3);
+    transition: all 0.25s;
+  }
+
+  html:not([lang="es"]) .lang-switch__btn[data-lang-btn="en"],
+  html[lang="es"] .lang-switch__btn[data-lang-btn="es"] {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    width: 44px;
+    height: 25px;
+    border-radius: 100px;
+    background: var(--line2);
+    border: 1px solid var(--line);
+    padding: 2px;
+    transition: background 0.3s;
+  }
+
+  .theme-toggle__knob {
+    position: relative;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: var(--bg2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.16, 0.7, 0.3, 1);
+  }
+
+  html[data-theme="dark"] .theme-toggle__knob {
+    transform: translateX(19px);
+  }
+
+  .theme-toggle__icon {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s;
+    stroke: var(--ink2);
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    fill: var(--ink2);
+  }
+
+  .theme-toggle__icon--sun {
+    opacity: 1;
+  }
+
+  .theme-toggle__icon--moon {
+    opacity: 0.25;
+  }
+
+  html[data-theme="dark"] .theme-toggle__icon--sun {
+    opacity: 0.25;
+  }
+
+  html[data-theme="dark"] .theme-toggle__icon--moon {
+    opacity: 1;
+  }
+
+  .theme-toggle__moon-mask {
+    fill: var(--bg2);
+  }
+
+  /* CTA button */
+  .topnav__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 17px;
+    border-radius: 10px;
+    background: var(--ink);
+    color: var(--bg);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1;
+    transition:
+      transform 0.25s,
+      box-shadow 0.25s;
+  }
+
+  .topnav__cta:hover {
+    transform: translateY(-1px);
+  }
+
+  .topnav__cta-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 8px var(--ok);
+    display: block;
+    flex-shrink: 0;
+  }
+
+  /*
+   * The prototype's header has no collapse behaviour of its own, but its
+   * full-width nav (links + language switch + theme toggle + CTA label)
+   * cannot fit under ~640px without horizontal overflow. Dropping the
+   * secondary quick-nav links first (their destinations stay reachable via
+   * the story rail and in-page scrolling) and then the CTA label preserves
+   * every control the fidelity brief protects (logo, language switch, theme
+   * toggle, CTA) while keeping the page overflow-free at all viewports.
+   */
+  @media (max-width: 640px) {
+    .topnav__links-item {
+      display: none;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .topnav__cta {
+      padding: 10px;
+    }
+
+    .topnav__cta-label {
+      display: none;
+    }
+  }
+</style>

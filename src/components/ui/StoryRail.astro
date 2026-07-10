@@ -1,0 +1,171 @@
+---
+const sections = [
+  {
+    id: "hero",
+    en: "Start",
+    es: "Inicio",
+    ariaEn: "Go to Hero",
+    ariaEs: "Ir a Inicio",
+  },
+  {
+    id: "problem",
+    en: "Recognition",
+    es: "Reconocimiento",
+    ariaEn: "Go to The Problem",
+    ariaEs: "Ir a El problema",
+  },
+  {
+    id: "approach",
+    en: "Approach",
+    es: "Enfoque",
+    ariaEn: "Go to The Approach",
+    ariaEs: "Ir a El enfoque",
+  },
+  {
+    id: "evidence",
+    en: "Evidence",
+    es: "Evidencia",
+    ariaEn: "Go to Evidence",
+    ariaEs: "Ir a Evidencia",
+  },
+  {
+    id: "collaboration",
+    en: "Collaboration",
+    es: "Colaboración",
+    ariaEn: "Go to Collaboration",
+    ariaEs: "Ir a Colaboración",
+  },
+  {
+    id: "next",
+    en: "Next step",
+    es: "Próximo paso",
+    ariaEn: "Go to Next Step",
+    ariaEs: "Ir a Próximo paso",
+  },
+];
+---
+
+<nav
+  data-rail
+  class="story-rail"
+  data-label-en="Page sections"
+  data-label-es="Secciones de la página"
+>
+  <div class="story-rail__inner">
+    <div class="story-rail__track-wrap">
+      <div class="story-rail__track" aria-hidden="true"></div>
+      <div data-rail-fill class="story-rail__fill" aria-hidden="true"></div>
+    </div>
+
+    {
+      sections.map(({ id, en, es, ariaEn, ariaEs }) => (
+        <button
+          data-rail-dot
+          data-target={id}
+          class="story-rail__dot-btn"
+          data-label-en={ariaEn}
+          data-label-es={ariaEs}
+        >
+          <span data-dot class="story-rail__dot" />
+          <span data-dot-label class="story-rail__dot-label" aria-hidden="true">
+            <span lang="en">{en}</span>
+            <span lang="es">{es}</span>
+          </span>
+        </button>
+      ))
+    }
+  </div>
+</nav>
+
+<style>
+  .story-rail {
+    position: fixed;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+  }
+
+  @media (max-width: 1240px) {
+    .story-rail {
+      display: none;
+    }
+  }
+
+  .story-rail__inner {
+    position: relative;
+    padding: 6px 0;
+  }
+
+  .story-rail__track-wrap {
+    position: absolute;
+    left: 4px;
+    /* Aligns exactly with the centre of the first and last dots. */
+    top: 21px;
+    bottom: 21px;
+    width: 1.5px;
+  }
+
+  .story-rail__track {
+    position: absolute;
+    inset: 0;
+    width: 1.5px;
+    background: var(--line2);
+  }
+
+  .story-rail__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.5px;
+    height: 0%;
+    background: var(--accent);
+    transition: height 0.2s linear;
+  }
+
+  .story-rail__dot-btn {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 10px 0;
+  }
+
+  .story-rail__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line2);
+    background: var(--bg);
+    transition: all 0.35s;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .story-rail__dot.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.3);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  .story-rail__dot-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .story-rail__dot-label.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>

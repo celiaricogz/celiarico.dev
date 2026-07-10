@@ -19,7 +19,8 @@ export type SectionSpacing =
 
 export type ContainerSize = "prose" | "narrow" | "default" | "wide";
 
-export type RadiusScale = "none" | "sm" | "md" | "lg" | "full";
+export type RadiusScale =
+  "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";
 
 export type TypographyLevel = 1 | 2 | 3 | 4;
 export type HeadingVariant = "default" | "display";

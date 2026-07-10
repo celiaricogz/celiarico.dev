@@ -15,6 +15,17 @@
   --color-accent: oklch(38% 0.13 258);
   --color-accent-hover: oklch(31% 0.13 258);
   --color-accent-foreground: oklch(98% 0.002 85);
+  --color-accent-secondary: oklch(31% 0.13 255);
+  --color-accent-muted: oklch(62% 0.09 255);
+
+  /* Surface */
+  --color-surface-inverse: oklch(13.5% 0.012 260);
+
+  /* Status */
+  --color-status-positive: oklch(58% 0.12 154);
+
+  /* Decorative */
+  --color-warm-accent: oklch(72% 0.11 75);
 
   /* Border */
   --color-border: oklch(88% 0.003 85);

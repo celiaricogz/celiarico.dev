@@ -1,4 +1,6 @@
 ---
+import StoryRail from "../components/ui/StoryRail.astro";
+import TopNav from "../components/ui/TopNav.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -35,7 +37,7 @@ const personSchema = JSON.stringify({
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -46,12 +48,192 @@ const personSchema = JSON.stringify({
     <meta property="og:url" content={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <!-- Google Fonts: Hanken Grotesk, IBM Plex Mono, Newsreader -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,wght@1,400&display=swap"
+    />
     <script type="application/ld+json" set:html={websiteSchema} />
     <script type="application/ld+json" set:html={personSchema} />
+    <script is:inline>
+      (function () {
+        try {
+          var theme = window.localStorage.getItem("cr-theme-v2");
+          if (theme !== "dark" && theme !== "light") {
+            theme =
+              window.matchMedia &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          }
+          if (theme === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+          }
+          var lang = window.localStorage.getItem("cr-lang");
+          if (lang === "es" || lang === "en") {
+            document.documentElement.setAttribute("lang", lang);
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="bg-background text-foreground">
-    <main>
+  <body>
+    <a href="#main" class="skip-link" lang="en">Skip to content</a>
+    <a href="#main" class="skip-link" lang="es">Saltar al contenido</a>
+    <StoryRail />
+    <TopNav />
+
+    <main id="main">
       <slot />
     </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <button
+          data-target="hero"
+          class="site-footer__logo"
+          aria-label="Back to top"
+        >
+          <span class="site-footer__logo-icon" aria-hidden="true">
+            <span class="site-footer__logo-icon-inner"></span>
+          </span>
+          <span class="site-footer__logo-text">
+            <span class="site-footer__name">Celia Rico</span>
+            <span class="site-footer__title" lang="en">IT Architect</span>
+            <span class="site-footer__title" lang="es">Arquitecta TI</span>
+          </span>
+        </button>
+        <span class="site-footer__copy">Celia Rico · 2026</span>
+        <button data-target="hero" class="site-footer__back-top">
+          <span lang="en">Back to top ↑</span>
+          <span lang="es">Volver arriba ↑</span>
+        </button>
+      </div>
+    </footer>
   </body>
 </html>
+
+<script>
+  import { initInteractions } from "../scripts/interactions";
+  document.addEventListener("DOMContentLoaded", () => initInteractions());
+</script>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: 12px;
+    top: -60px;
+    z-index: 200;
+    padding: 10px 16px;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 8px;
+    font: 600 13px/1 var(--font-body);
+    text-decoration: none;
+    transition: top 0.2s;
+  }
+
+  .skip-link:focus-visible {
+    top: 12px;
+  }
+
+  .site-footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--line);
+    padding: 32px clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  .site-footer__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .site-footer__logo {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .site-footer__logo-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: linear-gradient(150deg, var(--accent), var(--accent-2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .site-footer__logo-icon-inner {
+    width: 9px;
+    height: 9px;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 3px;
+    display: block;
+  }
+
+  .site-footer__logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .site-footer__name {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .site-footer__title {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-top: 5px;
+  }
+
+  .site-footer__copy {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .site-footer__back-top {
+    all: unset;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink2);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: color 0.3s;
+  }
+
+  .site-footer__back-top:hover {
+    color: var(--accent);
+  }
+</style>

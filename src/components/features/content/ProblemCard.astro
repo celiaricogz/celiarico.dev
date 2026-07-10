@@ -1,0 +1,46 @@
+---
+interface Props {
+  number: string;
+  textEn: string;
+  textEs: string;
+  delay?: number;
+}
+
+const { number, textEn, textEs, delay = 0 } = Astro.props;
+---
+
+<div data-reveal data-d={delay} class="problem-card">
+  <span class="problem-card__number">{number}</span>
+  <p class="problem-card__text">
+    <span lang="en">{textEn}</span>
+    <span lang="es">{textEs}</span>
+  </p>
+</div>
+
+<style>
+  .problem-card {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 18px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .problem-card__number {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--accent);
+    padding-top: 2px;
+  }
+
+  .problem-card__text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.45;
+    font-weight: 500;
+    color: var(--ink);
+  }
+</style>

@@ -1,54 +1,165 @@
 ---
-import Link from "../ui/Link.astro";
-import Container from "../primitives/Container.astro";
-import Stack from "../primitives/Stack.astro";
-import Body from "../typography/Body.astro";
-import Heading from "../typography/Heading.astro";
-import Lead from "../typography/Lead.astro";
-
 interface Props {
   id?: string;
 }
 
 const { id } = Astro.props;
-
-const contactLinks = [
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/celiarico/",
-    external: true,
-  },
-];
 ---
 
-<section id={id} aria-labelledby="next-step-heading" class="py-section-lg">
-  <Container>
-    <Stack gap="10">
-      <Stack gap="6">
-        <Heading level={2} id="next-step-heading">
-          Start the conversation
-        </Heading>
-        <Lead>
-          Every collaboration begins with understanding the situation. The first
-          conversation is simply an opportunity to discuss your engineering
-          challenges and determine whether working together makes sense.
-        </Lead>
-        <Body
-          >There is no commitment and no sales process. Only a conversation.</Body
-        >
-      </Stack>
-      <Stack gap="4">
-        <Link href="mailto:hola@celiarico.dev" variant="cta"
-          >Start the conversation</Link
-        >
-        {
-          contactLinks.map(({ label, href, external }) => (
-            <Link href={href} external={external}>
-              {label}
-            </Link>
-          ))
-        }
-      </Stack>
-    </Stack>
-  </Container>
+<section id={id} aria-labelledby="next-step-heading" class="next-step-section">
+  <div class="next-step-section__inner">
+    <span data-reveal class="next-step-section__label">
+      <span lang="en">05 — Next Step</span>
+      <span lang="es">05 — Próximo paso</span>
+    </span>
+
+    <h2
+      data-reveal
+      data-d="80"
+      id="next-step-heading"
+      class="next-step-section__headline"
+    >
+      <span lang="en">Start from where you are.</span>
+      <span lang="es">Empieza desde donde estás.</span>
+    </h2>
+
+    <p data-reveal data-d="160" class="next-step-section__lead">
+      <span lang="en"
+        >You don't need a defined problem or a proposed solution before reaching
+        out. If something in this page sounded familiar, that's enough to start.
+        No pitch, no obligation — just a conversation about what you're
+        building, what's getting in the way, and whether there's something worth
+        exploring together.</span
+      >
+      <span lang="es"
+        >No necesitas un problema definido ni una solución propuesta antes de
+        escribir. Si algo en esta página te sonó familiar, eso ya es suficiente
+        para empezar. Sin propuesta comercial, sin compromiso: solo una
+        conversación sobre lo que estás construyendo, qué se interpone en el
+        camino, y si hay algo que valga la pena explorar juntos.</span
+      >
+    </p>
+
+    <div data-reveal data-d="240" class="next-step-section__actions">
+      <a href="mailto:hola@celiarico.dev" class="next-step-section__cta">
+        <span lang="en">Start a conversation</span>
+        <span lang="es">Iniciar una conversación</span>
+        <span aria-hidden="true">→</span>
+      </a>
+      <a
+        href="https://www.linkedin.com/in/celiaricogutierrez/"
+        class="next-step-section__link"
+        target="_blank"
+        rel="noopener"
+      >
+        <span lang="en">Connect on LinkedIn</span>
+        <span lang="es">Conectar en LinkedIn</span>
+      </a>
+      <a href="mailto:hola@celiarico.dev" class="next-step-section__email">
+        hola@celiarico.dev
+      </a>
+    </div>
+  </div>
 </section>
+
+<style>
+  .next-step-section {
+    position: relative;
+    z-index: 1;
+    padding: clamp(6.25rem, 14vh, 11.25rem) clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  .next-step-section__inner {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .next-step-section__label {
+    display: inline-block;
+    margin-bottom: 26px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .next-step-section__headline {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(2.125rem, 5.6vw, 4.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+  }
+
+  .next-step-section__lead {
+    margin: 26px auto 0;
+    max-width: 560px;
+    font-family: var(--font-body);
+    font-size: 17.5px;
+    line-height: 1.65;
+    color: var(--ink2);
+  }
+
+  .next-step-section__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 42px;
+  }
+
+  .next-step-section__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 30px;
+    border-radius: 13px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.18) inset,
+      0 16px 34px -14px var(--accent-glow);
+    transition: transform 0.3s cubic-bezier(0.16, 0.7, 0.3, 1);
+  }
+
+  .next-step-section__cta:hover {
+    transform: translateY(-2px);
+  }
+
+  .next-step-section__link {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink2);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .next-step-section__link:hover {
+    color: var(--accent);
+  }
+
+  .next-step-section__email {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink3);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .next-step-section__email:hover {
+    color: var(--accent);
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<span class="status-badge">
+  <span class="status-badge__dot" aria-hidden="true"></span>
+  <span class="status-badge__text">{text}</span>
+</span>
+
+<style>
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: var(--radius-full);
+    background: rgba(91, 155, 120, 0.14);
+    border: 1px solid rgba(91, 155, 120, 0.28);
+  }
+
+  .status-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 8px var(--ok);
+    animation: cr-breathe 2.6s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  .status-badge__text {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: var(--ok);
+  }
+</style>

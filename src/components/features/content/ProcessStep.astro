@@ -1,19 +1,115 @@
 ---
-import Body from "../../typography/Body.astro";
 import Heading from "../../typography/Heading.astro";
-import Stack from "../../primitives/Stack.astro";
 
 interface Props {
-  title: string;
-  description: string;
+  stepNumber: string;
+  tagEn: string;
+  tagEs: string;
+  titleEn: string;
+  titleEs: string;
+  bodyEn: string;
+  bodyEs: string;
+  delay?: number;
 }
 
-const { title, description } = Astro.props;
+const {
+  stepNumber,
+  tagEn,
+  tagEs,
+  titleEn,
+  titleEs,
+  bodyEn,
+  bodyEs,
+  delay = 0,
+} = Astro.props;
 ---
 
-<article>
-  <Stack gap="3">
-    <Heading level={3}>{title}</Heading>
-    <Body>{description}</Body>
-  </Stack>
-</article>
+<div data-stage data-reveal data-d={delay} class="process-step">
+  <div class="process-step__dot-col">
+    <span data-stage-dot class="process-step__dot"></span>
+  </div>
+  <div class="process-step__content">
+    <span class="process-step__tag">
+      <span lang="en">{stepNumber} · {tagEn}</span>
+      <span lang="es">{stepNumber} · {tagEs}</span>
+    </span>
+    <Heading level={3} class="process-step__title">
+      <span lang="en">{titleEn}</span>
+      <span lang="es">{titleEs}</span>
+    </Heading>
+    <p class="process-step__body">
+      <span lang="en">{bodyEn}</span>
+      <span lang="es">{bodyEs}</span>
+    </p>
+  </div>
+</div>
+
+<style>
+  .process-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 26px;
+    padding-bottom: 40px;
+  }
+
+  .process-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .process-step__dot-col {
+    display: flex;
+    justify-content: center;
+  }
+
+  .process-step__dot {
+    position: relative;
+    z-index: 2;
+    margin-top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--bg2);
+    border: 2px solid var(--line2);
+    transition: all 0.5s;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .process-step__dot.is-passed {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 5px var(--accent-soft);
+  }
+
+  .process-step__tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+  }
+
+  .process-step__title {
+    margin: 14px 0 8px;
+    font-weight: 700;
+    font-size: clamp(1.25rem, 2.3vw, 1.625rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .process-step__body {
+    margin: 0;
+    max-width: 580px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink2);
+  }
+</style>

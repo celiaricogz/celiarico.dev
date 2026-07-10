@@ -19,15 +19,15 @@ const tagMap: Record<TypographyLevel, "h1" | "h2" | "h3" | "h4"> = {
 const Tag = tagMap[level];
 
 const defaultClasses: Record<TypographyLevel, string> = {
-  1: "text-h1 leading-tight tracking-tight",
-  2: "text-h2 leading-snug tracking-snug",
-  3: "text-h3 leading-snug tracking-snug",
-  4: "text-h4 leading-normal tracking-normal",
+  1: "text-h1 leading-tight tracking-tight font-bold",
+  2: "text-h2 leading-tight tracking-tight font-bold",
+  3: "text-h3 leading-snug tracking-snug font-bold",
+  4: "text-h4 leading-normal tracking-normal font-semibold",
 };
 
 const sizeClasses =
   variant === "display"
-    ? "text-display leading-tight tracking-tight"
+    ? "text-display leading-tight tracking-tighter font-bold"
     : defaultClasses[level];
 ---
 

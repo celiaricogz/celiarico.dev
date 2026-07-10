@@ -1,0 +1,504 @@
+---
+import StatusBadge from "../../ui/StatusBadge.astro";
+---
+
+<div class="console-wrap">
+  <!-- Floating annotation chips -->
+  <div data-reveal data-d="360" class="console-chip console-chip--light">
+    <span class="console-chip__icon" aria-hidden="true">43</span>
+    <span class="console-chip__body">
+      <span class="console-chip__title" lang="en">Architecture mapped</span>
+      <span class="console-chip__title" lang="es">Arquitectura mapeada</span>
+      <span class="console-chip__sub" lang="en">43 components</span>
+      <span class="console-chip__sub" lang="es">43 componentes</span>
+    </span>
+  </div>
+
+  <div data-reveal data-d="420" class="console-chip console-chip--dark">
+    <span class="console-chip__dot" aria-hidden="true"></span>
+    <span class="console-chip__body">
+      <span class="console-chip__title console-chip__title--light" lang="en">
+        Root cause found
+      </span>
+      <span class="console-chip__title console-chip__title--light" lang="es">
+        Causa raíz encontrada
+      </span>
+      <span class="console-chip__sub console-chip__sub--light" lang="en"
+        >auth-service coupling</span
+      >
+      <span class="console-chip__sub console-chip__sub--light" lang="es"
+        >acoplamiento en auth-service</span
+      >
+    </span>
+  </div>
+
+  <!-- Main card -->
+  <div class="console-card">
+    <!-- Card header -->
+    <div class="console-card__header">
+      <span class="console-card__header-text">
+        <span class="console-card__platform" lang="en">Architecture Review</span
+        >
+        <span class="console-card__platform" lang="es"
+          >Revisión de arquitectura</span
+        >
+        <span class="console-card__env" lang="en">current state</span>
+        <span class="console-card__env" lang="es">estado actual</span>
+      </span>
+      <StatusBadge text="ACTIVE" />
+    </div>
+
+    <!-- Card body -->
+    <div class="console-card__body">
+      <!-- Stat tiles -->
+      <div class="console-stats">
+        <div class="console-stat">
+          <div class="console-stat__value">43</div>
+          <div class="console-stat__label">
+            <span lang="en">Components</span><span lang="es">Componentes</span>
+          </div>
+        </div>
+        <div class="console-stat">
+          <div class="console-stat__value">3</div>
+          <div class="console-stat__label">
+            <span lang="en">Layers</span><span lang="es">Capas</span>
+          </div>
+        </div>
+        <div class="console-stat console-stat--accent">
+          <div class="console-stat__value">
+            <span lang="en">clear</span><span lang="es">claros</span>
+          </div>
+          <div class="console-stat__label">
+            <span lang="en">Boundaries</span><span lang="es">Límites</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workflow -->
+      <div class="console-workflow">
+        <div class="console-workflow__header">
+          <span class="console-workflow__title">
+            <span lang="en">Analysis workflow</span>
+            <span lang="es">Flujo de análisis</span>
+          </span>
+          <span class="console-workflow__id">#073</span>
+        </div>
+        <div class="console-workflow__stages">
+          <span class="console-workflow__stage console-workflow__stage--done">
+            <span aria-hidden="true"></span>
+            <span lang="en">explore</span><span lang="es">explorar</span>
+          </span>
+          <span
+            class="console-workflow__connector console-workflow__connector--done"
+          ></span>
+          <span class="console-workflow__stage console-workflow__stage--active">
+            <span class="console-workflow__spinner" aria-hidden="true"></span>
+            <span lang="en">map</span><span lang="es">mapear</span>
+          </span>
+          <span class="console-workflow__connector"></span>
+          <span class="console-workflow__stage">
+            <span lang="en">model</span><span lang="es">modelar</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Activity -->
+      <div class="console-activity" aria-label="Recent activity">
+        <div class="console-activity__item">
+          <span
+            class="console-activity__dot console-activity__dot--green"
+            aria-hidden="true"></span>
+          <span class="console-activity__text">
+            <span lang="en">Traced dependency tree in </span>
+            <span lang="es">Árbol de dependencias trazado en</span>
+            <strong>api-gateway</strong>
+          </span>
+          <span class="console-activity__time">2m</span>
+        </div>
+        <div class="console-activity__item">
+          <span class="console-activity__dot" aria-hidden="true"></span>
+          <span class="console-activity__text">
+            <span lang="en">Identified constraint in </span>
+            <span lang="es">Restricción identificada en</span>
+            <strong>auth module</strong>
+          </span>
+          <span class="console-activity__time">14m</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card footer: tech row -->
+    <div class="console-card__footer">
+      <span class="console-card__footer-label">
+        <span lang="en">In practice</span><span lang="es">En la práctica</span>
+      </span>
+      <span>Kubernetes</span>
+      <span class="console-card__footer-dot" aria-hidden="true"></span>
+      <span>Jenkins</span>
+      <span class="console-card__footer-dot" aria-hidden="true"></span>
+      <span>DevOps</span>
+      <span class="console-card__footer-dot" aria-hidden="true"></span>
+      <span>CI/CD</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .console-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Floating chips */
+  .console-chip {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    border-radius: 11px;
+  }
+
+  .console-chip--light {
+    top: -7%;
+    left: -6%;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    box-shadow: 0 14px 30px -16px rgba(0, 0, 0, 0.28);
+  }
+
+  .console-chip--dark {
+    bottom: 4%;
+    right: -6%;
+    background: var(--chip-bg);
+    box-shadow: 0 14px 30px -16px rgba(0, 0, 0, 0.4);
+    transition: background 0.4s ease;
+  }
+
+  .console-chip__icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .console-chip__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--chip-dot);
+    flex-shrink: 0;
+  }
+
+  .console-chip__body {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .console-chip__title {
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .console-chip__title--light {
+    color: var(--chip-fg);
+  }
+
+  .console-chip__sub {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 500;
+    color: var(--ink3);
+    margin-top: 3px;
+  }
+
+  .console-chip__sub--light {
+    color: var(--chip-sub);
+  }
+
+  /* Card */
+  .console-card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 460px;
+    border-radius: 18px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    box-shadow: 0 40px 80px -40px rgba(20, 21, 26, 0.35);
+    overflow: hidden;
+  }
+
+  /* Card header */
+  .console-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .console-card__header-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .console-card__platform {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .console-card__env {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 500;
+    color: var(--ink3);
+    margin-top: 3px;
+  }
+
+  /* Card body */
+  .console-card__body {
+    padding: 18px;
+  }
+
+  /* Stats */
+  .console-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+  }
+
+  .console-stat {
+    padding: 12px 10px;
+    border-radius: 11px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+  }
+
+  .console-stat--accent {
+    background: linear-gradient(160deg, var(--accent), var(--accent-2));
+    border-color: transparent;
+  }
+
+  .console-stat__value {
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .console-stat--accent .console-stat__value {
+    color: #fff;
+  }
+
+  .console-stat__label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-top: 6px;
+  }
+
+  .console-stat--accent .console-stat__label {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  /* Workflow */
+  .console-workflow {
+    margin-top: 14px;
+    padding: 14px 15px;
+    border-radius: 12px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+  }
+
+  .console-workflow__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .console-workflow__title {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink2);
+  }
+
+  .console-workflow__id {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 500;
+    color: var(--ink3);
+  }
+
+  .console-workflow__stages {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .console-workflow__stage {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 9px;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+    background: var(--bg3);
+    color: var(--ink3);
+  }
+
+  .console-workflow__stage span:first-child:not(.console-workflow__spinner) {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .console-workflow__stage--done {
+    background: rgba(91, 155, 120, 0.14);
+    color: var(--ok);
+  }
+
+  .console-workflow__stage--done span:first-child {
+    background: var(--ok);
+  }
+
+  .console-workflow__stage--active {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .console-workflow__spinner {
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--accent);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: cr-spin 0.9s linear infinite;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .console-workflow__connector {
+    flex: 1;
+    height: 2px;
+    background: var(--line2);
+    border-radius: 2px;
+  }
+
+  .console-workflow__connector--done {
+    background: rgba(91, 155, 120, 0.4);
+  }
+
+  /* Activity */
+  .console-activity {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .console-activity__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .console-activity__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .console-activity__dot--green {
+    background: var(--ok);
+  }
+
+  .console-activity__text {
+    flex: 1;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--ink2);
+  }
+
+  .console-activity__text strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .console-activity__time {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ink3);
+    flex-shrink: 0;
+  }
+
+  /* Card footer: tech row */
+  .console-card__footer {
+    padding: 14px 18px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .console-card__footer-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .console-card__footer
+    span:not(.console-card__footer-label):not(.console-card__footer-dot) {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink2);
+  }
+
+  .console-card__footer-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--line2);
+  }
+</style>
