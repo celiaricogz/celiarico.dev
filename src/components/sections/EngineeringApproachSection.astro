@@ -17,42 +17,42 @@ const steps = [
     titleEs:
       "Construir un modelo preciso de cómo funciona realmente el sistema.",
     bodyEn:
-      "Not how it was designed to work — how it behaves in production, under real conditions. The objective is a coherent mental model: the major components, how information moves between them, what each part actually does. Until that model exists, no decision is grounded.",
+      "Not how it was designed to work — how it behaves in production, under real conditions.",
     bodyEs:
-      "No cómo fue diseñado para funcionar, sino cómo se comporta en producción, en condiciones reales. El objetivo es un modelo mental coherente: los componentes principales, cómo se mueve la información entre ellos, qué hace realmente cada parte. Hasta que ese modelo existe, ninguna decisión tiene fundamento.",
+      "No cómo se diseñó, sino cómo se comporta en producción, en condiciones reales.",
   },
   {
     stepNumber: "02",
     tagEn: "ANALYSE",
     tagEs: "ANALIZAR",
-    titleEn: "Find the root cause, not the symptom.",
-    titleEs: "Encontrar la causa raíz, no el síntoma.",
-    bodyEn:
-      "Observable problems point to something deeper. The analysis follows the evidence — behaviour in production, metrics, logs, operational history — until the actual cause becomes clear. Recommendations are postponed until the uncertainty is resolved.",
-    bodyEs:
-      "Los problemas observables apuntan a algo más profundo. El análisis sigue la evidencia (comportamiento en producción, métricas, registros, historial operativo) hasta que la causa real queda clara. Las recomendaciones se posponen hasta resolver la incertidumbre.",
+    titleEn:
+      "Find the root cause, not the symptom — the analysis follows evidence, not the first hypothesis.",
+    titleEs:
+      "Encontrar la causa raíz, no el síntoma — el análisis sigue la evidencia, no la primera hipótesis.",
+    bodyEn: "",
+    bodyEs: "",
   },
   {
     stepNumber: "03",
     tagEn: "DESIGN",
     tagEs: "DISEÑAR",
     titleEn: "Shape the solution around the actual constraints.",
-    titleEs: "Dar forma a la solución en torno a las restricciones reales.",
+    titleEs: "Dar forma a la solución según las restricciones reales.",
     bodyEn:
-      "Business priorities, team capacity, technical debt tolerance, time horizon — these define the solution space before any technology is considered. Architecture is determined first. Technology is selected to serve it, not the other way around.",
+      "Business priorities, team capacity, debt tolerance, time horizon — these define the solution space first. Architecture comes before technology; the technology serves it.",
     bodyEs:
-      "Las prioridades del negocio, la capacidad del equipo, la tolerancia a la deuda técnica, el horizonte temporal: esto define el espacio de la solución antes de considerar cualquier tecnología. La arquitectura se determina primero. La tecnología se elige para servirla, no al revés.",
+      "Prioridades del negocio, capacidad del equipo, tolerancia a la deuda técnica, plazos: eso define primero el espacio de la solución. La arquitectura va antes que la tecnología.",
   },
   {
     stepNumber: "04",
     tagEn: "IMPLEMENT",
     tagEs: "IMPLEMENTAR",
-    titleEn: "Change incrementally. Validate as you go.",
-    titleEs: "Cambiar de forma incremental. Validar sobre la marcha.",
-    bodyEn:
-      "Each modification is a deliberate step, not a bet. Complexity is never increased as a side effect of reducing it elsewhere. The system improves through a series of decisions that each make the next decision easier to make with confidence.",
-    bodyEs:
-      "Cada modificación es un paso deliberado, no una apuesta. La complejidad nunca aumenta como efecto secundario de reducirla en otro lugar. El sistema mejora mediante una serie de decisiones que hacen que cada siguiente decisión sea más fácil de tomar con confianza.",
+    titleEn:
+      "Change incrementally, and validate as you go — never trading complexity for complexity elsewhere.",
+    titleEs:
+      "Cambiar poco a poco y validar en cada paso — nunca cambiando complejidad por complejidad en otro lado.",
+    bodyEn: "",
+    bodyEs: "",
   },
   {
     stepNumber: "05",
@@ -61,9 +61,9 @@ const steps = [
     titleEn: "Leave the system easier to evolve than you found it.",
     titleEs: "Dejar el sistema más fácil de evolucionar de lo que se encontró.",
     bodyEn:
-      "Deployment is not completion. The measure of a successful engagement is whether the team understands the system better than before — and whether the next change is easier to make. That is the standard, not the delivery date.",
+      "Deployment isn't completion. The real measure: does the team understand the system better than before, and is the next change easier to make? That's the standard — not the delivery date.",
     bodyEs:
-      "El despliegue no es el final. La medida de un proyecto exitoso es si el equipo entiende mejor el sistema que antes, y si el próximo cambio es más fácil de hacer. Ese es el estándar, no la fecha de entrega.",
+      "El despliegue no es el final. La medida real: ¿el equipo entiende mejor el sistema que antes? ¿es más fácil el próximo cambio? Ese es el estándar, no la fecha de entrega.",
   },
 ];
 ---
@@ -90,14 +90,11 @@ const steps = [
     <p data-reveal data-d="120" class="approach-section__lead">
       <span lang="en"
         >Engineering is the process of reducing uncertainty until the right
-        action becomes obvious. The questions asked, the evidence gathered, the
-        decisions postponed — all follow from that principle.</span
+        action becomes obvious. Every phase below follows from that.</span
       >
       <span lang="es"
         >La ingeniería es el proceso de reducir la incertidumbre hasta que la
-        acción correcta se vuelve obvia. Las preguntas que se hacen, la
-        evidencia que se reúne, las decisiones que se posponen: todo se deriva
-        de ese principio.</span
+        acción correcta resulta obvia. Cada fase parte de ahí.</span
       >
     </p>
 
@@ -106,16 +103,14 @@ const steps = [
     <div data-reveal data-d="80" class="approach-section__commitment">
       <p class="approach-section__commitment-text">
         <span lang="en"
-          >Technology is chosen after the architecture — never before. The
-          objective is not selecting tools. The objective is helping the system
-          become easier to understand, easier to evolve and easier to operate
-          than it was before.</span
+          >Technology is chosen after the architecture — never before. The goal
+          isn't picking tools; it's leaving the system easier to understand,
+          evolve, and operate.</span
         >
         <span lang="es"
-          >La tecnología se elige después de la arquitectura, nunca antes. El
-          objetivo no es seleccionar herramientas. El objetivo es ayudar a que
-          el sistema sea más fácil de entender, de evolucionar y de operar de lo
-          que era antes.</span
+          >La tecnología se elige después de la arquitectura, nunca antes. No se
+          trata de elegir herramientas, sino de dejar el sistema más fácil de
+          entender, evolucionar y operar.</span
         >
       </p>
     </div>

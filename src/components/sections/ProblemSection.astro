@@ -12,50 +12,42 @@ const problems = [
   {
     number: "01",
     textEn: "Architecture that grew faster than it was ever designed.",
-    textEs: "Una arquitectura que creció más rápido de lo que nunca se diseñó.",
+    textEs: "Una arquitectura que creció más rápido de lo que nunca se pensó.",
     delay: 60,
   },
   {
     number: "02",
     textEn: "Deployments that everyone is quietly a little afraid of.",
-    textEs:
-      "Despliegues de los que todos, en silencio, tienen un poco de miedo.",
+    textEs: "Despliegues que todos, en silencio, temen un poco.",
     delay: 120,
   },
   {
     number: "03",
     textEn: "Critical knowledge that lives in just one person's head.",
-    textEs: "Conocimiento crítico que vive solo en la cabeza de una persona.",
+    textEs: "Conocimiento clave que depende de una sola persona.",
     delay: 180,
   },
   {
     number: "04",
     textEn: "Dependencies no one can explain but everyone is afraid to touch.",
-    textEs: "Dependencias que nadie puede explicar pero que todos temen tocar.",
+    textEs:
+      "Dependencias que nadie sabe explicar pero nadie se atreve a tocar.",
     delay: 240,
   },
 ];
 
 const consequences = [
   {
-    en: "Delivery cycles slow as change becomes increasingly cautious.",
-    es: "Los ciclos de entrega se ralentizan a medida que el cambio se vuelve cada vez más cauteloso.",
+    en: "Delivery slows as every change becomes more cautious.",
+    es: "La entrega se ralentiza porque cada cambio exige más cautela.",
   },
   {
-    en: "Operational risk accumulates with every release.",
-    es: "El riesgo operativo se acumula con cada versión.",
+    en: "Institutional knowledge concentrates in two or three people.",
+    es: "El conocimiento clave queda en manos de dos o tres personas.",
   },
   {
-    en: "Architectural decisions become collective negotiations rather than informed choices.",
-    es: "Las decisiones de arquitectura se convierten en negociaciones colectivas en lugar de elecciones informadas.",
-  },
-  {
-    en: "Institutional knowledge concentrates in two or three individuals.",
-    es: "El conocimiento institucional se concentra en dos o tres personas.",
-  },
-  {
-    en: "Maintaining the existing system costs more than moving it forward.",
-    es: "Mantener el sistema existente cuesta más que hacerlo avanzar.",
+    en: "Maintaining the system costs more than moving it forward.",
+    es: "Mantener el sistema cuesta más que hacerlo avanzar.",
   },
 ];
 ---
@@ -86,15 +78,13 @@ const consequences = [
 
     <p data-reveal data-d="120" class="problem-section__lead">
       <span lang="en"
-        >Most teams know something has shifted before they can describe what.
-        Changes feel riskier. Decisions feel less certain. The system still
-        works — but it no longer feels fully understood.</span
+        >Most teams sense something has shifted before they can describe what.
+        Changes feel riskier. Decisions feel less certain.</span
       >
       <span lang="es"
-        >La mayoría de los equipos perciben que algo ha cambiado antes de poder
-        describir qué. Los cambios se sienten más arriesgados. Las decisiones,
-        menos seguras. El sistema sigue funcionando, pero ya no se entiende del
-        todo.</span
+        >La mayoría de los equipos nota que algo ha cambiado antes de saber
+        explicar qué. Los cambios pesan más. Las decisiones se sienten menos
+        firmes.</span
       >
     </p>
 
@@ -205,45 +195,18 @@ const consequences = [
         </span>
         <p class="problem-section__row-text">
           <span lang="en"
-            >This is not a sign of bad teams or poor decisions. The pattern is
-            consistent: as systems grow, the shared understanding of how they
-            actually behave does not grow with them. Each decision is made with
-            an incomplete picture of the whole. The system evolves. The
-            understanding of it does not.</span
+            >This isn't a sign of bad teams or poor decisions — it's a pattern.
+            As systems grow, shared understanding doesn't grow with them, so
+            each change is made on an incomplete picture. Every change made this
+            way adds a little more uncertainty, making the next decision harder
+            and quietly raising the cost of the one after it.</span
           >
           <span lang="es"
-            >Esto no es señal de malos equipos ni de malas decisiones. El patrón
-            es constante: a medida que los sistemas crecen, la comprensión
-            compartida de cómo se comportan realmente no crece con ellos. Cada
-            decisión se toma con una imagen incompleta del conjunto. El sistema
-            evoluciona. La comprensión de él, no.</span
-          >
-        </p>
-      </div>
-      <div data-reveal data-d="140" class="problem-section__row">
-        <span class="problem-section__row-label">
-          <span lang="en">Why it compounds</span>
-          <span lang="es">Por qué se agrava</span>
-        </span>
-        <p class="problem-section__row-text">
-          <span lang="en"
-            >What makes this condition difficult to resolve from within is that
-            it compounds. Each change made under incomplete understanding
-            creates new uncertainty. The next decision becomes harder to assess.
-            Confidence in the outcome decreases. The cost of every change
-            quietly rises — not because the technology is fundamentally broken,
-            but because the gap between how the system is believed to work and
-            how it actually works widens with every change.</span
-          >
-          <span lang="es"
-            >Lo que hace difícil resolver esta condición desde dentro es que se
-            agrava. Cada cambio hecho con una comprensión incompleta genera
-            nueva incertidumbre. La siguiente decisión se vuelve más difícil de
-            evaluar. La confianza en el resultado disminuye. El costo de cada
-            cambio aumenta silenciosamente, no porque la tecnología esté
-            fundamentalmente rota, sino porque la brecha entre cómo se cree que
-            funciona el sistema y cómo funciona realmente se amplía con cada
-            cambio.</span
+            >No es cosa de equipos flojos ni de malas decisiones: es un patrón.
+            El sistema crece, pero la comprensión compartida no crece al mismo
+            ritmo, así que cada decisión se toma con una imagen parcial. Cada
+            cambio así suma algo de incertidumbre, complica el siguiente y
+            encarece, poco a poco, todo lo que viene después.</span
           >
         </p>
       </div>
@@ -253,7 +216,7 @@ const consequences = [
     <div class="problem-section__consequences-wrap">
       <span data-reveal class="problem-section__consequences-label">
         <span lang="en">This shows up as</span>
-        <span lang="es">Esto se manifiesta como</span>
+        <span lang="es">Esto se nota en</span>
       </span>
       <div class="problem-section__timeline">
         <div aria-hidden="true" class="problem-section__timeline-track"></div>
@@ -281,16 +244,12 @@ const consequences = [
     <!-- Reframe -->
     <p data-reveal data-d="80" class="problem-section__reframe">
       <span lang="en"
-        >This situation is not inevitable. But it does not resolve through
-        faster delivery, better tooling, or more documentation. It requires a
-        different starting point — understanding how the system actually
-        behaves, before anything else changes.</span
+        >It isn't inevitable. But it resolves only one way — understanding how
+        the system actually behaves, before anything else changes.</span
       >
       <span lang="es"
-        >Esta situación no es inevitable. Pero no se resuelve entregando más
-        rápido, con mejores herramientas o más documentación. Requiere un punto
-        de partida distinto: entender cómo se comporta realmente el sistema,
-        antes de cambiar cualquier otra cosa.</span
+        >No es inevitable. Pero solo se resuelve de una forma: entendiendo cómo
+        se comporta realmente el sistema antes de tocar nada más.</span
       >
     </p>
   </div>

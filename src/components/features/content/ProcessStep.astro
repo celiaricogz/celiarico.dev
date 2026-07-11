@@ -22,6 +22,8 @@ const {
   bodyEs,
   delay = 0,
 } = Astro.props;
+
+const hasBody = Boolean(bodyEn || bodyEs);
 ---
 
 <div data-stage data-reveal data-d={delay} class="process-step">
@@ -33,14 +35,21 @@ const {
       <span lang="en">{stepNumber} · {tagEn}</span>
       <span lang="es">{stepNumber} · {tagEs}</span>
     </span>
-    <Heading level={3} class="process-step__title">
+    <Heading
+      level={3}
+      class={`process-step__title ${hasBody ? "" : "process-step__title--no-body"}`}
+    >
       <span lang="en">{titleEn}</span>
       <span lang="es">{titleEs}</span>
     </Heading>
-    <p class="process-step__body">
-      <span lang="en">{bodyEn}</span>
-      <span lang="es">{bodyEs}</span>
-    </p>
+    {
+      hasBody && (
+        <p class="process-step__body">
+          <span lang="en">{bodyEn}</span>
+          <span lang="es">{bodyEs}</span>
+        </p>
+      )
+    }
   </div>
 </div>
 
@@ -102,6 +111,10 @@ const {
     line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--ink);
+  }
+
+  .process-step__title--no-body {
+    margin-bottom: 0;
   }
 
   .process-step__body {

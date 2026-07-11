@@ -13,21 +13,33 @@ const cases = [
     tagEs: "Ingeniería de plataforma",
     titleEn: "A deployment platform analysed, redesigned, and delivered.",
     titleEs: "Una plataforma de despliegue analizada, rediseñada y entregada.",
-    bodyEn:
-      "The client presented a problem — a WebLogic platform that needed to be modernised without disrupting existing deployments. The technical solution was proposed after analysing the complete deployment system. A Shared Jenkins Library centralised the deployment logic. Compatibility layers preserved what the client needed unchanged. The platform was delivered on schedule.",
-    bodyEs:
-      "El cliente planteó un problema: una plataforma WebLogic que necesitaba modernizarse sin interrumpir los despliegues existentes. La solución técnica se propuso tras analizar el sistema de despliegue completo. Una Shared Jenkins Library centralizó la lógica de despliegue. Capas de compatibilidad preservaron lo que el cliente necesitaba mantener sin cambios. La plataforma se entregó según lo previsto.",
+    contextEn:
+      "A WebLogic platform needed modernising without disrupting existing deployments.",
+    contextEs:
+      "Una plataforma WebLogic necesitaba modernizarse sin frenar los despliegues en marcha.",
+    decisionEn:
+      "A Shared Jenkins Library centralised the deployment logic; compatibility layers preserved what had to stay unchanged.",
+    decisionEs:
+      "Una Shared Jenkins Library centralizó la lógica de despliegue; las capas de compatibilidad mantuvieron intacto lo que debía seguir igual.",
+    outcomeEn: "Delivered on schedule.",
+    outcomeEs: "Entregada según lo previsto.",
     delay: 60,
   },
   {
     tagEn: "Enterprise Architecture",
     tagEs: "Arquitectura empresarial",
     titleEn: "Architecture reviews across multiple engineering teams.",
-    titleEs: "Revisiones de arquitectura en múltiples equipos de ingeniería.",
-    bodyEn:
-      "Reviewing solution architectures, evaluating technology migrations, and maintaining shared engineering infrastructure — for multiple development teams simultaneously. Recommendations follow analysis. When an evaluation concludes a migration is not advisable, that conclusion is documented with the evidence that supports it.",
-    bodyEs:
-      "Revisando arquitecturas de solución, evaluando migraciones tecnológicas y manteniendo infraestructura de ingeniería compartida, para varios equipos de desarrollo a la vez. Las recomendaciones vienen después del análisis. Cuando una evaluación concluye que una migración no es aconsejable, esa conclusión se documenta con la evidencia que la respalda.",
+    titleEs: "Revisiones de arquitectura en varios equipos de ingeniería.",
+    contextEn:
+      "Reviewing solution architectures and migration strategies across several teams at once.",
+    contextEs:
+      "Revisando arquitecturas de solución y estrategias de migración en varios equipos a la vez.",
+    decisionEn:
+      "When the evidence doesn't support a migration, that conclusion is documented — not defaulted past.",
+    decisionEs:
+      "Cuando la evidencia no respalda una migración, esa conclusión se documenta — no se ignora.",
+    outcomeEn: "Recommendations follow analysis, every time.",
+    outcomeEs: "Las recomendaciones vienen siempre después del análisis.",
     delay: 120,
   },
 ];
@@ -36,17 +48,17 @@ const observations = [
   {
     years: "4",
     textEn:
-      "Across four years supporting multiple concurrent engineering teams — different projects, different stacks, different operational environments — incidents reported as application defects regularly traced back to platform configuration, infrastructure, or failures between systems. Each required building a model of the whole before it was possible to locate the part that had failed.",
+      "Four years supporting multiple concurrent teams — different projects, different stacks. Incidents reported as application defects regularly traced back to platform or infrastructure. Each required a model of the whole before the failing part could be found.",
     textEs:
-      "A lo largo de cuatro años dando soporte a varios equipos de ingeniería en paralelo (proyectos distintos, stacks distintos, entornos operativos distintos), incidentes reportados como defectos de aplicación se remontaban con frecuencia a la configuración de la plataforma, a la infraestructura, o a fallos entre sistemas. Cada caso exigía construir un modelo del conjunto antes de poder localizar la parte que había fallado.",
+      "Cuatro años dando soporte a varios equipos a la vez, con proyectos y stacks distintos. Incidentes reportados como fallos de aplicación se remontaban con frecuencia a la plataforma o a la infraestructura. Cada caso exigía un modelo del conjunto antes de dar con la pieza rota.",
     delay: 80,
   },
   {
     years: "3",
     textEn:
-      "Earlier still — a student team of fewer than twenty engineers, an eleven-month window, their first operational rocket. Full software lifecycle responsibility: architecture through integration through operational launch, coordinated across avionics, electronics, structures, propulsion and operations. Limited testing opportunities. Real consequences for every decision.",
+      "Earlier: a student team of fewer than twenty, an eleven-month window, their first operational rocket — full lifecycle responsibility across avionics, structures, propulsion and operations, with limited testing and real consequences.",
     textEs:
-      "Antes aún: un equipo estudiantil de menos de veinte ingenieros, una ventana de once meses, su primer cohete operativo. Responsabilidad completa del ciclo de vida del software: desde la arquitectura hasta la integración y el lanzamiento operativo, coordinado entre aviónica, electrónica, estructuras, propulsión y operaciones. Oportunidades de prueba limitadas. Consecuencias reales en cada decisión.",
+      "Antes: un equipo estudiantil de menos de veinte personas, once meses de plazo, su primer cohete operativo — responsabilidad completa del ciclo de vida, entre aviónica, estructuras, propulsión y operaciones, con pocas pruebas posibles y consecuencias reales.",
     delay: 140,
   },
 ];
@@ -63,28 +75,25 @@ const observations = [
       class="evidence-section__headline"
     >
       <span lang="en"
-        >The approach has already been applied. In systems that were already in
-        production.</span
+        >The approach, already applied — in systems already in production.</span
       >
       <span lang="es"
-        >El enfoque ya se ha aplicado. En sistemas que ya estaban en producción.</span
+        >El enfoque, ya aplicado — en sistemas que ya estaban en producción.</span
       >
     </h2>
 
     <p data-reveal data-d="120" class="evidence-section__lead">
       <span lang="en"
-        >The environments have included enterprise software undergoing active
-        migration, a platform team supporting multiple defence simulation
-        projects simultaneously, a large healthcare organisation's shared
-        engineering infrastructure, and a student rocketry team with an
-        eleven-month deadline and real launch constraints.</span
+        >Environments have included enterprise systems mid-migration, a platform
+        team supporting several simulation projects at once, shared
+        infrastructure for a large healthcare organisation, and a student
+        rocketry team with an eleven-month deadline.</span
       >
       <span lang="es"
-        >Los entornos han incluido software empresarial en migración activa, un
-        equipo de plataforma dando soporte a varios proyectos de simulación de
-        defensa a la vez, la infraestructura de ingeniería compartida de una
-        gran organización sanitaria, y un equipo estudiantil de cohetería con un
-        plazo de once meses y restricciones reales de lanzamiento.</span
+        >Los entornos han incluido software empresarial en plena migración, un
+        equipo de plataforma dando soporte a varios proyectos de simulación a la
+        vez, la infraestructura compartida de una gran organización sanitaria, y
+        un equipo estudiantil de cohetería con once meses de plazo.</span
       >
     </p>
 
@@ -101,10 +110,36 @@ const observations = [
               <span lang="en">{c.titleEn}</span>
               <span lang="es">{c.titleEs}</span>
             </h3>
-            <p class="evidence-case__body">
-              <span lang="en">{c.bodyEn}</span>
-              <span lang="es">{c.bodyEs}</span>
-            </p>
+            <div class="evidence-case__field">
+              <span class="evidence-case__field-label">
+                <span lang="en">Context</span>
+                <span lang="es">Contexto</span>
+              </span>
+              <p class="evidence-case__field-text">
+                <span lang="en">{c.contextEn}</span>
+                <span lang="es">{c.contextEs}</span>
+              </p>
+            </div>
+            <div class="evidence-case__field">
+              <span class="evidence-case__field-label">
+                <span lang="en">Decision</span>
+                <span lang="es">Decisión</span>
+              </span>
+              <p class="evidence-case__field-text evidence-case__field-text--decision">
+                <span lang="en">{c.decisionEn}</span>
+                <span lang="es">{c.decisionEs}</span>
+              </p>
+            </div>
+            <div class="evidence-case__field">
+              <span class="evidence-case__field-label evidence-case__field-label--outcome">
+                <span lang="en">Outcome</span>
+                <span lang="es">Resultado</span>
+              </span>
+              <p class="evidence-case__field-text evidence-case__field-text--outcome">
+                <span lang="en">{c.outcomeEn}</span>
+                <span lang="es">{c.outcomeEs}</span>
+              </p>
+            </div>
           </div>
         ))
       }
@@ -168,17 +203,14 @@ const observations = [
         </span>
         <p class="evidence-section__note-text">
           <span lang="en"
-            >The technology landscape does not remain stable. Studying
-            unfamiliar technologies, building Proofs of Concept before
-            recommending them, and treating adaptation as a professional
-            responsibility — not a reaction to deadlines — is part of how the
-            work is done.</span
+            >The technology landscape shifts constantly. Studying unfamiliar
+            tools and proving them out before recommending them is treated as a
+            professional responsibility, not a reaction to deadlines.</span
           >
           <span lang="es"
-            >El panorama tecnológico no permanece estable. Estudiar tecnologías
-            desconocidas, construir pruebas de concepto antes de recomendarlas,
-            y tratar la adaptación como una responsabilidad profesional (no como
-            una reacción a los plazos) forma parte de cómo se hace el trabajo.</span
+            >El panorama tecnológico no se está quieto. Estudiar herramientas
+            nuevas y probarlas antes de recomendarlas es una responsabilidad
+            profesional, no una reacción a los plazos.</span
           >
         </p>
       </div>
@@ -190,14 +222,12 @@ const observations = [
         </span>
         <p class="evidence-section__note-text">
           <span lang="en"
-            >Experience shapes the quality of decisions made in unfamiliar
-            systems. What that looks like in practice — that depends on what the
-            system actually needs.</span
+            >Experience shapes the quality of decisions in unfamiliar systems.
+            What it looks like depends on what the system needs.</span
           >
           <span lang="es"
-            >La experiencia moldea la calidad de las decisiones tomadas en
-            sistemas desconocidos. Cómo se ve eso en la práctica depende de lo
-            que el sistema realmente necesita.</span
+            >La experiencia mejora las decisiones en sistemas desconocidos. Cómo
+            se traduce eso depende de lo que cada sistema necesite.</span
           >
         </p>
       </div>
@@ -280,12 +310,49 @@ const observations = [
     color: var(--ink);
   }
 
-  .evidence-case__body {
+  .evidence-case__field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 12px;
+  }
+
+  .evidence-case__field:last-child {
+    margin-bottom: 0;
+  }
+
+  .evidence-case__field-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .evidence-case__field-label--outcome {
+    color: var(--accent);
+    opacity: 0.75;
+  }
+
+  .evidence-case__field-text {
     margin: 0;
     font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink3);
+  }
+
+  .evidence-case__field-text--decision {
     font-size: 15.5px;
-    line-height: 1.65;
-    color: var(--ink2);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .evidence-case__field-text--outcome {
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: 700;
   }
 
   /* Separator */
