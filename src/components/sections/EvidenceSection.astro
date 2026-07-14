@@ -11,57 +11,56 @@ const cases = [
   {
     tagEn: "Platform Engineering",
     tagEs: "Ingeniería de plataforma",
-    titleEn: "A deployment platform analysed, redesigned, and delivered.",
-    titleEs: "Una plataforma de despliegue analizada, rediseñada y entregada.",
+    titleEn:
+      "A single CI/CD architecture, standardised across environments that had each evolved on their own.",
+    titleEs:
+      "Una única arquitectura de CI/CD, estandarizada en entornos que hasta entonces evolucionaban cada uno por su cuenta.",
     contextEn:
-      "A WebLogic platform needed modernising without disrupting existing deployments.",
+      "Legacy J2EE applications running across multiple Oracle WebLogic 11g/14c environments, each with its own release process.",
     contextEs:
-      "Una plataforma WebLogic necesitaba modernizarse sin frenar los despliegues en marcha.",
+      "Aplicaciones J2EE heredadas desplegadas en varios entornos Oracle WebLogic 11g/14c, cada uno con su propio proceso de release.",
     decisionEn:
-      "A Shared Jenkins Library centralised the deployment logic; compatibility layers preserved what had to stay unchanged.",
+      "Jenkins Shared Libraries centralised build, quality and deployment logic into one reusable architecture; environment configuration was separated from build artefacts, and Maven/Nexus versioning gave every release a consistent lifecycle.",
     decisionEs:
-      "Una Shared Jenkins Library centralizó la lógica de despliegue; las capas de compatibilidad mantuvieron intacto lo que debía seguir igual.",
-    outcomeEn: "Delivered on schedule.",
-    outcomeEs: "Entregada según lo previsto.",
+      "Las Jenkins Shared Libraries centralizaron la lógica de build, calidad y despliegue en una arquitectura reutilizable; la configuración de entorno se separó de los artefactos de build, y el versionado con Maven/Nexus dio a cada release un ciclo de vida coherente.",
+    outcomeEn:
+      "Deployments became predictable and reversible instead of environment-specific rituals — lower operational complexity, and meaningfully less risk in every release.",
+    outcomeEs:
+      "Los despliegues dejaron de ser rituales propios de cada entorno y pasaron a ser predecibles y reversibles — menos complejidad operativa, y mucho menos riesgo en cada release.",
     delay: 60,
   },
   {
-    tagEn: "Enterprise Architecture",
-    tagEs: "Arquitectura empresarial",
-    titleEn: "Architecture reviews across multiple engineering teams.",
-    titleEs: "Revisiones de arquitectura en varios equipos de ingeniería.",
+    tagEn: "Platform Architecture",
+    tagEs: "Arquitectura de plataforma",
+    titleEn:
+      "Reusable standards, not one-off fixes, across a regulated healthcare platform.",
+    titleEs:
+      "Estándares reutilizables, no parches puntuales, en una plataforma sanitaria regulada.",
     contextEn:
-      "Reviewing solution architectures and migration strategies across several teams at once.",
+      "Enterprise platforms spanning multiple teams, where stability and security leave little room for improvisation.",
     contextEs:
-      "Revisando arquitecturas de solución y estrategias de migración en varios equipos a la vez.",
+      "Plataformas empresariales que atraviesan varios equipos, donde la estabilidad y la seguridad dejan poco margen para la improvisación.",
     decisionEn:
-      "When the evidence doesn't support a migration, that conclusion is documented — not defaulted past.",
+      "Automation across the software lifecycle and shared standards for Linux-based systems replaced team-by-team improvisation, so modernisation could proceed without destabilising what already worked.",
     decisionEs:
-      "Cuando la evidencia no respalda una migración, esa conclusión se documenta — no se ignora.",
-    outcomeEn: "Recommendations follow analysis, every time.",
-    outcomeEs: "Las recomendaciones vienen siempre después del análisis.",
+      "La automatización a lo largo del ciclo de vida del software y unos estándares compartidos para los sistemas Linux sustituyeron la improvisación equipo a equipo, permitiendo modernizar sin desestabilizar lo que ya funcionaba.",
+    outcomeEn:
+      "Fewer inconsistencies for any team to reason about, and modernisation decisions backed by evidence rather than habit.",
+    outcomeEs:
+      "Menos inconsistencias con las que lidiar en cualquier equipo, y decisiones de modernización respaldadas por evidencia y no por costumbre.",
     delay: 120,
   },
 ];
 
-const observations = [
-  {
-    years: "4",
-    textEn:
-      "Four years supporting multiple concurrent teams — different projects, different stacks. Incidents reported as application defects regularly traced back to platform or infrastructure. Each required a model of the whole before the failing part could be found.",
-    textEs:
-      "Cuatro años dando soporte a varios equipos a la vez, con proyectos y stacks distintos. Incidentes reportados como fallos de aplicación se remontaban con frecuencia a la plataforma o a la infraestructura. Cada caso exigía un modelo del conjunto antes de dar con la pieza rota.",
-    delay: 80,
-  },
-  {
-    years: "3",
-    textEn:
-      "Earlier: a student team of fewer than twenty, an eleven-month window, their first operational rocket — full lifecycle responsibility across avionics, structures, propulsion and operations, with limited testing and real consequences.",
-    textEs:
-      "Antes: un equipo estudiantil de menos de veinte personas, once meses de plazo, su primer cohete operativo — responsabilidad completa del ciclo de vida, entre aviónica, estructuras, propulsión y operaciones, con pocas pruebas posibles y consecuencias reales.",
-    delay: 140,
-  },
+const progressionSteps = [
+  { en: "Software Engineering", es: "Ingeniería de software" },
+  { en: "Distributed Systems", es: "Sistemas distribuidos" },
+  { en: "Platform Engineering", es: "Ingeniería de plataforma" },
+  { en: "Enterprise Architecture", es: "Arquitectura empresarial" },
+  { en: "Technical Leadership", es: "Liderazgo técnico" },
 ];
+
+const orgs = ["GMV", "Indra", "Sanitas", "Serikat"];
 ---
 
 <section id={id} aria-labelledby="evidence-heading" class="evidence-section">
@@ -84,16 +83,16 @@ const observations = [
 
     <p data-reveal data-d="120" class="evidence-section__lead">
       <span lang="en"
-        >Environments have included enterprise systems mid-migration, a platform
-        team supporting several simulation projects at once, shared
-        infrastructure for a large healthcare organisation, and a student
-        rocketry team with an eleven-month deadline.</span
+        >Environments have included a regulated healthcare platform, legacy
+        enterprise systems delivered through Oracle WebLogic, and a
+        mission-critical satellite monitoring system moved from a monolith to
+        microservices.</span
       >
       <span lang="es"
-        >Los entornos han incluido software empresarial en plena migración, un
-        equipo de plataforma dando soporte a varios proyectos de simulación a la
-        vez, la infraestructura compartida de una gran organización sanitaria, y
-        un equipo estudiantil de cohetería con once meses de plazo.</span
+        >Los entornos han incluido una plataforma sanitaria regulada, sistemas
+        empresariales heredados desplegados sobre Oracle WebLogic, y un sistema
+        de monitorización de satélites en producción, migrado de un monolito a
+        microservicios.</span
       >
     </p>
 
@@ -149,31 +148,80 @@ const observations = [
     <div data-reveal class="evidence-section__separator">
       <span aria-hidden="true" class="evidence-section__separator-line"></span>
       <span class="evidence-section__separator-text">
-        <span lang="en">+6 years of field experience</span>
-        <span lang="es">+6 años de experiencia en campo</span>
+        <span lang="en">From implementation to architectural judgement</span>
+        <span lang="es">De la implementación al criterio arquitectónico</span>
       </span>
       <span aria-hidden="true" class="evidence-section__separator-line"></span>
     </div>
 
-    <!-- Observations -->
-    <div class="evidence-section__observations">
-      {
-        observations.map((o) => (
-          <div data-reveal data-d={o.delay} class="evidence-observation">
-            <div class="evidence-observation__value-row">
-              <span class="evidence-observation__value">{o.years}</span>
-              <span class="evidence-observation__unit">
-                <span lang="en">years</span>
-                <span lang="es">años</span>
-              </span>
-            </div>
-            <p class="evidence-observation__text">
-              <span lang="en">{o.textEn}</span>
-              <span lang="es">{o.textEs}</span>
-            </p>
-          </div>
-        ))
-      }
+    <!-- Progression and breadth -->
+    <div class="evidence-section__blocks">
+      <div data-reveal data-d="80" class="evidence-block">
+        <span class="evidence-block__label">
+          <span lang="en">Accumulated capability</span>
+          <span lang="es">Capacidad acumulada</span>
+        </span>
+        <div class="evidence-progression">
+          {
+            progressionSteps.map((step, i) => (
+              <>
+                {i > 0 && (
+                  <span aria-hidden="true" class="evidence-progression__arrow">
+                    →
+                  </span>
+                )}
+                <span
+                  class={`evidence-progression__chip ${i === progressionSteps.length - 1 ? "evidence-progression__chip--accent" : ""}`}
+                >
+                  <span lang="en">{step.en}</span>
+                  <span lang="es">{step.es}</span>
+                </span>
+              </>
+            ))
+          }
+        </div>
+        <p class="evidence-block__text">
+          <span lang="en"
+            >Each stage built on the last: writing the systems, then untangling
+            how they fail once distributed, then standardising how they get
+            built and shipped, then deciding how they should be structured in
+            the first place.</span
+          >
+          <span lang="es"
+            >Cada etapa se apoyó en la anterior: primero escribir los sistemas,
+            luego entender cómo fallan al distribuirlos, después estandarizar
+            cómo se construyen y despliegan, y por último decidir cómo deben
+            estructurarse desde el principio.</span
+          >
+        </p>
+      </div>
+
+      <div
+        data-reveal
+        data-d="120"
+        class="evidence-block evidence-block--breadth"
+      >
+        <span class="evidence-block__label">
+          <span lang="en">Breadth</span>
+          <span lang="es">Amplitud</span>
+        </span>
+        <p class="evidence-block__text evidence-block__text--tight">
+          <span lang="en"
+            >The same reasoning has applied to a mission-critical satellite
+            system, a regulated healthcare platform, legacy enterprise
+            environments, and the automation and observability holding them
+            together — different domains, the same process of understanding
+            before changing.</span
+          >
+          <span lang="es"
+            >El mismo razonamiento se ha aplicado a un sistema de satélites en
+            producción, una plataforma sanitaria regulada, entornos
+            empresariales heredados, y la automatización y observabilidad que
+            los mantiene en marcha — dominios distintos, el mismo proceso de
+            entender antes de cambiar.</span
+          >
+        </p>
+      </div>
     </div>
 
     <!-- Confirmation -->
@@ -230,6 +278,27 @@ const observations = [
             se traduce eso depende de lo que cada sistema necesite.</span
           >
         </p>
+      </div>
+    </div>
+
+    <!-- Experience across organisations -->
+    <div data-reveal class="evidence-section__orgs">
+      <span class="evidence-section__orgs-label">
+        <span lang="en"
+          >Professional experience across healthcare, enterprise technology and
+          aerospace, at organisations including</span
+        >
+        <span lang="es"
+          >Experiencia profesional en sanidad, tecnología empresarial y
+          aeroespacial, en organizaciones como</span
+        >
+      </span>
+      <div class="evidence-section__orgs-row">
+        {
+          orgs.map((org) => (
+            <span class="evidence-section__org-logo">{org}</span>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -380,61 +449,74 @@ const observations = [
     white-space: nowrap;
   }
 
-  /* Observations */
-  .evidence-section__observations {
+  /* Progression / breadth */
+  .evidence-section__blocks {
     margin-top: 32px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
   }
 
-  @media (max-width: 720px) {
-    .evidence-section__observations {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .evidence-observation {
-    padding: 30px;
+  .evidence-block {
+    padding: 30px 32px;
     border-radius: 18px;
     background: var(--bg2);
     border: 1px solid var(--line);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
   }
 
-  .evidence-observation__value-row {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
+  .evidence-block--breadth {
+    margin-top: 24px;
   }
 
-  .evidence-observation__value {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 52px;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: var(--accent);
-  }
-
-  .evidence-observation__unit {
+  .evidence-block__label {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 9.5px;
     font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink3);
   }
 
-  .evidence-observation__text {
-    margin: 0;
+  .evidence-block__text {
+    margin: 18px 0 0;
+    max-width: 760px;
     font-family: var(--font-body);
     font-size: 15.5px;
     line-height: 1.65;
     color: var(--ink2);
+  }
+
+  .evidence-block__text--tight {
+    margin-top: 12px;
+  }
+
+  .evidence-progression {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .evidence-progression__chip {
+    padding: 7px 13px;
+    border-radius: 8px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12.5px;
+    line-height: 1.2;
+    color: var(--ink2);
+    white-space: nowrap;
+  }
+
+  .evidence-progression__chip--accent {
+    background: linear-gradient(160deg, var(--accent), var(--accent-2));
+    border-color: transparent;
+    color: #fff;
+  }
+
+  .evidence-progression__arrow {
+    color: var(--ink3);
+    font-size: 13px;
   }
 
   /* Confirmation */
@@ -505,5 +587,38 @@ const observations = [
     height: 1px;
     background: var(--line);
     margin: 22px 0;
+  }
+
+  /* Experience across organisations */
+  .evidence-section__orgs {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+
+  .evidence-section__orgs-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12.5px;
+    line-height: 1;
+    color: var(--ink3);
+  }
+
+  .evidence-section__orgs-row {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 3vw, 34px);
+    flex-wrap: wrap;
+  }
+
+  .evidence-section__org-logo {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--ink3);
+    filter: grayscale(1);
   }
 </style>

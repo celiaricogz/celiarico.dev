@@ -1,11 +1,11 @@
 ---
-
+import logoImg from "../../assets/ChatGPT Image Jul 14, 2026, 02_03_10 PM(1).png";
 ---
 
 <header data-topbar class="topnav" role="banner">
   <button data-target="hero" class="topnav__logo" aria-label="Back to top">
     <span class="topnav__logo-icon" aria-hidden="true">
-      <span class="topnav__logo-icon-inner"></span>
+      <img src={logoImg.src} alt="" class="topnav__logo-img" />
     </span>
     <span class="topnav__logo-text">
       <span class="topnav__name">Celia Rico</span>
@@ -144,23 +144,20 @@
   .topnav__logo-icon {
     width: 30px;
     height: 30px;
-    border-radius: 9px;
+    border-radius: 8px;
     background: linear-gradient(150deg, var(--accent), var(--accent-2));
-    box-shadow:
-      0 4px 12px -4px var(--accent-glow),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    overflow: hidden;
   }
 
-  .topnav__logo-icon-inner {
-    width: 11px;
-    height: 11px;
-    border: 2px solid rgba(255, 255, 255, 0.92);
-    border-radius: 4px;
-    display: block;
+  .topnav__logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .topnav__logo-text {

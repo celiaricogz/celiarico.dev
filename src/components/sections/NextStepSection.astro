@@ -1,4 +1,7 @@
 ---
+import portraitLight from "../../assets/mi-foto-clara.png";
+import portraitDark from "../../assets/image.png";
+
 interface Props {
   id?: string;
 }
@@ -8,54 +11,138 @@ const { id } = Astro.props;
 
 <section id={id} aria-labelledby="next-step-heading" class="next-step-section">
   <div class="next-step-section__inner">
-    <span data-reveal class="next-step-section__label">
-      <span lang="en">05 — Next Step</span>
-      <span lang="es">05 — Próximo paso</span>
-    </span>
+    <div data-reveal class="next-step-section__label-row">
+      <span class="next-step-section__label-text">
+        <span lang="en">05 — Next Step</span>
+        <span lang="es">05 — Próximo paso</span>
+      </span>
+      <span aria-hidden="true" class="next-step-section__label-line"></span>
+      <span class="next-step-section__label-counter">05 / 05</span>
+    </div>
 
-    <h2
-      data-reveal
-      data-d="80"
-      id="next-step-heading"
-      class="next-step-section__headline"
-    >
-      <span lang="en">Start from where you are.</span>
-      <span lang="es">Empieza desde donde estás.</span>
-    </h2>
+    <div class="next-step-section__layout">
+      <!-- Portrait -->
+      <div aria-hidden="true" class="next-step-section__portrait-wrap">
+        <div class="next-step-section__portrait-shadow"></div>
+        <img
+          src={portraitLight.src}
+          alt=""
+          class="next-step-section__portrait next-step-section__portrait--light"
+        />
+        <img
+          src={portraitDark.src}
+          alt=""
+          class="next-step-section__portrait next-step-section__portrait--dark"
+        />
+      </div>
 
-    <p data-reveal data-d="160" class="next-step-section__lead">
-      <span lang="en"
-        >The problem doesn't need to be fully defined first. If something here
-        sounded familiar, that's enough. No pitch — just a conversation about
-        your system, what's slowing it down, and whether working together makes
-        sense.</span
-      >
-      <span lang="es"
-        >No hace falta tener el problema del todo definido. Si algo de esta
-        página te resultó familiar, ya es suficiente para empezar. Sin propuesta
-        comercial: solo una conversación sobre tu sistema, qué lo frena, y si
-        tiene sentido trabajar juntas.</span
-      >
-    </p>
+      <!-- Central copy -->
+      <div class="next-step-section__copy">
+        <h2
+          data-reveal
+          data-d="80"
+          id="next-step-heading"
+          class="next-step-section__headline"
+        >
+          <span lang="en">Start from where you are.</span>
+          <span lang="es">Empieza desde donde estás.</span>
+        </h2>
 
-    <div data-reveal data-d="240" class="next-step-section__actions">
-      <a href="mailto:hola@celiarico.dev" class="next-step-section__cta">
-        <span lang="en">Start a conversation</span>
-        <span lang="es">Iniciar una conversación</span>
-        <span aria-hidden="true">→</span>
-      </a>
-      <a
-        href="https://www.linkedin.com/in/celiaricogutierrez/"
-        class="next-step-section__link"
-        target="_blank"
-        rel="noopener"
-      >
-        <span lang="en">Connect on LinkedIn</span>
-        <span lang="es">Conectar en LinkedIn</span>
-      </a>
-      <a href="mailto:hola@celiarico.dev" class="next-step-section__email">
-        hola@celiarico.dev
-      </a>
+        <p data-reveal data-d="160" class="next-step-section__lead">
+          <span lang="en"
+            >The problem doesn't need to be fully defined first. If something
+            here sounded familiar, that's enough. The first conversation is
+            simply about understanding your system and deciding, together,
+            whether collaboration makes sense — no pitch, no obligation.</span
+          >
+          <span lang="es"
+            >No hace falta tener el problema del todo definido. Si algo de esta
+            página te ha resultado familiar, ya es suficiente. La primera
+            conversación consiste solo en entender tu sistema y decidir juntas
+            si tiene sentido colaborar — sin propuesta comercial, sin
+            compromiso.</span
+          >
+        </p>
+
+        <div data-reveal data-d="240" class="next-step-section__actions">
+          <a href="mailto:hola@celiarico.dev" class="next-step-section__cta">
+            <span lang="en">Start a conversation</span>
+            <span lang="es">Iniciar una conversación</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/celiarico"
+            class="next-step-section__link"
+            target="_blank"
+            rel="noopener"
+          >
+            <span lang="en">Connect on LinkedIn</span>
+            <span lang="es">Conectar en LinkedIn</span>
+          </a>
+          <a href="mailto:hola@celiarico.dev" class="next-step-section__email">
+            hola@celiarico.dev
+          </a>
+        </div>
+      </div>
+
+      <!-- Working together card -->
+      <div data-reveal data-d="200" class="next-step-section__card">
+        <span class="next-step-section__card-label">
+          <span lang="en">Working together</span>
+          <span lang="es">Cómo trabajamos</span>
+        </span>
+
+        <div class="next-step-section__card-details">
+          <span class="next-step-section__card-role">
+            <span lang="en">Freelance IT Architect</span>
+            <span lang="es">Arquitecta IT freelance</span>
+          </span>
+          <span class="next-step-section__card-location">
+            <span lang="en">Based in Madrid · remote across Europe</span>
+            <span lang="es">Con base en Madrid · remoto en toda Europa</span>
+          </span>
+          <span class="next-step-section__card-languages">
+            <span lang="en">English · Spanish</span>
+            <span lang="es">Español · Inglés</span>
+          </span>
+        </div>
+
+        <div aria-hidden="true" class="next-step-section__card-divider"></div>
+
+        <span class="next-step-section__card-points-label">
+          <span lang="en">Typical starting points</span>
+          <span lang="es">Puntos de partida habituales</span>
+        </span>
+        <div class="next-step-section__card-points">
+          <span>
+            <span lang="en">Architecture Review</span>
+            <span lang="es">Revisión de arquitectura</span>
+          </span>
+          <span>
+            <span lang="en">Technical Assessment</span>
+            <span lang="es">Evaluación técnica</span>
+          </span>
+          <span>
+            <span lang="en">Ongoing Architectural Support</span>
+            <span lang="es">Acompañamiento arquitectónico continuo</span>
+          </span>
+          <span>
+            <span lang="en">Modernisation Initiative</span>
+            <span lang="es">Iniciativa de modernización</span>
+          </span>
+        </div>
+
+        <div aria-hidden="true" class="next-step-section__card-divider"></div>
+
+        <p class="next-step-section__card-honesty">
+          <span lang="en"
+            >If I don't think I'm the right person to help, I'll say so.</span
+          >
+          <span lang="es"
+            >Si no soy la persona adecuada para ayudar, te lo diré.</span
+          >
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -68,27 +155,130 @@ const { id } = Astro.props;
   }
 
   .next-step-section__inner {
-    max-width: 780px;
+    max-width: 1180px;
     margin: 0 auto;
-    text-align: center;
   }
 
-  .next-step-section__label {
-    display: inline-block;
-    margin-bottom: 26px;
+  /* Section label row */
+  .next-step-section__label-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 56px;
+  }
+
+  .next-step-section__label-text {
     font-family: var(--font-mono);
     font-size: 11.5px;
     font-weight: 600;
+    line-height: 1;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--accent);
+  }
+
+  .next-step-section__label-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .next-step-section__label-counter {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    color: var(--ink3);
+  }
+
+  /* Layout: portrait + copy + card */
+  .next-step-section__layout {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(24px, 4vw, 56px);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Portrait */
+  .next-step-section__portrait-wrap {
+    flex: 0 0 auto;
+    width: clamp(180px, 20vw, 280px);
+    aspect-ratio: 3 / 4.6;
+    border-radius: 18px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .next-step-section__portrait-shadow {
+    position: absolute;
+    left: 72%;
+    bottom: -37px;
+    transform: translateX(-78%) rotate(5deg);
+    transform-origin: center;
+
+    width: 122px;
+    height: 14px;
+
+    border-radius: 50%;
+    background: rgba(45, 32, 22, 0.28);
+    filter: blur(6px);
+
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  html[data-theme="dark"] .next-step-section__portrait-shadow {
+    background: rgba(0, 0, 0, 0.43);
+  }
+
+  .next-step-section__portrait {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom;
+    transform: scale(1.35) translate(-32px, 48px);
+    transform-origin: bottom center;
+    transition: opacity 0.5s ease;
+    z-index: 2;
+  }
+
+  /* Restored: light portrait (opaque) shown in light mode */
+  .next-step-section__portrait--light {
+    opacity: 1;
+  }
+
+  /* Restored: dark portrait hidden in light mode */
+  .next-step-section__portrait--dark {
+    opacity: 0;
+  }
+
+  /* Restored: light portrait hidden in dark mode */
+  html[data-theme="dark"] .next-step-section__portrait--light {
+    opacity: 0;
+  }
+
+  /* Restored: dark portrait visible in dark mode */
+  html[data-theme="dark"] .next-step-section__portrait--dark {
+    opacity: 1;
+  }
+
+  /* Central copy */
+  .next-step-section__copy {
+    flex: 1 1 300px;
+    min-width: 240px;
+    max-width: 480px;
+    text-align: center;
   }
 
   .next-step-section__headline {
     margin: 0;
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: clamp(2.125rem, 5.6vw, 4.25rem);
+    font-size: clamp(2.125rem, 5.2vw, 3.875rem);
     line-height: 1.05;
     letter-spacing: -0.035em;
     color: var(--ink);
@@ -96,7 +286,7 @@ const { id } = Astro.props;
 
   .next-step-section__lead {
     margin: 26px auto 0;
-    max-width: 560px;
+    max-width: 480px;
     font-family: var(--font-body);
     font-size: 17.5px;
     line-height: 1.65;
@@ -159,5 +349,96 @@ const { id } = Astro.props;
 
   .next-step-section__email:hover {
     color: var(--accent);
+  }
+
+  /* Working together card */
+  .next-step-section__card {
+    flex: 1 1 240px;
+    min-width: 220px;
+    max-width: 280px;
+    padding: 22px 24px;
+    border-radius: 16px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+  }
+
+  .next-step-section__card-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .next-step-section__card-details {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .next-step-section__card-role {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  .next-step-section__card-location {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ink2);
+  }
+
+  .next-step-section__card-languages {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    color: var(--ink3);
+  }
+
+  .next-step-section__card-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 16px 0 14px;
+  }
+
+  .next-step-section__card-points-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .next-step-section__card-points {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .next-step-section__card-points span {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ink2);
+  }
+
+  .next-step-section__card-honesty {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--ink3);
+    font-style: italic;
   }
 </style>

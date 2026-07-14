@@ -20,6 +20,9 @@ const steps = [
       "Not how it was designed to work — how it behaves in production, under real conditions.",
     bodyEs:
       "No cómo se diseñó, sino cómo se comporta en producción, en condiciones reales.",
+    outcomeEn: "→ A shared, accurate picture of how the system behaves today.",
+    outcomeEs:
+      "→ Una imagen compartida y fiel de cómo se comporta el sistema hoy.",
   },
   {
     stepNumber: "02",
@@ -31,6 +34,10 @@ const steps = [
       "Encontrar la causa raíz, no el síntoma — el análisis sigue la evidencia, no la primera hipótesis.",
     bodyEn: "",
     bodyEs: "",
+    outcomeEn:
+      "→ Root causes, risks, and the constraints any solution has to respect.",
+    outcomeEs:
+      "→ Las causas raíz, los riesgos y las restricciones que cualquier solución debe respetar.",
   },
   {
     stepNumber: "03",
@@ -41,7 +48,11 @@ const steps = [
     bodyEn:
       "Business priorities, team capacity, debt tolerance, time horizon — these define the solution space first. Architecture comes before technology; the technology serves it.",
     bodyEs:
-      "Prioridades del negocio, capacidad del equipo, tolerancia a la deuda técnica, plazos: eso define primero el espacio de la solución. La arquitectura va antes que la tecnología.",
+      "Prioridades del negocio, capacidad del equipo, tolerancia a la deuda técnica, plazos: eso define primero el espacio de la solución. La arquitectura precede a la tecnología, que está a su servicio.",
+    outcomeEn:
+      "→ A set of architectural options, with their trade-offs made explicit.",
+    outcomeEs:
+      "→ Varias opciones de arquitectura, con sus contrapartidas explicitadas.",
   },
   {
     stepNumber: "04",
@@ -53,6 +64,10 @@ const steps = [
       "Cambiar poco a poco y validar en cada paso — nunca cambiando complejidad por complejidad en otro lado.",
     bodyEn: "",
     bodyEs: "",
+    outcomeEn:
+      "→ Validated, incremental change — nothing riskier than it needs to be.",
+    outcomeEs:
+      "→ Cambios validados y progresivos, sin más riesgo del necesario.",
   },
   {
     stepNumber: "05",
@@ -64,6 +79,10 @@ const steps = [
       "Deployment isn't completion. The real measure: does the team understand the system better than before, and is the next change easier to make? That's the standard — not the delivery date.",
     bodyEs:
       "El despliegue no es el final. La medida real: ¿el equipo entiende mejor el sistema que antes? ¿es más fácil el próximo cambio? Ese es el estándar, no la fecha de entrega.",
+    outcomeEn:
+      "→ A system the team understands well enough to keep evolving on its own.",
+    outcomeEs:
+      "→ Un sistema que el equipo entiende lo bastante bien para seguir evolucionándolo sin ayuda.",
   },
 ];
 ---
@@ -95,6 +114,21 @@ const steps = [
       <span lang="es"
         >La ingeniería es el proceso de reducir la incertidumbre hasta que la
         acción correcta resulta obvia. Cada fase parte de ahí.</span
+      >
+    </p>
+
+    <p data-reveal data-d="150" class="approach-section__applies">
+      <span lang="en"
+        >In practice, that includes architecture reviews, legacy modernisation,
+        platform and cloud engineering, migration strategy, and the harder
+        technical decisions — usually in systems that have grown difficult to
+        evolve safely.</span
+      >
+      <span lang="es"
+        >En la práctica, eso incluye revisiones de arquitectura, modernización
+        de sistemas heredados, ingeniería de plataforma y de cloud, estrategias
+        de migración, y las decisiones técnicas más difíciles — casi siempre en
+        sistemas que ya cuesta evolucionar con seguridad.</span
       >
     </p>
 
@@ -144,12 +178,21 @@ const steps = [
   }
 
   .approach-section__lead {
-    margin: 0 0 68px;
+    margin: 0 0 20px;
     max-width: 600px;
     font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.6;
     color: var(--ink2);
+  }
+
+  .approach-section__applies {
+    margin: 0 0 68px;
+    max-width: 640px;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink3);
   }
 
   .approach-section__commitment {

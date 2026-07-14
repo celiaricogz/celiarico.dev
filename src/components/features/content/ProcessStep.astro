@@ -9,6 +9,8 @@ interface Props {
   titleEs: string;
   bodyEn: string;
   bodyEs: string;
+  outcomeEn: string;
+  outcomeEs: string;
   delay?: number;
 }
 
@@ -20,6 +22,8 @@ const {
   titleEs,
   bodyEn,
   bodyEs,
+  outcomeEn,
+  outcomeEs,
   delay = 0,
 } = Astro.props;
 
@@ -35,10 +39,7 @@ const hasBody = Boolean(bodyEn || bodyEs);
       <span lang="en">{stepNumber} · {tagEn}</span>
       <span lang="es">{stepNumber} · {tagEs}</span>
     </span>
-    <Heading
-      level={3}
-      class={`process-step__title ${hasBody ? "" : "process-step__title--no-body"}`}
-    >
+    <Heading level={3} class="process-step__title">
       <span lang="en">{titleEn}</span>
       <span lang="es">{titleEs}</span>
     </Heading>
@@ -50,6 +51,12 @@ const hasBody = Boolean(bodyEn || bodyEs);
         </p>
       )
     }
+    <p
+      class={`process-step__outcome ${hasBody ? "" : "process-step__outcome--tight"}`}
+    >
+      <span lang="en">{outcomeEn}</span>
+      <span lang="es">{outcomeEs}</span>
+    </p>
   </div>
 </div>
 
@@ -113,10 +120,6 @@ const hasBody = Boolean(bodyEn || bodyEs);
     color: var(--ink);
   }
 
-  .process-step__title--no-body {
-    margin-bottom: 0;
-  }
-
   .process-step__body {
     margin: 0;
     max-width: 580px;
@@ -124,5 +127,19 @@ const hasBody = Boolean(bodyEn || bodyEs);
     font-size: 1rem;
     line-height: 1.6;
     color: var(--ink2);
+  }
+
+  .process-step__outcome {
+    margin: 10px 0 0;
+    max-width: 580px;
+    font-family: var(--font-body);
+    font-size: 0.90625rem;
+    line-height: 1.5;
+    color: var(--ink3);
+    font-style: italic;
+  }
+
+  .process-step__outcome--tight {
+    margin-top: 0;
   }
 </style>
