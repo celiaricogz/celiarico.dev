@@ -6,3 +6,7 @@ dist/
 
 .claude/
 reference/
+CLAUDE.md
+AGENTS.md
+ARCHITECTURE.md
+tmp/
