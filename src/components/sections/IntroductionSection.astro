@@ -15,10 +15,10 @@ const { id } = Astro.props;
       <div data-reveal class="hero__eyebrow">
         <span class="hero__eyebrow-dot" aria-hidden="true"></span>
         <span class="hero__eyebrow-text" lang="en"
-          >IT Architect · Architecture · Cloud</span
+          >IT Architect · Platform Engineering · Enterprise Systems</span
         >
         <span class="hero__eyebrow-text" lang="es"
-          >Arquitecta IT · Arquitectura · Cloud</span
+          >Arquitecta IT · Platform Engineering · Sistemas Empresariales</span
         >
       </div>
 
@@ -103,6 +103,15 @@ const { id } = Astro.props;
   @media (max-width: 980px) {
     .hero__inner {
       grid-template-columns: 1fr;
+    }
+  }
+
+  /* On small phones the ConsoleCard makes the hero ~900px tall, pushing the
+     scroll cue off-screen. Hide the panel so the copy fills the viewport and
+     the scroll cue lands at the bottom of the screen as intended. */
+  @media (max-width: 640px) {
+    .hero__panel {
+      display: none;
     }
   }
 
@@ -208,6 +217,18 @@ const { id } = Astro.props;
     color: var(--accent);
   }
 
+  @media (max-width: 640px) {
+    .hero__cta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero__cta-primary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
   /* Right panel */
   .hero__panel {
     position: relative;
@@ -227,6 +248,13 @@ const { id } = Astro.props;
     gap: 9px;
     pointer-events: none;
     z-index: 3;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .hero__scrollcue {
+      bottom: -35;
+    }
   }
 
   .hero__scrollcue-label {

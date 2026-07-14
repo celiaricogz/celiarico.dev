@@ -362,6 +362,15 @@ const { id } = Astro.props;
     border: 1px solid var(--line);
   }
 
+  /* When the card wraps to its own row (640px–980px tablet range), let it
+     expand to match the visual weight of the portrait + copy row above it. */
+  @media (min-width: 641px) and (max-width: 979px) {
+    .next-step-section__card {
+      max-width: 480px;
+      width: 100%;
+    }
+  }
+
   .next-step-section__card-label {
     font-family: var(--font-mono);
     font-size: 9px;
@@ -444,6 +453,10 @@ const { id } = Astro.props;
 
   /* Mobile composition */
   @media (max-width: 640px) {
+    .next-step-section__label-row {
+      margin-bottom: 36px;
+    }
+
     .next-step-section__layout {
       flex-direction: column;
       flex-wrap: nowrap;
@@ -479,11 +492,30 @@ const { id } = Astro.props;
       flex: none;
     }
 
+    .next-step-section__cta {
+      width: 100%;
+      max-width: 360px;
+      justify-content: center;
+    }
+
     .next-step-section__card {
       width: min(100%, 320px);
       max-width: 320px;
       flex: none;
       margin-top: 48px;
+    }
+  }
+
+  /* At 390–430px the translate(-50px) can clip the portrait slightly
+     against the viewport left edge. Reduce it to keep the face centred. */
+  @media (max-width: 430px) {
+    .next-step-section__portrait {
+      transform: scale(1.15) translate(-28px, 8px);
+    }
+
+    .next-step-section__portrait-shadow {
+      left: 60%;
+      transform: translateX(-60%) rotate(5deg);
     }
   }
 </style>

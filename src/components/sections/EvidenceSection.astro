@@ -335,6 +335,12 @@ const orgs = ["GMV", "Indra", "Sanitas", "Serikat"];
     color: var(--ink2);
   }
 
+  @media (max-width: 640px) {
+    .evidence-section__lead {
+      margin-bottom: 32px;
+    }
+  }
+
   /* Case study grid */
   .evidence-section__cases {
     display: grid;
@@ -446,6 +452,26 @@ const orgs = ["GMV", "Indra", "Sanitas", "Serikat"];
     text-transform: uppercase;
     color: var(--ink);
     white-space: nowrap;
+  }
+
+  /* At narrow widths the nowrap separator text overflows its flex container.
+     Stack it vertically and allow wrapping so it reads cleanly. */
+  @media (max-width: 560px) {
+    .evidence-section__separator {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .evidence-section__separator-line {
+      width: 40px;
+      flex: none;
+    }
+
+    .evidence-section__separator-text {
+      white-space: normal;
+      text-align: center;
+    }
   }
 
   /* Progression / breadth */

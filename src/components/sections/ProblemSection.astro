@@ -292,6 +292,12 @@ const consequences = [
     color: var(--ink2);
   }
 
+  @media (max-width: 640px) {
+    .problem-section__lead {
+      margin-bottom: 36px;
+    }
+  }
+
   /* Split: list + chart */
   .problem-section__split {
     display: grid;
@@ -378,6 +384,20 @@ const consequences = [
   /* Why it happens / compounds rows */
   .problem-section__rows {
     margin-top: 64px;
+  }
+
+  @media (max-width: 640px) {
+    .problem-section__rows {
+      margin-top: 40px;
+    }
+
+    .problem-section__consequences-wrap {
+      margin-top: 36px;
+    }
+
+    .problem-section__reframe {
+      margin-top: 36px;
+    }
   }
 
   .problem-section__row {

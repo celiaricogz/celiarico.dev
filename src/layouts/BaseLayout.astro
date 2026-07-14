@@ -236,4 +236,15 @@ const personSchema = JSON.stringify({
   .site-footer__back-top:hover {
     color: var(--accent);
   }
+
+  /* Three flex items with space-between wrap awkwardly at narrow widths.
+     Stack them centred so the footer reads as a coherent column. */
+  @media (max-width: 540px) {
+    .site-footer__inner {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+  }
 </style>
