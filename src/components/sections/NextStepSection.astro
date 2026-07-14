@@ -441,4 +441,49 @@ const { id } = Astro.props;
     color: var(--ink3);
     font-style: italic;
   }
+
+  /* Mobile composition */
+  @media (max-width: 640px) {
+    .next-step-section__layout {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 0;
+    }
+
+    .next-step-section__portrait-wrap {
+      width: min(62vw, 220px);
+
+      /*
+      * Reserves real visual space below the transformed portrait,
+      * preventing it from overlapping the heading.
+      */
+      margin-bottom: 42px;
+    }
+
+    .next-step-section__portrait {
+      transform: scale(1.2) translate(-50px, 8px);
+    }
+
+    .next-step-section__portrait-shadow {
+      left: 72%;
+      bottom: 12px;
+      width: 108px;
+      height: 13px;
+      transform: translateX(-108%) rotate(5deg);
+    }
+
+    .next-step-section__copy {
+      width: 100%;
+      max-width: 480px;
+      flex: none;
+    }
+
+    .next-step-section__card {
+      width: min(100%, 320px);
+      max-width: 320px;
+      flex: none;
+      margin-top: 48px;
+    }
+  }
 </style>
