@@ -1,5 +1,9 @@
 ---
 import SectionLabel from "../ui/SectionLabel.astro";
+import gmvLogo from "../../assets/logos-clientes/gmv_logo_red.png";
+import indraLogo from "../../assets/logos-clientes/indra.png";
+import sanitasLogo from "../../assets/logos-clientes/sanitas.jpg";
+import erhardtLogo from "../../assets/logos-clientes/erhardt-grupo.png";
 
 interface Props {
   id?: string;
@@ -57,10 +61,15 @@ const progressionSteps = [
   { en: "Distributed Systems", es: "Sistemas distribuidos" },
   { en: "Platform Engineering", es: "Ingeniería de plataforma" },
   { en: "Enterprise Architecture", es: "Arquitectura empresarial" },
-  { en: "Technical Leadership", es: "Liderazgo técnico" },
+  { en: "Architectural Advisory", es: "Asesoramiento en arquitectura" },
 ];
 
-const orgs = ["GMV", "Indra", "Sanitas", "Serikat"];
+const orgs = [
+  { src: gmvLogo.src, alt: "GMV" },
+  { src: indraLogo.src, alt: "Indra" },
+  { src: sanitasLogo.src, alt: "Sanitas" },
+  { src: erhardtLogo.src, alt: "ERHARDT Grupo" },
+];
 ---
 
 <section id={id} aria-labelledby="evidence-heading" class="evidence-section">
@@ -284,18 +293,20 @@ const orgs = ["GMV", "Indra", "Sanitas", "Serikat"];
     <div data-reveal class="evidence-section__orgs">
       <span class="evidence-section__orgs-label">
         <span lang="en"
-          >Professional experience across healthcare, enterprise technology,
-          defense and aerospace, at organisations including</span
-        >
+          >Professional experience in various fields including:
+        </span>
         <span lang="es"
-          >Experiencia profesional en sanidad, tecnología empresarial, defensa y
-          aeroespacial, en organizaciones como</span
-        >
+          >Experiencia profesional en distintos ámbitos como:
+        </span>
       </span>
       <div class="evidence-section__orgs-row">
         {
           orgs.map((org) => (
-            <span class="evidence-section__org-logo">{org}</span>
+            <img
+              src={org.src}
+              alt={org.alt}
+              class="evidence-section__org-logo"
+            />
           ))
         }
       </div>
@@ -544,6 +555,25 @@ const orgs = ["GMV", "Indra", "Sanitas", "Serikat"];
     font-size: 13px;
   }
 
+  @media (max-width: 640px) {
+    .evidence-progression {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .evidence-progression__chip {
+      white-space: normal;
+    }
+
+    .evidence-progression__arrow {
+      display: block;
+      padding: 2px 0 2px 8px;
+      transform: translateX(60px) translateY(-6px) rotate(90deg);
+      transform-origin: 8px center;
+    }
+  }
+
   /* Confirmation */
   .evidence-section__confirmation {
     margin: 40px 0 0;
@@ -638,12 +668,9 @@ const orgs = ["GMV", "Indra", "Sanitas", "Serikat"];
   }
 
   .evidence-section__org-logo {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 1;
-    letter-spacing: -0.01em;
-    color: var(--ink3);
-    filter: grayscale(1);
+    display: block;
+    height: 28px;
+    width: auto;
+    filter: grayscale(1) opacity(0.55);
   }
 </style>
