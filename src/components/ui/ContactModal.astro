@@ -1,0 +1,906 @@
+---
+// ContactModal — UI Component
+// Provides the "Start a conversation" contact flow for all CTAs on the page.
+// Opened by any element with [data-modal-open]. Mounted once in BaseLayout.
+---
+
+<!-- Cal.com element-click embed initialisation (queued until embed.js loads) -->
+<script is:inline>
+  (function (C, A, L) {
+    let p = function (a, ar) {
+      a.q.push(ar);
+    };
+    let d = C.document;
+    C.Cal =
+      C.Cal ||
+      function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () {
+            p(api, arguments);
+          };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else {
+            p(cal, ar);
+          }
+          return;
+        }
+        p(cal, ar);
+      };
+  })(window, "https://app.cal.eu/embed/embed.js", "init");
+
+  Cal("init", "30min", { origin: "https://app.cal.eu" });
+  Cal.config = Cal.config || {};
+  Cal.config.forwardQueryParams = true;
+
+  Cal.ns["30min"]("ui", {
+    hideEventTypeDetails: true,
+    layout: "month_view",
+    theme: "auto",
+  });
+</script>
+
+<div
+  id="contact-modal"
+  class="contact-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="contact-modal-title"
+  aria-hidden="true"
+  inert
+>
+  <!-- Backdrop — clicking outside the panel closes the modal -->
+  <div class="contact-modal__backdrop"></div>
+
+  <div class="contact-modal__panel">
+    <!-- Header: always visible regardless of active view -->
+    <div class="contact-modal__header">
+      <h2 id="contact-modal-title" class="contact-modal__title">
+        <span lang="en">Get in touch</span>
+        <span lang="es">Ponerse en contacto</span>
+      </h2>
+      <button
+        type="button"
+        class="contact-modal__close"
+        data-modal-close
+        aria-label="Close"
+        data-label-en="Close"
+        data-label-es="Cerrar"
+      >
+        <svg
+          viewBox="0 0 16 16"
+          width="14"
+          height="14"
+          aria-hidden="true"
+          fill="none"
+        >
+          <line
+            x1="3"
+            y1="3"
+            x2="13"
+            y2="13"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"></line>
+          <line
+            x1="13"
+            y1="3"
+            x2="3"
+            y2="13"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Options view (default) -->
+    <div data-modal-view="options">
+      <div class="contact-modal__options">
+        <button
+          type="button"
+          class="contact-modal__option"
+          data-show-view="schedule"
+        >
+          <div class="contact-modal__option-body">
+            <span class="contact-modal__option-title">
+              <span lang="en">Schedule a conversation</span>
+              <span lang="es">Programar una conversación</span>
+            </span>
+            <span class="contact-modal__option-desc">
+              <span lang="en"
+                >A 30-minute introduction to understand your context, discuss
+                your goals and see whether I'm the right person to help.</span
+              >
+              <span lang="es"
+                >Una introducción de 30 minutos para entender tu contexto,
+                hablar de tus objetivos y ver si soy la persona adecuada para
+                ayudar.</span
+              >
+            </span>
+          </div>
+          <span class="contact-modal__option-arrow" aria-hidden="true">→</span>
+        </button>
+
+        <div class="contact-modal__divider" aria-hidden="true"></div>
+
+        <button
+          type="button"
+          class="contact-modal__option"
+          data-show-view="message"
+        >
+          <div class="contact-modal__option-body">
+            <span class="contact-modal__option-title">
+              <span lang="en">Send a message</span>
+              <span lang="es">Enviar un mensaje</span>
+            </span>
+            <span class="contact-modal__option-desc">
+              <span lang="en"
+                >Prefer to start by email? Tell me about your situation and I'll
+                reply personally.</span
+              >
+              <span lang="es"
+                >¿Prefieres empezar por correo? Cuéntame tu situación y te
+                responderé personalmente.</span
+              >
+            </span>
+          </div>
+          <span class="contact-modal__option-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Schedule view -->
+    <div data-modal-view="schedule" hidden>
+      <button type="button" class="contact-modal__back" data-modal-back>
+        <svg
+          viewBox="0 0 16 16"
+          width="12"
+          height="12"
+          aria-hidden="true"
+          fill="none"
+        >
+          <polyline
+            points="10,3 4,8 10,13"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"></polyline>
+        </svg>
+        <span lang="en">Back</span>
+        <span lang="es">Volver</span>
+      </button>
+
+      <div class="contact-modal__schedule">
+        <p class="contact-modal__schedule-desc">
+          <span lang="en"
+            >A 30-minute introduction to understand your context, discuss your
+            goals and see whether I'm the right person to help.</span
+          >
+          <span lang="es"
+            >Una introducción de 30 minutos para entender tu contexto, hablar de
+            tus objetivos y ver si soy la persona adecuada para ayudar.</span
+          >
+        </p>
+
+        <!--
+          Cal.com element-click trigger.
+          data-cal-config theme is updated dynamically in initContactModal()
+          to match the site's current light/dark setting.
+        -->
+        <button
+          type="button"
+          class="contact-modal__cal-btn"
+          data-cal-link="celiarico/30min"
+          data-cal-namespace="30min"
+          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"}'
+        >
+          <span lang="en">Open calendar →</span>
+          <span lang="es">Abrir calendario →</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Message view -->
+    <div data-modal-view="message" hidden>
+      <button type="button" class="contact-modal__back" data-modal-back>
+        <svg
+          viewBox="0 0 16 16"
+          width="12"
+          height="12"
+          aria-hidden="true"
+          fill="none"
+        >
+          <polyline
+            points="10,3 4,8 10,13"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"></polyline>
+        </svg>
+        <span lang="en">Back</span>
+        <span lang="es">Volver</span>
+      </button>
+
+      <!--
+        Form submission endpoint.
+        Create a free Formspree account at https://formspree.io, point it to
+        hola@celiarico.dev, and replace FORMSPREE_FORM_ID with the ID shown in
+        your dashboard (e.g. "xpwzabcd"). The constant is defined in the
+        <script> block below.
+      -->
+      <form id="contact-form" class="contact-modal__form" novalidate>
+        <div class="contact-modal__field">
+          <label for="contact-email" class="contact-modal__label">
+            <span lang="en">Email</span>
+            <span lang="es">Correo electrónico</span>
+          </label>
+          <input
+            type="email"
+            id="contact-email"
+            name="email"
+            class="contact-modal__input"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="contact-modal__field">
+          <label for="contact-message" class="contact-modal__label">
+            <span lang="en">Message</span>
+            <span lang="es">Mensaje</span>
+          </label>
+          <textarea
+            id="contact-message"
+            name="message"
+            class="contact-modal__textarea"
+            rows="5"
+            required></textarea>
+        </div>
+
+        <p class="contact-modal__form-error" data-form-error hidden>
+          <span lang="en">Something went wrong. Please try again.</span>
+          <span lang="es">Algo salió mal. Por favor, inténtalo de nuevo.</span>
+        </p>
+
+        <button type="submit" class="contact-modal__submit" data-form-submit>
+          <span lang="en">Send message</span>
+          <span lang="es">Enviar mensaje</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Success view -->
+    <div data-modal-view="success" hidden>
+      <div class="contact-modal__success" tabindex="-1">
+        <div class="contact-modal__success-icon" aria-hidden="true">
+          <svg
+            viewBox="0 0 20 20"
+            width="20"
+            height="20"
+            fill="none"
+            aria-hidden="true"
+          >
+            <polyline
+              points="4,10 8,14 16,6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></polyline>
+          </svg>
+        </div>
+        <p class="contact-modal__success-title">
+          <span lang="en">Message sent.</span>
+          <span lang="es">Mensaje enviado.</span>
+        </p>
+        <p class="contact-modal__success-body">
+          <span lang="en">I'll reply personally as soon as I can.</span>
+          <span lang="es">Te responderé personalmente lo antes posible.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Overlay ──────────────────────────────────────────────── */
+
+  .contact-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 4vw, 32px);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.3s cubic-bezier(0.16, 0.7, 0.3, 1),
+      visibility 0.3s cubic-bezier(0.16, 0.7, 0.3, 1);
+  }
+
+  .contact-modal.is-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Backdrop ─────────────────────────────────────────────── */
+
+  .contact-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--ink) 45%, transparent);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  /* ── Panel ────────────────────────────────────────────────── */
+
+  .contact-modal__panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+    max-height: 90dvh;
+    overflow-y: auto;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: clamp(22px, 5vw, 34px);
+    box-shadow:
+      0 8px 40px rgba(20, 21, 26, 0.14),
+      0 2px 8px rgba(20, 21, 26, 0.07);
+    transform: translateY(14px) scale(0.98);
+    transition: transform 0.4s cubic-bezier(0.16, 0.7, 0.3, 1);
+  }
+
+  html[data-theme="dark"] .contact-modal__panel {
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.35),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .contact-modal.is-open .contact-modal__panel {
+    transform: none;
+  }
+
+  /* ── Header ───────────────────────────────────────────────── */
+
+  .contact-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+
+  .contact-modal__title {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .contact-modal__close {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+    color: var(--ink3);
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+
+  .contact-modal__close:hover {
+    background: var(--line);
+    color: var(--ink);
+  }
+
+  /* ── Options ──────────────────────────────────────────────── */
+
+  .contact-modal__option {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 14px;
+    border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background 0.2s;
+  }
+
+  .contact-modal__option:hover {
+    background: var(--bg3);
+  }
+
+  .contact-modal__option:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 12px;
+  }
+
+  .contact-modal__option-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+  }
+
+  .contact-modal__option-title {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  .contact-modal__option-desc {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink2);
+  }
+
+  .contact-modal__option-arrow {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink3);
+    flex-shrink: 0;
+    transition:
+      color 0.2s,
+      transform 0.2s;
+  }
+
+  .contact-modal__option:hover .contact-modal__option-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  .contact-modal__divider {
+    height: 1px;
+    background: var(--line);
+    margin: 4px 14px;
+  }
+
+  /* ── Back button ──────────────────────────────────────────── */
+
+  .contact-modal__back {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 18px;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink3);
+    transition: color 0.2s;
+  }
+
+  .contact-modal__back:hover {
+    color: var(--ink);
+  }
+
+  .contact-modal__back:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* ── Schedule ─────────────────────────────────────────────── */
+
+  .contact-modal__schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .contact-modal__schedule-desc {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink2);
+  }
+
+  .contact-modal__cal-btn {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 24px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1;
+    box-shadow: 0 10px 26px -10px var(--accent-glow);
+    transition: transform 0.3s cubic-bezier(0.16, 0.7, 0.3, 1);
+    text-align: center;
+  }
+
+  .contact-modal__cal-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .contact-modal__cal-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 12px;
+  }
+
+  /* ── Form ─────────────────────────────────────────────────── */
+
+  .contact-modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .contact-modal__field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .contact-modal__label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--ink2);
+  }
+
+  .contact-modal__input,
+  .contact-modal__textarea {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line2);
+    border-radius: 10px;
+    padding: 11px 13px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .contact-modal__input:focus,
+  .contact-modal__textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .contact-modal__textarea {
+    resize: vertical;
+    min-height: 112px;
+  }
+
+  .contact-modal__form-error {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: oklch(52% 0.17 25);
+  }
+
+  html[data-theme="dark"] .contact-modal__form-error {
+    color: oklch(68% 0.17 25);
+  }
+
+  .contact-modal__submit {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 22px;
+    border-radius: 11px;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    transition: opacity 0.2s;
+  }
+
+  .contact-modal__submit:hover:not(:disabled) {
+    opacity: 0.82;
+  }
+
+  .contact-modal__submit:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .contact-modal__submit:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 11px;
+  }
+
+  /* ── Success ──────────────────────────────────────────────── */
+
+  .contact-modal__success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px 0 6px;
+    gap: 10px;
+    outline: none;
+  }
+
+  .contact-modal__success-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-modal__success-title {
+    margin: 4px 0 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .contact-modal__success-body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink2);
+  }
+
+  /* ── Reduced motion ───────────────────────────────────────── */
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-modal,
+    .contact-modal__panel {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Form endpoint — create a free Formspree account at https://formspree.io,
+  // point it to hola@celiarico.dev, and replace FORMSPREE_FORM_ID with your
+  // form ID (8-character string shown in your Formspree dashboard).
+  const FORM_ENDPOINT = "https://formspree.io/f/FORMSPREE_FORM_ID";
+
+  type CalWindow = Window & {
+    Cal?: {
+      ns?: Record<string, (...args: unknown[]) => void>;
+    };
+  };
+
+  function syncCalTheme(): void {
+    const isDark =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    const theme = isDark ? "dark" : "light";
+
+    const calBtn = document.querySelector<HTMLElement>("[data-cal-link]");
+    if (calBtn) {
+      calBtn.setAttribute(
+        "data-cal-config",
+        JSON.stringify({
+          layout: "month_view",
+          useSlotsViewOnSmallScreen: "true",
+          theme,
+        }),
+      );
+    }
+
+    try {
+      (window as CalWindow).Cal?.ns?.["30min"]?.("ui", {
+        hideEventTypeDetails: true,
+        layout: "month_view",
+        theme,
+      });
+    } catch (_) {}
+  }
+
+  function initContactModal(): void {
+    const modal = document.getElementById("contact-modal");
+    if (!modal) return;
+
+    const panel = modal.querySelector<HTMLElement>(".contact-modal__panel");
+    const form = modal.querySelector<HTMLFormElement>("#contact-form");
+    const errorEl = modal.querySelector<HTMLElement>("[data-form-error]");
+    const submitBtn =
+      modal.querySelector<HTMLButtonElement>("[data-form-submit]");
+    const successEl = modal.querySelector<HTMLElement>(
+      ".contact-modal__success",
+    );
+
+    let previousFocus: HTMLElement | null = null;
+
+    const FOCUSABLE_SELECTORS = [
+      "button:not([disabled])",
+      "input:not([disabled])",
+      "textarea:not([disabled])",
+      "select:not([disabled])",
+      "a[href]",
+    ].join(", ");
+
+    const getFocusable = (): HTMLElement[] =>
+      Array.from(
+        modal.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS),
+      ).filter((el) => !el.closest("[hidden]"));
+
+    const trapFocus = (e: KeyboardEvent): void => {
+      if (e.key !== "Tab") return;
+      const els = getFocusable();
+      if (els.length === 0) return;
+      const first = els[0];
+      const last = els[els.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    const showView = (name: string): void => {
+      modal.querySelectorAll<HTMLElement>("[data-modal-view]").forEach((v) => {
+        v.toggleAttribute("hidden", v.getAttribute("data-modal-view") !== name);
+      });
+    };
+
+    const openModal = (): void => {
+      if (modal.classList.contains("is-open")) return;
+      previousFocus = document.activeElement as HTMLElement;
+      modal.removeAttribute("inert");
+      modal.setAttribute("aria-hidden", "false");
+      modal.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      form?.reset();
+      showView("options");
+      modal.addEventListener("keydown", trapFocus);
+      requestAnimationFrame(() => {
+        const els = getFocusable();
+        els[0]?.focus();
+      });
+    };
+
+    const closeModal = (): void => {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      modal.removeEventListener("keydown", trapFocus);
+      previousFocus?.focus();
+      // Restore inert after the CSS transition completes (300ms + buffer)
+      setTimeout(() => modal.setAttribute("inert", ""), 350);
+    };
+
+    // Open all "Start a conversation" triggers
+    document
+      .querySelectorAll<HTMLElement>("[data-modal-open]")
+      .forEach((btn) => {
+        btn.addEventListener("click", openModal);
+      });
+
+    // Close button (inside panel)
+    modal.querySelectorAll<HTMLElement>("[data-modal-close]").forEach((btn) => {
+      btn.addEventListener("click", closeModal);
+    });
+
+    // Backdrop click — close when clicking outside the panel
+    modal.addEventListener("click", (e: MouseEvent) => {
+      if (panel && !panel.contains(e.target as Node)) closeModal();
+    });
+
+    // Escape key
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open"))
+        closeModal();
+    });
+
+    // View switching
+    modal.querySelectorAll<HTMLElement>("[data-show-view]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const view = btn.getAttribute("data-show-view");
+        if (!view) return;
+        showView(view);
+        if (view === "schedule") syncCalTheme();
+        requestAnimationFrame(() => {
+          const els = getFocusable();
+          els[0]?.focus();
+        });
+      });
+    });
+
+    // Back buttons
+    modal.querySelectorAll<HTMLElement>("[data-modal-back]").forEach((btn) => {
+      btn.addEventListener("click", () => showView("options"));
+    });
+
+    // Form submission
+    form?.addEventListener("submit", async (e: Event) => {
+      e.preventDefault();
+      if (!submitBtn) return;
+
+      const email = form
+        .querySelector<HTMLInputElement>("#contact-email")
+        ?.value.trim();
+      const message = form
+        .querySelector<HTMLTextAreaElement>("#contact-message")
+        ?.value.trim();
+      if (!email || !message) return;
+
+      submitBtn.disabled = true;
+      if (errorEl) errorEl.hidden = true;
+
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (res.ok) {
+          showView("success");
+          requestAnimationFrame(() => successEl?.focus());
+        } else {
+          if (errorEl) errorEl.hidden = false;
+          submitBtn.disabled = false;
+        }
+      } catch (_) {
+        if (errorEl) errorEl.hidden = false;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => initContactModal());
+</script>

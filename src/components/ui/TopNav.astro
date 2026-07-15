@@ -98,13 +98,13 @@ import logoImg from "../../assets/ChatGPT Image Jul 14, 2026, 02_03_10 PM(1).png
       </li>
 
       <li>
-        <a href="#next" class="topnav__cta">
+        <button type="button" class="topnav__cta" data-modal-open>
           <span class="topnav__cta-dot" aria-hidden="true"></span>
           <span class="topnav__cta-label" lang="en">Start a conversation</span>
           <span class="topnav__cta-label" lang="es"
             >Iniciar una conversación</span
           >
-        </a>
+        </button>
       </li>
     </ul>
   </nav>
@@ -297,11 +297,11 @@ import logoImg from "../../assets/ChatGPT Image Jul 14, 2026, 02_03_10 PM(1).png
   }
 
   .theme-toggle__icon--moon {
-    opacity: 0.25;
+    opacity: 0;
   }
 
   html[data-theme="dark"] .theme-toggle__icon--sun {
-    opacity: 0.25;
+    opacity: 0;
   }
 
   html[data-theme="dark"] .theme-toggle__icon--moon {
@@ -314,6 +314,8 @@ import logoImg from "../../assets/ChatGPT Image Jul 14, 2026, 02_03_10 PM(1).png
 
   /* CTA button */
   .topnav__cta {
+    all: unset;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 8px;

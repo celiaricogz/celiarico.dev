@@ -65,11 +65,11 @@ const { id } = Astro.props;
         </p>
 
         <div data-reveal data-d="240" class="next-step-section__actions">
-          <a href="mailto:hola@celiarico.dev" class="next-step-section__cta">
+          <button type="button" class="next-step-section__cta" data-modal-open>
             <span lang="en">Start a conversation</span>
             <span lang="es">Iniciar una conversación</span>
             <span aria-hidden="true">→</span>
-          </a>
+          </button>
           <a
             href="https://www.linkedin.com/in/celiarico"
             class="next-step-section__link"
@@ -79,8 +79,11 @@ const { id } = Astro.props;
             <span lang="en">Connect on LinkedIn</span>
             <span lang="es">Conectar en LinkedIn</span>
           </a>
-          <a href="mailto:hola@celiarico.dev" class="next-step-section__email">
-            hola@celiarico.dev
+          <a
+            href="mailto:contact@celiarico.dev"
+            class="next-step-section__email"
+          >
+            contact@celiarico.dev
           </a>
         </div>
       </div>
@@ -302,6 +305,8 @@ const { id } = Astro.props;
   }
 
   .next-step-section__cta {
+    all: unset;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 10px;
