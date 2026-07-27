@@ -289,6 +289,14 @@ const orgs = [
       </div>
     </div>
 
+    <!-- Projects CTA -->
+    <div data-reveal class="evidence-section__projects-cta">
+      <a href="/projects" class="evidence-section__projects-btn">
+        <span lang="en">See the full case studies →</span>
+        <span lang="es">Ver los casos de estudio completos →</span>
+      </a>
+    </div>
+
     <!-- Experience across organisations -->
     <div data-reveal class="evidence-section__orgs">
       <span class="evidence-section__orgs-label">
@@ -672,5 +680,35 @@ const orgs = [
     height: 28px;
     width: auto;
     filter: grayscale(1) opacity(0.55);
+  }
+
+  /* Projects CTA */
+  .evidence-section__projects-cta {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .evidence-section__projects-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.18) inset,
+      0 14px 30px -12px var(--accent-glow);
+    transition: transform 0.25s;
+  }
+
+  .evidence-section__projects-btn:hover {
+    transform: translateY(-2px);
   }
 </style>

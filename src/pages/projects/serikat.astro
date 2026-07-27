@@ -1,0 +1,1856 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+---
+
+<ProjectLayout
+  title="Modernising CI/CD for 17 legacy Java applications — Celia Rico"
+  description="Turning a Jenkins Freestyle and WebLogic 11g deployment process into a reusable architecture built on Jenkins Pipeline, Shared Libraries, Nexus and WebLogic 14c — without touching the applications' code."
+  pageType="detail"
+>
+  <!-- ============ HERO ============ -->
+  <section class="sk-hero" id="sk-hero">
+    <div class="sk-hero__inner">
+      <a href="/projects" class="sk-back" data-reveal>
+        <span aria-hidden="true">←</span>
+        <span lang="en">All projects</span>
+        <span lang="es">Todos los proyectos</span>
+      </a>
+
+      <span class="sk-tag" data-reveal data-d="40">
+        <span lang="en">Platform Engineering</span>
+        <span lang="es">Ingeniería de plataforma</span>
+      </span>
+
+      <h1 class="sk-hero__headline" data-reveal data-d="80">
+        <span lang="en">Modernising CI/CD for 17 legacy Java applications</span>
+        <span lang="es"
+          >Modernización de CI/CD para 17 aplicaciones Java legacy</span
+        >
+      </h1>
+
+      <p class="sk-hero__description" data-reveal data-d="120">
+        <span lang="en"
+          >Turning a Jenkins Freestyle and WebLogic 11g deployment process into
+          a reusable architecture built on Jenkins Pipeline, Shared Libraries,
+          Nexus and WebLogic 14c — without touching the applications' code.</span
+        >
+        <span lang="es"
+          >Transformar un proceso de despliegue basado en Jenkins Freestyle y
+          WebLogic 11g en una arquitectura reutilizable con Jenkins Pipeline,
+          Shared Libraries, Nexus y WebLogic 14c, sin tocar el código de las
+          aplicaciones.</span
+        >
+      </p>
+
+      <div class="sk-meta-grid" data-reveal data-d="160">
+        <div class="sk-meta-cell">
+          <div class="sk-meta-cell__label">
+            <span lang="en">Client</span>
+            <span lang="es">Cliente</span>
+          </div>
+          <div class="sk-meta-cell__value">ERHARDT Serikat</div>
+        </div>
+        <div class="sk-meta-cell">
+          <div class="sk-meta-cell__label">
+            <span lang="en">Duration</span>
+            <span lang="es">Dedicación</span>
+          </div>
+          <div class="sk-meta-cell__value">
+            <span lang="en">120h over 6 months</span>
+            <span lang="es">120h en 6 meses</span>
+          </div>
+        </div>
+        <div class="sk-meta-cell">
+          <div class="sk-meta-cell__label">
+            <span lang="en">Initial scope</span>
+            <span lang="es">Alcance inicial</span>
+          </div>
+          <div class="sk-meta-cell__value">
+            <span lang="en">17 Java apps</span>
+            <span lang="es">17 apps Java</span>
+          </div>
+        </div>
+        <div class="sk-meta-cell sk-meta-cell--accent">
+          <div class="sk-meta-cell__label sk-meta-cell__label--light">
+            <span lang="en">Status</span>
+            <span lang="es">Estado</span>
+          </div>
+          <div class="sk-meta-cell__value sk-meta-cell__value--light">
+            <span lang="en">Validated</span>
+            <span lang="es">Validado</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sk-tech-tags" data-reveal data-d="200">
+        {
+          [
+            "Jenkins Pipeline",
+            "Groovy",
+            "Jenkins Shared Library",
+            "Maven",
+            "Nexus",
+            "WebLogic 14c",
+            "GitLab",
+            "SSH / SCP",
+          ].map((t) => <span class="sk-tech-tag">{t}</span>)
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUMMARY ============ -->
+  <section class="sk-section" id="sk-summary">
+    <div class="sk-section__inner">
+      <span class="sk-section-label" data-reveal>
+        <span lang="en">Project summary</span>
+        <span lang="es">Resumen del proyecto</span>
+      </span>
+
+      <div class="sk-summary-table" data-reveal data-d="40">
+        <div class="sk-summary-row">
+          <span class="sk-summary-row__key">
+            <span lang="en">Direct client</span>
+            <span lang="es">Cliente directo</span>
+          </span>
+          <span class="sk-summary-row__val">ERHARDT Serikat</span>
+        </div>
+        <div class="sk-summary-row">
+          <span class="sk-summary-row__key">
+            <span lang="en">End client</span>
+            <span lang="es">Cliente final</span>
+          </span>
+          <span class="sk-summary-row__val">
+            <span lang="en">Confidential</span>
+            <span lang="es">Confidencial</span>
+          </span>
+        </div>
+        <div class="sk-summary-row">
+          <span class="sk-summary-row__key">
+            <span lang="en">Project type</span>
+            <span lang="es">Tipo de proyecto</span>
+          </span>
+          <span class="sk-summary-row__val">
+            <span lang="en"
+              >Architecture and implementation of a CI/CD platform</span
+            >
+            <span lang="es"
+              >Arquitectura e implementación de una plataforma CI/CD</span
+            >
+          </span>
+        </div>
+        <div class="sk-summary-row">
+          <span class="sk-summary-row__key">
+            <span lang="en">Initial scope</span>
+            <span lang="es">Alcance inicial</span>
+          </span>
+          <span class="sk-summary-row__val">
+            <span lang="en"
+              >17 Java enterprise applications, architected to absorb future
+              migrations</span
+            >
+            <span lang="es"
+              >17 aplicaciones Java enterprise, con arquitectura preparada para
+              nuevas migraciones</span
+            >
+          </span>
+        </div>
+        <div class="sk-summary-row">
+          <span class="sk-summary-row__key">
+            <span lang="en">Delivered implementation</span>
+            <span lang="es">Implementación realizada</span>
+          </span>
+          <span class="sk-summary-row__val">
+            <span lang="en"
+              >17 main pipelines, 5 additional variants and one central
+              orchestrator</span
+            >
+            <span lang="es"
+              >17 pipelines principales, 5 variantes adicionales y un
+              orquestador central</span
+            >
+          </span>
+        </div>
+        <div class="sk-summary-row">
+          <span class="sk-summary-row__key">
+            <span lang="en">Dedication</span>
+            <span lang="es">Dedicación</span>
+          </span>
+          <span class="sk-summary-row__val">
+            <span lang="en">120 hours across 6 months</span>
+            <span lang="es">120 horas distribuidas durante 6 meses</span>
+          </span>
+        </div>
+        <div class="sk-summary-row">
+          <span class="sk-summary-row__key">
+            <span lang="en">Responsibility</span>
+            <span lang="es">Responsabilidad</span>
+          </span>
+          <span class="sk-summary-row__val">
+            <span lang="en"
+              >Analysis, design, implementation, testing and technical
+              coordination</span
+            >
+            <span lang="es"
+              >Análisis, diseño, implementación, pruebas y coordinación técnica</span
+            >
+          </span>
+        </div>
+        <div class="sk-summary-row">
+          <span class="sk-summary-row__key">
+            <span lang="en">Validated environment</span>
+            <span lang="es">Entorno validado</span>
+          </span>
+          <span class="sk-summary-row__val">
+            <span lang="en"
+              >Development, with the legacy platform running in parallel</span
+            >
+            <span lang="es"
+              >Desarrollo, con la plataforma legacy operativa en paralelo</span
+            >
+          </span>
+        </div>
+        <div class="sk-summary-row">
+          <span class="sk-summary-row__key">
+            <span lang="en">Delivery status</span>
+            <span lang="es">Estado de la entrega</span>
+          </span>
+          <span class="sk-summary-row__val">
+            <span lang="en"
+              >Validated solution, ready for transition to production</span
+            >
+            <span lang="es"
+              >Solución validada y preparada para su transición a producción</span
+            >
+          </span>
+        </div>
+      </div>
+
+      <blockquote class="sk-pullquote" data-reveal data-d="80">
+        <p class="sk-pullquote__text">
+          <span lang="en"
+            >"The goal wasn't to replace what was old with something more
+            modern. It was to reduce the risk of a complex migration, and turn a
+            process that was hard to maintain into something reusable, traceable
+            and understandable."</span
+          >
+          <span lang="es"
+            >"El objetivo no era sustituir lo antiguo por algo técnicamente más
+            moderno. Era reducir el riesgo de una migración compleja y convertir
+            un proceso difícil de mantener en una base reutilizable, trazable y
+            comprensible."</span
+          >
+        </p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============ 01 CONTEXT + CONSTRAINT ============ -->
+  <section class="sk-section sk-section--alt" id="sk-context">
+    <div class="sk-section__inner">
+      <span class="sk-section-label" data-reveal>
+        <span lang="en">01 — Starting point</span>
+        <span lang="es">01 — Punto de partida</span>
+      </span>
+
+      <h2 class="sk-h2" data-reveal data-d="40">
+        <span lang="en"
+          >A working system that no one could safely change quickly.</span
+        >
+        <span lang="es"
+          >Un sistema funcional que nadie podía cambiar rápido con seguridad.</span
+        >
+      </h2>
+
+      <p class="sk-body" data-reveal data-d="80">
+        <span lang="en"
+          >Seventeen interdependent Java enterprise applications, deployed
+          through Jenkins Freestyle jobs and application-specific scripts on a
+          legacy WebLogic platform. The brief wasn't just to keep these 17
+          running — the architecture had to let the client add new migrations
+          over time without a redesign.</span
+        >
+        <span lang="es"
+          >17 aplicaciones Java enterprise interdependientes, desplegadas
+          mediante jobs Jenkins Freestyle y scripts específicos por aplicación
+          sobre una plataforma WebLogic legacy. El encargo no era solo mantener
+          esas 17 en marcha: la arquitectura debía permitir incorporar nuevas
+          migraciones sin rediseñarla.</span
+        >
+      </p>
+
+      <div class="sk-split2" data-reveal data-d="120">
+        <div>
+          <span class="sk-sublabel">
+            <span lang="en">What the old process cost</span>
+            <span lang="es">Lo que costaba el proceso anterior</span>
+          </span>
+          <ul class="sk-bullet-list">
+            <li>
+              <span lang="en">Logic duplicated across every application.</span>
+              <span lang="es"
+                >La lógica estaba duplicada entre aplicaciones.</span
+              >
+            </li>
+            <li>
+              <span lang="en">Changes had to be applied job by job.</span>
+              <span lang="es">Los cambios debían aplicarse job por job.</span>
+            </li>
+            <li>
+              <span lang="en"
+                >Configuration, paths and behaviour tightly coupled.</span
+              >
+              <span lang="es"
+                >Configuración, rutas y comportamiento fuertemente acoplados.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Part of the process depended on tacit knowledge and
+                unconventional filesystem structures.</span
+              >
+              <span lang="es"
+                >Parte del funcionamiento dependía de conocimiento tácito y
+                estructuras de filesystem poco convencionales.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >A full deployment meant running multiple jobs manually, in a
+                specific order.</span
+              >
+              <span lang="es"
+                >El despliegue completo exigía ejecutar manualmente varios jobs
+                en un orden concreto.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Processes were hard to version, review and evolve safely.</span
+              >
+              <span lang="es"
+                >Los procesos eran difíciles de versionar, revisar y evolucionar
+                con seguridad.</span
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <span class="sk-sublabel">
+            <span lang="en">The hard constraint</span>
+            <span lang="es">La restricción clave</span>
+          </span>
+          <p class="sk-body sk-body--sm">
+            <span lang="en"
+              >Modernisation had to happen without touching the applications'
+              pom.xml files or code — ruling out an idealised migration where
+              every project adopted one uniform structure.</span
+            >
+            <span lang="es"
+              >La modernización debía hacerse sin modificar los pom.xml ni el
+              código de las aplicaciones, descartando una migración idealizada
+              con una estructura uniforme para todos los proyectos.</span
+            >
+          </p>
+          <ul class="sk-bullet-list sk-bullet-list--muted">
+            <li>
+              <span lang="en"
+                >Application-specific Maven profiles and filters.</span
+              >
+              <span lang="es">Perfiles y filtros Maven específicos.</span>
+            </li>
+            <li>
+              <span lang="en">JAR, WAR, EAR and multi-module projects.</span>
+              <span lang="es">Proyectos JAR, WAR, EAR y multimódulo.</span>
+            </li>
+            <li>
+              <span lang="en">Historic web.xml structures.</span>
+              <span lang="es">Estructuras históricas de web.xml.</span>
+            </li>
+            <li>
+              <span lang="en"
+                >External configuration generated during the build.</span
+              >
+              <span lang="es"
+                >Configuración externa generada durante el build.</span
+              >
+            </li>
+            <li>
+              <span lang="en">Static resources published to Apache.</span>
+              <span lang="es">Recursos estáticos publicados en Apache.</span>
+            </li>
+            <li>
+              <span lang="en"
+                >Different paths, targets and deployment variants.</span
+              >
+              <span lang="es"
+                >Distintas rutas, targets y variantes de despliegue.</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 ARCHITECTURE ============ -->
+  <section class="sk-section" id="sk-arch">
+    <div class="sk-section__inner">
+      <span class="sk-section-label" data-reveal>
+        <span lang="en">02 — The architecture</span>
+        <span lang="es">02 — La arquitectura</span>
+      </span>
+
+      <h2 class="sk-h2" data-reveal data-d="40">
+        <span lang="en"
+          >Separate what's common from what's specific — without ignoring real
+          constraints.</span
+        >
+        <span lang="es"
+          >Separar lo común de lo específico, sin ignorar las restricciones
+          reales.</span
+        >
+      </h2>
+
+      <p class="sk-body" data-reveal data-d="80">
+        <span lang="en"
+          >The core of the solution combined three elements, plus a central
+          orchestrator to run applications in the required order.</span
+        >
+        <span lang="es"
+          >La pieza central combinó tres elementos, más un orquestador central
+          para ejecutar las aplicaciones en el orden requerido.</span
+        >
+      </p>
+
+      <!-- Pipeline flow -->
+      <div class="sk-flow-card" data-reveal data-d="120">
+        <span class="sk-sublabel">
+          <span lang="en">Pipeline flow, per application</span>
+          <span lang="es">Flujo del pipeline, por aplicación</span>
+        </span>
+        <div class="sk-flow-steps">
+          {
+            [
+              {
+                en: "Checkout by branch or tag",
+                es: "Checkout por branch o tag",
+              },
+              { en: "Maven build", es: "Build Maven" },
+              {
+                en: "Adaptations for legacy structures",
+                es: "Adaptaciones de estructuras legacy",
+              },
+              {
+                en: "External configuration generation",
+                es: "Generación de configuración externa",
+              },
+              {
+                en: "Publication and validation in Nexus",
+                es: "Publicación y validación en Nexus",
+              },
+              {
+                en: "Transfer via SSH/SCP",
+                es: "Transferencia por SSH/SCP",
+              },
+              {
+                en: "Optional static-resource publishing",
+                es: "Publicación opcional de recursos estáticos",
+              },
+              {
+                en: "Deployment on WebLogic 14c, with validation",
+                es: "Despliegue sobre WebLogic 14c, con validación",
+              },
+            ].map((step, i, arr) => (
+              <div class="sk-flow-step">
+                <span class="sk-flow-step__dot" aria-hidden="true" />
+                {i < arr.length - 1 && (
+                  <span class="sk-flow-step__line" aria-hidden="true" />
+                )}
+                <span class="sk-flow-step__text">
+                  <span lang="en">{step.en}</span>
+                  <span lang="es">{step.es}</span>
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Three pillars -->
+      <div class="sk-pillars" data-reveal data-d="160">
+        <div class="sk-pillar">
+          <span class="sk-pillar__tag">
+            <span lang="en">Logic</span>
+            <span lang="es">Lógica</span>
+          </span>
+          <p class="sk-pillar__body">
+            <span lang="en"
+              >Versioned once in the Shared Library, instead of duplicated
+              across 17+ Freestyle jobs.</span
+            >
+            <span lang="es"
+              >Versionada una sola vez en la Shared Library, en lugar de
+              duplicada en más de 17 jobs Freestyle.</span
+            >
+          </p>
+        </div>
+        <div class="sk-pillar">
+          <span class="sk-pillar__tag">
+            <span lang="en">Configuration</span>
+            <span lang="es">Configuración</span>
+          </span>
+          <p class="sk-pillar__body">
+            <span lang="en"
+              >Externalised via Jenkins Managed Files — changeable without
+              touching pipeline logic.</span
+            >
+            <span lang="es"
+              >Externalizada mediante Jenkins Managed Files: se puede cambiar
+              sin tocar la lógica de los pipelines.</span
+            >
+          </p>
+        </div>
+        <div class="sk-pillar">
+          <span class="sk-pillar__tag">
+            <span lang="en">Secrets</span>
+            <span lang="es">Secretos</span>
+          </span>
+          <p class="sk-pillar__body">
+            <span lang="en"
+              >Stored in Jenkins Credentials, referenced by the pipelines
+              instead of hardcoded.</span
+            >
+            <span lang="es"
+              >Almacenados en Jenkins Credentials, referenciados por los
+              pipelines en lugar de estar hardcodeados.</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 RESOLVING LEGACY ============ -->
+  <section class="sk-section sk-section--alt" id="sk-legacy">
+    <div class="sk-section__inner">
+      <span class="sk-section-label" data-reveal>
+        <span lang="en">03 — Resolving legacy without relocating it</span>
+        <span lang="es">03 — Resolver lo legacy sin trasladarlo</span>
+      </span>
+
+      <h2 class="sk-h2" data-reveal data-d="40">
+        <span lang="en"
+          >Wrapping old scripts isn't modernisation. Absorbing their behaviour
+          is.</span
+        >
+        <span lang="es"
+          >Envolver scripts antiguos no es modernizar. Absorber su
+          comportamiento, sí.</span
+        >
+      </h2>
+
+      <div class="sk-legacy-cards" data-reveal data-d="80">
+        <div class="sk-legacy-card">
+          <span class="sk-legacy-card__title">
+            <span lang="en">Normalising web.xml</span>
+            <span lang="es">Normalización de web.xml</span>
+          </span>
+          <p class="sk-legacy-card__body">
+            <span lang="en"
+              >Some WAR modules kept their web.xml in non-standard locations.
+              The pipeline split the build into phases — compile, detect WAR
+              modules and their effective paths, normalise the descriptor at the
+              right point in the Maven lifecycle, then continue packaging
+              without a later <code>clean</code> undoing the fix.</span
+            >
+            <span lang="es"
+              >Algunas aplicaciones WAR mantenían el descriptor web.xml en
+              ubicaciones distintas de las esperadas. La pipeline dividía el
+              build en fases: compilar, detectar los módulos WAR y sus rutas
+              efectivas, normalizar el descriptor en el momento correcto del
+              ciclo Maven, y continuar el empaquetado sin que un <code
+                >clean</code
+              > posterior deshiciera la adaptación.</span
+            >
+          </p>
+        </div>
+
+        <div class="sk-legacy-card">
+          <span class="sk-legacy-card__title">
+            <span lang="en">Externally generated configuration</span>
+            <span lang="es"
+              >Configuración externa generada durante el build</span
+            >
+          </span>
+          <p class="sk-legacy-card__body">
+            <span lang="en"
+              >Several applications consumed configuration files external to the
+              deployable artefact. The new pipeline preserved this via
+              controlled temp directories: Maven handled filtering and
+              transformation, and the result was distributed to the correct
+              remote filesystem — no config baked into the WAR/EAR.</span
+            >
+            <span lang="es"
+              >Varias aplicaciones consumían configuración externa al artefacto
+              desplegable. La nueva pipeline mantuvo este comportamiento con
+              directorios temporales controlados: Maven filtraba y transformaba,
+              y el resultado se distribuía al filesystem remoto correspondiente,
+              sin meter configuración dentro del WAR o EAR.</span
+            >
+          </p>
+        </div>
+
+        <div class="sk-legacy-card">
+          <span class="sk-legacy-card__title">
+            <span lang="en">Resolving artefacts in Nexus</span>
+            <span lang="es">Resolución de artefactos en Nexus</span>
+          </span>
+          <p class="sk-legacy-card__body">
+            <span lang="en"
+              >Deployment stopped depending on the local build result. Nexus
+              became the source of truth, supporting three modes: build +
+              publish + deploy, build only, or deploy an already-published
+              version — decoupling the build cycle from the deploy cycle.</span
+            >
+            <span lang="es"
+              >El despliegue dejó de depender del resultado local del build.
+              Nexus pasó a ser la fuente de verdad, con tres modos posibles:
+              build + publicación + despliegue, solo build, o despliegue de una
+              versión ya publicada — desacoplando construcción y despliegue.</span
+            >
+          </p>
+        </div>
+      </div>
+
+      <!-- Orchestrator -->
+      <div class="sk-legacy-card sk-orchestrator-card" data-reveal data-d="120">
+        <span class="sk-legacy-card__title">
+          <span lang="en">Orchestrating dependent applications</span>
+          <span lang="es">Orquestar aplicaciones dependientes</span>
+        </span>
+        <p class="sk-legacy-card__body">
+          <span lang="en"
+            >Applications had to run in a specific sequence. The new
+            orchestrator:</span
+          >
+          <span lang="es"
+            >Las aplicaciones debían ejecutarse en una secuencia concreta. El
+            nuevo orquestador:</span
+          >
+        </p>
+        <ul class="sk-bullet-list">
+          <li>
+            <span lang="en">Loaded execution order from a Managed File.</span>
+            <span lang="es"
+              >Cargaba el orden de ejecución desde un Managed File.</span
+            >
+          </li>
+          <li>
+            <span lang="en"
+              >Ran pipelines sequentially, by the selected variant.</span
+            >
+            <span lang="es"
+              >Ejecutaba los pipelines secuencialmente, según la variante
+              seleccionada.</span
+            >
+          </li>
+          <li>
+            <span lang="en">Accepted branch, tag or version.</span>
+            <span lang="es">Aceptaba branch, tag o versión.</span>
+          </li>
+          <li>
+            <span lang="en"
+              >Allowed starting or stopping at a specific point.</span
+            >
+            <span lang="es"
+              >Permitía empezar o detener la secuencia en un punto concreto.</span
+            >
+          </li>
+          <li>
+            <span lang="en">Stopped on the first failure.</span>
+            <span lang="es">Interrumpía la ejecución ante el primer fallo.</span
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 SCOPE + VALIDATION ============ -->
+  <section class="sk-section" id="sk-scope">
+    <div class="sk-section__inner">
+      <span class="sk-section-label" data-reveal>
+        <span lang="en">04 — Scope implemented</span>
+        <span lang="es">04 — Alcance implementado</span>
+      </span>
+
+      <h2 class="sk-h2" data-reveal data-d="40">
+        <span lang="en"
+          >A base built to extend, not a closed solution for 17 apps.</span
+        >
+        <span lang="es"
+          >Una base preparada para crecer, no una solución cerrada para 17 apps.</span
+        >
+      </h2>
+
+      <p class="sk-body" data-reveal data-d="80">
+        <span lang="en"
+          >The first phase considered 34 potential pipelines — 17 applications
+          with two operational variants each. The architecture was designed as
+          an extensible base, not a closed set.</span
+        >
+        <span lang="es"
+          >La primera fase contemplaba 34 pipelines potenciales: 17 aplicaciones
+          con dos variantes operativas cada una. La arquitectura se diseñó como
+          una base extensible, no como un conjunto cerrado.</span
+        >
+      </p>
+
+      <div class="sk-stat-row" data-reveal data-d="120">
+        <div class="sk-stat-cell">
+          <div class="sk-stat-cell__value">17</div>
+          <div class="sk-stat-cell__label">
+            <span lang="en">Main pipelines</span>
+            <span lang="es">Pipelines principales</span>
+          </div>
+        </div>
+        <div class="sk-stat-cell">
+          <div class="sk-stat-cell__value">5</div>
+          <div class="sk-stat-cell__label">
+            <span lang="en">Secondary variants</span>
+            <span lang="es">Variantes adicionales</span>
+          </div>
+        </div>
+        <div class="sk-stat-cell sk-stat-cell--accent">
+          <div class="sk-stat-cell__value sk-stat-cell__value--light">1</div>
+          <div class="sk-stat-cell__label sk-stat-cell__label--light">
+            <span lang="en">Central orchestrator</span>
+            <span lang="es">Orquestador central</span>
+          </div>
+        </div>
+      </div>
+
+      <span class="sk-section-label" data-reveal data-d="40">
+        <span lang="en">Validation</span>
+        <span lang="es">Validación</span>
+      </span>
+      <p class="sk-body sk-body--sm" data-reveal data-d="80">
+        <span lang="en"
+          >Tested against real applications in development while the legacy
+          platform stayed available in parallel.</span
+        >
+        <span lang="es"
+          >Probada sobre aplicaciones reales en desarrollo, mientras la
+          plataforma legacy seguía disponible en paralelo.</span
+        >
+      </p>
+      <ul class="sk-validation-grid" data-reveal data-d="120">
+        {
+          [
+            { en: "Maven build", es: "Build Maven" },
+            {
+              en: "Artefact publication and retrieval",
+              es: "Publicación y recuperación de artefactos",
+            },
+            {
+              en: "Configuration transformations",
+              es: "Transformaciones de configuración",
+            },
+            {
+              en: "Apps with and without static resources",
+              es: "Aplicaciones con y sin recursos estáticos",
+            },
+            {
+              en: "Transfers to remote servers",
+              es: "Transferencias a servidores remotos",
+            },
+            {
+              en: "Deploy and redeploy on WebLogic 14c",
+              es: "Deploy y redeploy sobre WebLogic 14c",
+            },
+            {
+              en: "Technical verification of deployments",
+              es: "Verificación técnica de los despliegues",
+            },
+            {
+              en: "Sequential execution via the orchestrator",
+              es: "Ejecución secuencial mediante el orquestador",
+            },
+            {
+              en: "Functional comparison against prior behaviour",
+              es: "Comparación funcional con el comportamiento anterior",
+            },
+          ].map((item) => (
+            <li class="sk-validation-item">
+              <span class="sk-validation-item__check" aria-hidden="true">
+                ✓
+              </span>
+              <p class="sk-validation-item__text">
+                <span lang="en">{item.en}</span>
+                <span lang="es">{item.es}</span>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 05 BEFORE / AFTER ============ -->
+  <section class="sk-section sk-section--alt" id="sk-result">
+    <div class="sk-section__inner">
+      <span class="sk-section-label" data-reveal>
+        <span lang="en">05 — Result</span>
+        <span lang="es">05 — Resultado</span>
+      </span>
+
+      <h2 class="sk-h2" data-reveal data-d="40">
+        <span lang="en"
+          >From a collection of one-off jobs to a common, extensible platform.</span
+        >
+        <span lang="es"
+          >De una colección de jobs específicos a una plataforma común y
+          extensible.</span
+        >
+      </h2>
+
+      <div class="sk-before-after" data-reveal data-d="80">
+        <div class="sk-ba-col sk-ba-col--before">
+          <span class="sk-ba-col__label">
+            <span lang="en">Before</span>
+            <span lang="es">Antes</span>
+          </span>
+          <div class="sk-ba-col__items">
+            {
+              [
+                {
+                  en: "Independent Freestyle jobs",
+                  es: "Jobs Freestyle independientes",
+                },
+                { en: "Hardcoded scripts", es: "Scripts hardcodeados" },
+                { en: "Duplicated logic", es: "Lógica duplicada" },
+                {
+                  en: "Configuration and secrets coupled together",
+                  es: "Configuración y secretos acoplados",
+                },
+                {
+                  en: "Manual, per-application changes",
+                  es: "Cambios manuales por aplicación",
+                },
+                {
+                  en: "Sequential deploys run job by job",
+                  es: "Despliegues secuenciales ejecutados job a job",
+                },
+                {
+                  en: "Dependence on undocumented knowledge",
+                  es: "Dependencia de conocimiento no documentado",
+                },
+              ].map((item) => (
+                <p class="sk-ba-col__item">
+                  <span lang="en">{item.en}</span>
+                  <span lang="es">{item.es}</span>
+                </p>
+              ))
+            }
+          </div>
+        </div>
+        <div class="sk-ba-col sk-ba-col--after">
+          <span class="sk-ba-col__label sk-ba-col__label--accent">
+            <span lang="en">After</span>
+            <span lang="es">Después</span>
+          </span>
+          <div class="sk-ba-col__items">
+            {
+              [
+                {
+                  en: "Minimal, versioned Jenkinsfiles",
+                  es: "Jenkinsfiles mínimos y versionados",
+                },
+                {
+                  en: "One common Shared Library",
+                  es: "Una Shared Library común",
+                },
+                {
+                  en: "Centralised configuration",
+                  es: "Configuración centralizada",
+                },
+                {
+                  en: "Secrets managed via Credentials",
+                  es: "Secretos gestionados mediante Credentials",
+                },
+                {
+                  en: "Traceable artefacts in Nexus",
+                  es: "Artefactos trazables en Nexus",
+                },
+                {
+                  en: "Build and deploy decoupled",
+                  es: "Build y deploy desacoplados",
+                },
+                {
+                  en: "Deploys by branch, tag or published version",
+                  es: "Despliegues por branch, tag o versión publicada",
+                },
+                {
+                  en: "Central orchestration with partial execution",
+                  es: "Orquestación central con ejecución parcial",
+                },
+                {
+                  en: "A pattern ready for new apps, variants and future migrations",
+                  es: "Patrón preparado para nuevas apps, variantes y futuras migraciones",
+                },
+              ].map((item) => (
+                <p class="sk-ba-col__item sk-ba-col__item--strong">
+                  <span lang="en">{item.en}</span>
+                  <span lang="es">{item.es}</span>
+                </p>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Client feedback -->
+      <div class="sk-feedback" data-reveal data-d="120">
+        <div class="sk-feedback__header">
+          <span class="sk-feedback__icon" aria-hidden="true">"</span>
+          <span class="sk-feedback__label">
+            <span lang="en">Client feedback</span>
+            <span lang="es">Feedback del cliente</span>
+          </span>
+        </div>
+        <p class="sk-feedback__quote">
+          <span lang="en"
+            >Celia is collaborating with us on a complex CI/CD implementation
+            with Jenkins for one of our main clients. Her performance has been
+            excellent — very proactive in proposing alternatives and resolving
+            problems. From the very start she understood the project's needs
+            perfectly. The team values her involvement highly; in fact, the
+            initial scope was expanded because of the trust her work has earned.
+            Highly recommended.</span
+          >
+          <span lang="es"
+            >Celia está colaborando con nosotros en una compleja implantación de
+            un entorno de CI/CD con Jenkins para uno de nuestros principales
+            clientes. Su desempeño ha sido estupendo, siendo muy proactiva
+            proponiendo alternativas y resolutiva ante los problemas. Desde el
+            primer momento ha comprendido perfectamente las necesidades del
+            proyecto. El equipo de trabajo valora muy positivamente su
+            participación en el proyecto. De hecho, el alcance inicial se ha
+            ampliado por la confianza que han tenido en su trabajo. Recomendable
+            totalmente.</span
+          >
+        </p>
+        <div class="sk-feedback__divider" aria-hidden="true"></div>
+        <span class="sk-feedback__attribution">
+          <span lang="en">— Director of Projects, ERHARDT Serikat</span>
+          <span lang="es">— Directora de Proyectos, ERHARDT Serikat</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTRIBUTION + WHAT IT SHOWS ============ -->
+  <section class="sk-section" id="sk-contrib">
+    <div class="sk-section__inner">
+      <div class="sk-split2">
+        <div data-reveal>
+          <span class="sk-section-label">
+            <span lang="en">My contribution</span>
+            <span lang="es">Mi aportación</span>
+          </span>
+          <p class="sk-body sk-body--sm sk-body--mt">
+            <span lang="en"
+              >I owned analysis, design and implementation individually,
+              coordinating with dev and admin teams where access, permissions or
+              behaviour needed validating.</span
+            >
+            <span lang="es"
+              >Asumí de forma individual el análisis, diseño e implementación,
+              coordinándome con los equipos de desarrollo y administración
+              cuando había que validar accesos, permisos o comportamiento.</span
+            >
+          </p>
+          <ul class="sk-bullet-list">
+            <li>
+              <span lang="en"
+                >Reconstructed the system's behaviour with no closed
+                specification.</span
+              >
+              <span lang="es"
+                >Reconstruir el funcionamiento del sistema sin una
+                especificación cerrada.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Identified which behaviours had to be preserved and which could
+                be abstracted.</span
+              >
+              <span lang="es"
+                >Identificar qué comportamientos debían conservarse y cuáles
+                podían abstraerse.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Designed the Jenkinsfile, Shared Library, Managed Files and
+                Credentials architecture.</span
+              >
+              <span lang="es"
+                >Diseñar la arquitectura de Jenkinsfiles, Shared Library,
+                Managed Files y Credentials.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Implemented the pipelines and the orchestrator.</span
+              >
+              <span lang="es">Implementar los pipelines y el orquestador.</span>
+            </li>
+            <li>
+              <span lang="en"
+                >Adapted the process to heterogeneous applications without
+                touching their code.</span
+              >
+              <span lang="es"
+                >Adaptar el proceso a aplicaciones heterogéneas sin modificar su
+                código.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Resolved Maven, Nexus, SSH, filesystem and WebLogic issues.</span
+              >
+              <span lang="es"
+                >Resolver problemas de Maven, Nexus, SSH, filesystem y WebLogic.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Validated the result against real applications.</span
+              >
+              <span lang="es"
+                >Validar el resultado sobre aplicaciones reales.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Documented and transferred the knowledge needed to extend the
+                platform.</span
+              >
+              <span lang="es"
+                >Documentar y transferir el conocimiento para extender la
+                plataforma.</span
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div data-reveal data-d="60">
+          <span class="sk-section-label">
+            <span lang="en">What this project shows</span>
+            <span lang="es">Qué demuestra este proyecto</span>
+          </span>
+          <ul class="sk-bullet-list sk-bullet-list--muted sk-bullet-list--mt">
+            <li>
+              <span lang="en">Understand before replacing.</span>
+              <span lang="es">Comprender antes de sustituir.</span>
+            </li>
+            <li>
+              <span lang="en"
+                >Look for real behaviour, not just available documentation.</span
+              >
+              <span lang="es"
+                >Buscar el comportamiento real, no solo la documentación
+                disponible.</span
+              >
+            </li>
+            <li>
+              <span lang="en">Reduce uncertainty before proposing change.</span>
+              <span lang="es"
+                >Reducir incertidumbre antes de proponer cambios.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Modernise without denying the context's constraints.</span
+              >
+              <span lang="es"
+                >Modernizar sin negar las restricciones del contexto.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Design common mechanisms without forcing artificial uniformity.</span
+              >
+              <span lang="es"
+                >Diseñar mecanismos comunes sin forzar una homogeneidad
+                artificial.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Prioritise traceability, maintainability and operability.</span
+              >
+              <span lang="es"
+                >Priorizar trazabilidad, mantenibilidad y capacidad de
+                operación.</span
+              >
+            </li>
+            <li>
+              <span lang="en"
+                >Leave a solution the team can understand and extend on its own.</span
+              >
+              <span lang="es"
+                >Dejar una solución que el equipo pueda entender y extender
+                solo.</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="sk-closing" data-reveal data-d="80">
+        <span lang="en"
+          >The most important decision wasn't technological. It was separating
+          what's common from what's specific, without ignoring the system's real
+          constraints.</span
+        >
+        <span lang="es"
+          >La decisión más relevante no fue tecnológica. Fue separar lo común de
+          lo específico sin ignorar las restricciones reales del sistema.</span
+        >
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ NEXT / CONTACT ============ -->
+  <section class="sk-section sk-section--alt sk-cta-section" id="sk-cta">
+    <div class="sk-cta-section__inner">
+      <h2 class="sk-cta-section__headline" data-reveal>
+        <span lang="en">Have a system like this one?</span>
+        <span lang="es">¿Tienes un sistema parecido?</span>
+      </h2>
+      <p class="sk-cta-section__body" data-reveal data-d="60">
+        <span lang="en"
+          >The first conversation is just about understanding what you have — no
+          pitch, no obligation.</span
+        >
+        <span lang="es"
+          >La primera conversación consiste solo en entender lo que tienes, sin
+          propuesta comercial ni compromiso.</span
+        >
+      </p>
+      <div class="sk-cta-section__actions" data-reveal data-d="120">
+        <a
+          href="mailto:hola@celiarico.dev"
+          class="sk-cta-btn sk-cta-btn--primary"
+        >
+          <span lang="en">Start a conversation</span>
+          <span lang="es">Iniciar una conversación</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <a href="/projects" class="sk-cta-btn sk-cta-btn--secondary">
+          <span lang="en">See all projects</span>
+          <span lang="es">Ver todos los proyectos</span>
+        </a>
+      </div>
+      <p class="sk-cta-section__note" data-reveal data-d="160">
+        <span lang="en"
+          >This case study describes work delivered for ERHARDT Serikat on
+          behalf of one of its clients. Internal application, server and
+          configuration names have been omitted or anonymised. Public
+          attribution and the client review are pending validation before final
+          publication.</span
+        >
+        <span lang="es"
+          >Este caso de estudio describe el trabajo realizado para ERHARDT
+          Serikat en un proyecto para uno de sus clientes. Nombres de
+          aplicaciones, servidores y configuración se han omitido o anonimizado.
+          La atribución pública y la revisión del cliente están pendientes de
+          validación antes de la publicación definitiva.</span
+        >
+      </p>
+    </div>
+  </section>
+</ProjectLayout>
+
+<style>
+  /* ——— SHARED SECTION STYLES ——— */
+  .sk-section {
+    position: relative;
+    padding: clamp(64px, 8vh, 96px) clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  .sk-section--alt {
+    background: var(--bg2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sk-section__inner {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  /* ——— HERO ——— */
+  .sk-hero {
+    position: relative;
+    padding: clamp(56px, 8vh, 96px) clamp(1.25rem, 4vw, 3.5rem)
+      clamp(48px, 6vh, 72px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sk-hero__inner {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .sk-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font: 600 12.5px/1 var(--font-mono);
+    letter-spacing: 0.04em;
+    color: var(--ink3);
+    text-decoration: none;
+    margin-bottom: 30px;
+    transition: color 0.25s;
+  }
+
+  .sk-back:hover {
+    color: var(--accent);
+  }
+
+  .sk-tag {
+    font: 600 10.5px/1 var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 7px;
+    background: var(--accent-soft);
+  }
+
+  .sk-hero__headline {
+    margin: 20px 0 0;
+    font: 700 clamp(30px, 4.6vw, 50px) / 1.1 var(--font-body);
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  .sk-hero__description {
+    margin: 22px 0 0;
+    max-width: 700px;
+    font: 400 clamp(16px, 1.3vw, 18px) / 1.65 var(--font-body);
+    color: var(--ink2);
+  }
+
+  /* Meta grid */
+  .sk-meta-grid {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .sk-meta-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .sk-meta-cell {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+  }
+
+  .sk-meta-cell--accent {
+    background: linear-gradient(160deg, var(--accent), var(--accent-2));
+    border-color: transparent;
+  }
+
+  .sk-meta-cell__label {
+    font: 500 9px/1 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .sk-meta-cell__label--light {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .sk-meta-cell__value {
+    margin-top: 6px;
+    font: 600 13.5px/1.3 var(--font-body);
+    color: var(--ink);
+  }
+
+  .sk-meta-cell__value--light {
+    color: #fff;
+  }
+
+  /* Tech tags */
+  .sk-tech-tags {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .sk-tech-tag {
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+    font: 600 11.5px/1 var(--font-mono);
+    color: var(--ink2);
+    white-space: nowrap;
+  }
+
+  /* ——— TYPOGRAPHY HELPERS ——— */
+  .sk-section-label {
+    font: 600 11.5px/1 var(--font-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0;
+  }
+
+  .sk-h2 {
+    margin: 18px 0 20px;
+    max-width: 720px;
+    font: 700 clamp(24px, 3.2vw, 36px) / 1.2 var(--font-body);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .sk-body {
+    margin: 0 0 36px;
+    max-width: 720px;
+    font: 400 16.5px / 1.7 var(--font-body);
+    color: var(--ink2);
+  }
+
+  .sk-body--sm {
+    font-size: 15.5px;
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+
+  .sk-body--mt {
+    margin-top: 18px;
+  }
+
+  .sk-sublabel {
+    font: 600 9.5px/1 var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  /* ——— SUMMARY ——— */
+  .sk-summary-table {
+    margin-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+
+  .sk-summary-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  @media (max-width: 640px) {
+    .sk-summary-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+
+  .sk-summary-row__key {
+    font: 600 12px/1.4 var(--font-body);
+    color: var(--ink3);
+  }
+
+  .sk-summary-row__val {
+    font: 500 15px/1.5 var(--font-body);
+    color: var(--ink);
+  }
+
+  .sk-pullquote {
+    margin: 40px 0 0;
+    padding: 26px 30px;
+    border-radius: 16px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    border-left: none;
+  }
+
+  .sk-pullquote__text {
+    margin: 0;
+    font: 500 17px/1.65 var(--font-body);
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  /* ——— SPLIT 2-COL ——— */
+  .sk-split2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  @media (max-width: 900px) {
+    .sk-split2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ——— BULLET LISTS ——— */
+  .sk-bullet-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sk-bullet-list--mt {
+    margin-top: 20px;
+  }
+
+  .sk-bullet-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .sk-bullet-list li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+  }
+
+  .sk-bullet-list--muted li::before {
+    background: var(--ink3);
+  }
+
+  .sk-bullet-list li p,
+  .sk-bullet-list li span:not(.sk-bullet-list li::before) {
+    margin: 0;
+    font: 400 15px/1.55 var(--font-body);
+    color: var(--ink2);
+  }
+
+  /* ——— FLOW CARD ——— */
+  .sk-flow-card {
+    padding: 28px;
+    border-radius: 18px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+
+  .sk-flow-steps {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .sk-flow-step {
+    position: relative;
+    padding-left: 26px;
+    padding-bottom: 16px;
+  }
+
+  .sk-flow-step__dot {
+    position: absolute;
+    left: 3px;
+    top: 6px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .sk-flow-step__line {
+    position: absolute;
+    left: 6px;
+    top: 14px;
+    bottom: 0;
+    width: 1.5px;
+    background: var(--line2);
+  }
+
+  .sk-flow-step__text {
+    font: 500 14.5px/1.5 var(--font-body);
+    color: var(--ink2);
+  }
+
+  /* ——— PILLARS ——— */
+  .sk-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .sk-pillars {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .sk-pillar {
+    padding: 24px 22px;
+    border-radius: 16px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+  }
+
+  .sk-pillar__tag {
+    font: 600 9.5px/1 var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+  }
+
+  .sk-pillar__body {
+    margin: 12px 0 0;
+    font: 400 14.5px/1.6 var(--font-body);
+    color: var(--ink2);
+  }
+
+  /* ——— LEGACY CARDS ——— */
+  .sk-legacy-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 30px;
+  }
+
+  .sk-legacy-card {
+    padding: 26px 28px;
+    border-radius: 16px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+
+  .sk-orchestrator-card {
+    margin-top: 32px;
+  }
+
+  .sk-legacy-card__title {
+    font: 700 15.5px/1.3 var(--font-body);
+    color: var(--ink);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .sk-legacy-card__body {
+    margin: 0 0 12px;
+    font: 400 15px/1.65 var(--font-body);
+    color: var(--ink2);
+    max-width: 780px;
+  }
+
+  /* ——— STAT ROW ——— */
+  .sk-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+
+  @media (max-width: 640px) {
+    .sk-stat-row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .sk-stat-cell {
+    padding: 20px;
+    border-radius: 14px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .sk-stat-cell--accent {
+    background: linear-gradient(160deg, var(--accent), var(--accent-2));
+    border-color: transparent;
+  }
+
+  .sk-stat-cell__value {
+    font: 700 30px/1 var(--font-body);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .sk-stat-cell__value--light {
+    color: #fff;
+  }
+
+  .sk-stat-cell__label {
+    margin-top: 6px;
+    font: 500 10px/1 var(--font-mono);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .sk-stat-cell__label--light {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* ——— VALIDATION ——— */
+  .sk-validation-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 24px;
+  }
+
+  @media (max-width: 640px) {
+    .sk-validation-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .sk-validation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 4px 0;
+  }
+
+  .sk-validation-item__check {
+    color: var(--accent);
+    font-size: 13px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .sk-validation-item__text {
+    margin: 0;
+    font: 400 14.5px/1.5 var(--font-body);
+    color: var(--ink2);
+  }
+
+  /* ——— BEFORE / AFTER ——— */
+  .sk-before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  @media (max-width: 900px) {
+    .sk-before-after {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .sk-ba-col {
+    padding: 28px;
+    border-radius: 16px;
+  }
+
+  .sk-ba-col--before {
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+
+  .sk-ba-col--after {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+  }
+
+  .sk-ba-col__label {
+    font: 600 10.5px/1 var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .sk-ba-col__label--accent {
+    color: var(--accent);
+  }
+
+  .sk-ba-col__items {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .sk-ba-col__item {
+    margin: 0;
+    font: 400 14.5px/1.55 var(--font-body);
+    color: var(--ink2);
+  }
+
+  .sk-ba-col__item--strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ——— FEEDBACK ——— */
+  .sk-feedback {
+    padding: 24px 26px;
+    border-radius: 14px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+
+  .sk-feedback__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .sk-feedback__icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font:
+      700 13px/1 Georgia,
+      serif;
+    color: var(--accent);
+  }
+
+  .sk-feedback__label {
+    font: 600 9.5px/1 var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .sk-feedback__quote {
+    margin: 0;
+    font: 400 14.5px/1.65 var(--font-body);
+    color: var(--ink2);
+  }
+
+  .sk-feedback__divider {
+    height: 1px;
+    background: var(--line);
+    margin: 16px 0 12px;
+  }
+
+  .sk-feedback__attribution {
+    font: 600 11.5px/1 var(--font-mono);
+    letter-spacing: 0.02em;
+    color: var(--ink3);
+  }
+
+  /* ——— CLOSING STATEMENT ——— */
+  .sk-closing {
+    margin: 40px 0 0;
+    font: 500 clamp(18px, 2vw, 22px) / 1.5 var(--font-body);
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    padding-top: 26px;
+    border-top: 2px solid var(--ink);
+  }
+
+  /* ——— CTA SECTION ——— */
+  .sk-cta-section {
+    border-bottom: none;
+  }
+
+  .sk-cta-section__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .sk-cta-section__headline {
+    margin: 0;
+    font: 700 clamp(26px, 3.6vw, 40px) / 1.15 var(--font-body);
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  .sk-cta-section__body {
+    margin: 18px auto 0;
+    max-width: 480px;
+    font: 400 16px/1.6 var(--font-body);
+    color: var(--ink2);
+  }
+
+  .sk-cta-section__actions {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .sk-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font: 600 15px/1 var(--font-body);
+    transition: transform 0.25s;
+  }
+
+  .sk-cta-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .sk-cta-btn--primary {
+    padding: 15px 28px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    color: #fff;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.18) inset,
+      0 14px 30px -12px var(--accent-glow);
+  }
+
+  .sk-cta-btn--secondary {
+    font-size: 14.5px;
+    color: var(--ink2);
+  }
+
+  .sk-cta-btn--secondary:hover {
+    color: var(--accent);
+    transform: none;
+  }
+
+  .sk-cta-section__note {
+    margin: 48px 0 0;
+    font: 400 italic 12px/1.6 var(--font-body);
+    color: var(--ink3);
+  }
+</style>

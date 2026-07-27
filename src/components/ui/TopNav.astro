@@ -23,10 +23,10 @@ import logoImg from "../../assets/ChatGPT Image Jul 14, 2026, 02_03_10 PM(1).png
         </button>
       </li>
       <li class="topnav__links-item">
-        <button data-target="evidence" data-navlink class="topnav__link">
-          <span lang="en">Evidence</span>
-          <span lang="es">Evidencia</span>
-        </button>
+        <a href="/projects" class="topnav__link">
+          <span lang="en">Real projects</span>
+          <span lang="es">Proyectos reales</span>
+        </a>
       </li>
 
       <li aria-hidden="true" class="topnav__divider topnav__links-item"></li>
@@ -201,6 +201,8 @@ import logoImg from "../../assets/ChatGPT Image Jul 14, 2026, 02_03_10 PM(1).png
   .topnav__link {
     all: unset;
     cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
     font-family: var(--font-body);
     font-size: 13.5px;
     font-weight: 500;
