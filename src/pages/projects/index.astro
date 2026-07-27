@@ -1,0 +1,351 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+---
+
+<ProjectLayout
+  title="Projects — Celia Rico"
+  description="Case studies from real engagements — what the system looked like, what changed, and why."
+  pageType="list"
+>
+  <!-- ============ HERO ============ -->
+  <section class="projects-hero">
+    <div class="projects-hero__inner">
+      <div class="projects-hero__eyebrow" data-reveal>
+        <span class="projects-hero__eyebrow-text">
+          <span lang="en">Proof through practice.</span>
+          <span lang="es">La práctica como evidencia.</span>
+        </span>
+        <span class="projects-hero__eyebrow-line" aria-hidden="true"></span>
+        <span class="projects-hero__eyebrow-count">
+          <span lang="en">1 project</span>
+          <span lang="es">1 proyecto</span>
+        </span>
+      </div>
+
+      <h1 class="projects-hero__headline" data-reveal data-d="60">
+        <span lang="en"
+          >Challenges, decisions and outcomes from real client engagements.</span
+        >
+        <span lang="es"
+          >Retos, decisiones y resultados en proyectos con clientes.</span
+        >
+      </h1>
+
+      <p class="projects-hero__lead" data-reveal data-d="120">
+        <span lang="en"
+          >Case studies from real engagements — what the system looked like,
+          what changed, and why. Growing as new work is delivered.</span
+        >
+        <span lang="es"
+          >Casos de estudio de proyectos reales: cómo era el sistema, qué cambió
+          y por qué. Esta sección crecerá con cada nuevo proyecto.</span
+        >
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ PROJECT GRID ============ -->
+  <section class="projects-grid-section">
+    <div class="projects-grid-section__inner">
+      <div class="projects-grid">
+        <!-- Serikat project card -->
+        <a href="/projects/serikat" class="project-card" data-reveal>
+          <span class="project-card__tag">
+            <span lang="en">Platform Engineering</span>
+            <span lang="es">Ingeniería de plataforma</span>
+          </span>
+
+          <h2 class="project-card__title">
+            <span lang="en"
+              >Modernising CI/CD for 17 legacy Java applications</span
+            >
+            <span lang="es"
+              >Modernización de CI/CD para 17 aplicaciones Java legacy</span
+            >
+          </h2>
+
+          <p class="project-card__summary">
+            <span lang="en"
+              >Turning a Jenkins Freestyle / WebLogic 11g deployment process
+              into a reusable Jenkins Pipeline architecture with Shared
+              Libraries, Nexus and WebLogic 14c — without touching the
+              applications' code.</span
+            >
+            <span lang="es"
+              >Transformar un proceso de despliegue basado en Jenkins Freestyle
+              y WebLogic 11g en una arquitectura reutilizable con Jenkins
+              Pipeline, Shared Libraries, Nexus y WebLogic 14c, sin tocar el
+              código de las aplicaciones.</span
+            >
+          </p>
+
+          <div class="project-card__stats">
+            <div class="project-card__stat">
+              <div class="project-card__stat-value">17</div>
+              <div class="project-card__stat-label">
+                <span lang="en">Java apps</span>
+                <span lang="es">apps Java</span>
+              </div>
+            </div>
+            <div class="project-card__stat">
+              <div class="project-card__stat-value">22</div>
+              <div class="project-card__stat-label">
+                <span lang="en">pipelines</span>
+                <span lang="es">pipelines</span>
+              </div>
+            </div>
+            <div class="project-card__stat">
+              <div class="project-card__stat-value">1</div>
+              <div class="project-card__stat-label">
+                <span lang="en">orchestrator</span>
+                <span lang="es">orquestador</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card__tech">
+            {
+              [
+                "Jenkins Pipeline",
+                "Groovy",
+                "Shared Library",
+                "Maven",
+                "Nexus",
+                "WebLogic 14c",
+              ].map((t) => <span class="project-card__tech-tag">{t}</span>)
+            }
+          </div>
+
+          <span class="project-card__cta">
+            <span lang="en">Read the full case study</span>
+            <span lang="es">Ver el caso completo</span>
+            <span aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <!-- More coming placeholder -->
+        <div class="project-card-placeholder">
+          <p class="project-card-placeholder__text">
+            <span lang="en"
+              >More case studies will appear here as new engagements are
+              completed.</span
+            >
+            <span lang="es"
+              >Aquí aparecerán más casos de estudio a medida que se completen
+              nuevos proyectos.</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</ProjectLayout>
+
+<style>
+  /* ——— HERO ——— */
+  .projects-hero {
+    position: relative;
+    padding: clamp(64px, 9vh, 110px) clamp(1.25rem, 4vw, 3.5rem)
+      clamp(48px, 6vh, 72px);
+  }
+
+  .projects-hero__inner {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .projects-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 26px;
+  }
+
+  .projects-hero__eyebrow-text {
+    font: 600 11.5px/1 var(--font-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .projects-hero__eyebrow-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .projects-hero__eyebrow-count {
+    font: 500 10px/1 var(--font-mono);
+    letter-spacing: 0.1em;
+    color: var(--ink3);
+    white-space: nowrap;
+  }
+
+  .projects-hero__headline {
+    margin: 0;
+    max-width: 780px;
+    font: 700 clamp(32px, 5vw, 56px) / 1.08 var(--font-body);
+    letter-spacing: -0.035em;
+    color: var(--ink);
+  }
+
+  .projects-hero__lead {
+    margin: 22px 0 0;
+    max-width: 620px;
+    font: 400 clamp(16px, 1.3vw, 18px) / 1.65 var(--font-body);
+    color: var(--ink2);
+  }
+
+  /* ——— GRID SECTION ——— */
+  .projects-grid-section {
+    position: relative;
+    padding: 0 clamp(1.25rem, 4vw, 3.5rem) clamp(100px, 12vh, 150px);
+  }
+
+  .projects-grid-section__inner {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 24px;
+  }
+
+  @media (max-width: 480px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ——— PROJECT CARD ——— */
+  .project-card {
+    display: block;
+    position: relative;
+    padding: 32px 32px 30px;
+    border-radius: 20px;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      border-color 0.3s,
+      transform 0.3s,
+      box-shadow 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 24px 48px -28px rgba(20, 21, 26, 0.25);
+  }
+
+  html[data-theme="dark"] .project-card:hover {
+    box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.5);
+  }
+
+  .project-card__tag {
+    font: 600 10.5px/1 var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 7px;
+    background: var(--accent-soft);
+  }
+
+  .project-card__title {
+    margin: 18px 0 10px;
+    font: 700 clamp(20px, 2.2vw, 26px) / 1.3 var(--font-body);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .project-card__summary {
+    margin: 0 0 20px;
+    font: 400 15.5px / 1.6 var(--font-body);
+    color: var(--ink2);
+    max-width: 480px;
+  }
+
+  /* Stats */
+  .project-card__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .project-card__stat {
+    padding: 10px 8px;
+    border-radius: 10px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .project-card__stat-value {
+    font: 700 18px/1 var(--font-body);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .project-card__stat-label {
+    font: 500 8.5px/1 var(--font-mono);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-top: 5px;
+  }
+
+  /* Tech tags */
+  .project-card__tech {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+
+  .project-card__tech-tag {
+    padding: 5px 11px;
+    border-radius: 7px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+    font: 600 11px/1 var(--font-mono);
+    color: var(--ink2);
+    white-space: nowrap;
+  }
+
+  /* CTA row */
+  .project-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: 600 14px/1 var(--font-body);
+    color: var(--ink);
+  }
+
+  /* ——— PLACEHOLDER CARD ——— */
+  .project-card-placeholder {
+    position: relative;
+    padding: 32px;
+    border-radius: 20px;
+    border: 1.5px dashed var(--line2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 220px;
+  }
+
+  .project-card-placeholder__text {
+    margin: 0;
+    font: 400 14px / 1.6 var(--font-body);
+    color: var(--ink3);
+    max-width: 260px;
+  }
+</style>
